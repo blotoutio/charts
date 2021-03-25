@@ -1,0 +1,11 @@
+apiVersion: v1
+appVersion: 0.0.1
+description: A Helm chart for App, a declarative, GitOps continuous delivery helm chart for Kubernetes.
+keywords:
+- sdk
+- backend
+maintainers:
+- name: satish
+- name: ojasvi
+name: app
+version: 0.0.1
