@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "superset.fullname" . }}-beat
+  labels:
+    app: {{ template "superset.name" . }}-beat
+    chart: {{ template "superset.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "superset.name" . }}-beat
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      {{ if .Values.supersetBeat.forceReload }}
+      annotations:
+        # Optionally force the thing to reload
+        force-reload: {{ randAlphaNum 5 | quote }}
+      {{ end }}
+      labels:
+        app: {{ template "superset.name" . }}-beat
+        release: {{ .Release.Name }}
+    spec:
+      securityContext:
+        runAsUser: 0 # Needed in order to allow pip install to work in bootstrap
+      {{- if .Values.supersetBeat.initContainers }}
+      initContainers:
+      {{-  tpl (toYaml .Values.supersetBeat.initContainers) . | nindent 6 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: {{  tpl (toJson .Values.supersetBeat.command) . }}
+          env:
+            - name: "SUPERSET_PORT"
+              value: {{ .Values.service.port | quote}}
+          {{ if .Values.extraEnv }}
+            {{- range $key, $value := .Values.extraEnv }}
+            - name: {{ $key | quote}}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          envFrom:
+            - secretRef:
+                name: {{ tpl .Values.envFromSecret . | quote }}
+          volumeMounts:
+            - name: superset-config
+              mountPath: {{ .Values.configMountPath | quote }}
+              readOnly: true
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+      imagePullSecrets:
+        - name: regcred
+      volumes:
+        - name: superset-config
+          secret:
+            secretName: {{ tpl .Values.configFromSecret . }}
