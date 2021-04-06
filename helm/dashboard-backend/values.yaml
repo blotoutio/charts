@@ -59,17 +59,10 @@ ingress:
   paths:
     - /
 
-# Swagger enable
-swagger:
-  enable: false
-  annotations: {}
-  labels: {}
-  paths:
-    - /
 ## Labels to set container specific security contexts
 containerSecurityContext:
   {}
   # capabilities:
   #   drop:
   #     - all
-  # readOnlyRootFilesystem: true
+   readOnlyRootFilesystem: true
