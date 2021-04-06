@@ -65,4 +65,4 @@ containerSecurityContext:
   # capabilities:
   #   drop:
   #     - all
-   readOnlyRootFilesystem: true
+  # readOnlyRootFilesystem: true
