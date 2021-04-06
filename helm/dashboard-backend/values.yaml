@@ -59,6 +59,10 @@ ingress:
   paths:
     - /
 
+# Swagger enable
+swagger:
+  enable: false
+  
 ## Labels to set container specific security contexts
 containerSecurityContext:
   {}
