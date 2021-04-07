@@ -1,0 +1,59 @@
+nameOverride: ""
+
+replicaCount: 1
+
+image:
+  repository: 
+  tag: 
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+env: {}
+
+service:
+  type: ClusterIP
+  port: 8080
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name:
+
+podSecurityContext:
+  {}
+# fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: example.com
+      paths: ["/"]
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  limits:
+    cpu: 512m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

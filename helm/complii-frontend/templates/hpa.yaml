@@ -3,13 +3,13 @@ apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
   labels:
-    app.kubernetes.io/name: {{ include "app.name" . }}-{{ .Release.Name }}-hpa
+    app.kubernetes.io/name: {{ include "app.name" . }}-{{ .Release.Name }}
     helm.sh/chart: {{ include "app.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/part-of: application
     app.kubernetes.io/component: {{ .Release.Name }}
-  name: {{ .Release.Name }}-hpa
+  name: {{ .Release.Name }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

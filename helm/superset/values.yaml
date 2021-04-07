@@ -1,0 +1,393 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# Default values for superset.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+## These requirements are used to build a requirements file which is then applied on init
+## of superset containers
+additionalRequirements: {}
+
+## The name of the secret which we will use to generate a superset_config.py file
+## Note: this secret must have the key superset_config.py in it and can include other files as well
+##
+configFromSecret: '{{ template "superset.fullname" . }}-config'
+
+## The name of the secret which we will use to populate env vars in deployed pods
+## This can be useful for secret keys, etc.
+##
+envFromSecret: '{{ template "superset.fullname" . }}-env'
+
+## Extra environment variables that will be passed into pods
+##
+extraEnv: {}
+
+configMountPath: "/app/pythonpath"
+
+SUPERSET_ADMIN:
+SUPERSET_PASSWORD:
+
+image:
+  repository: blotout/superset
+  tag: 0.6.0
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8088
+
+ingress:
+  enabled: false
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    # nginx.ingress.kubernetes.io/server-snippet: |
+    #   if ($http_x_forwarded_proto != 'https') {
+    #      return 301 https://$host$request_uri;
+    #   }
+  path: /
+  hosts:
+    - superset.domain.com
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  limits:
+    cpu: 250m
+    memory: 700Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+##
+## Superset node configuration
+supersetNode:
+  command:
+    - "/bin/sh"
+    - "-c"
+    - ". {{ .Values.configMountPath }}/superset_bootstrap.sh; /usr/bin/docker-entrypoint.sh"
+  connections:
+    redis_host: 'redis-master.redis.svc.cluster.local'
+    redis_port: "6379"
+    db_host: 'postgresql.postgresql.svc.cluster.local'
+    db_port: "5432"
+    db_user: postgres
+    db_pass:
+    db_name: superset
+    COMPOSE_PROJECT_NAME: superset
+    SLACK_API_TOKEN:
+    AUTH_USER_REGISTRATION_ROLE: Admin
+    DEFAULT_ADMIN:
+    SUPERSET_BASEURL:
+    SMTP_USER:
+    SMTP_PASSWORD:
+    SMTP_MAIL_FROM:
+  forceReload: false
+  initContainers:
+    - name: wait-for-postgres
+      image: busybox:latest
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - secretRef:
+            name: '{{ tpl .Values.envFromSecret . }}'
+      command: [ "/bin/sh", "-c", "until nc -zv $DB_HOST $DB_PORT -w1; do echo 'waiting for db'; sleep 1; done" ]
+
+##
+## Superset worker configuration
+supersetWorker:
+  command:
+    - "/bin/sh"
+    - "-c"
+    - ". {{ .Values.configMountPath }}/superset_bootstrap.sh; celery --app=superset.tasks.celery_app:app worker"
+  forceReload: false # If true, forces deployment to reload on each upgrade
+  initContainers:
+    - name: wait-for-postgres
+      image: busybox:latest
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - secretRef:
+            name: '{{ tpl .Values.envFromSecret . }}'
+      command: [ "/bin/sh", "-c", "until nc -zv $DB_HOST $DB_PORT -w1; do echo 'waiting for db'; sleep 1; done" ]
+
+supersetBeat:
+  command:
+    - "/bin/sh"
+    - "-c"
+    - ". {{ .Values.configMountPath }}/superset_bootstrap.sh; celery beat --app=superset.tasks.celery_app:app"
+  forceReload: false # If true, forces deployment to reload on each upgrade
+  initContainers:
+    - name: wait-for-postgres
+      image: busybox:latest
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - secretRef:
+            name: '{{ tpl .Values.envFromSecret . }}'
+      command: [ "/bin/sh", "-c", "until nc -zv $DB_HOST $DB_PORT -w1; do echo 'waiting for db'; sleep 1; done" ]
+
+##
+## Init job configuration
+init:
+  command:
+    - "/bin/sh"
+    - "-c"
+    - ". {{ .Values.configMountPath }}/superset_bootstrap.sh; . {{ .Values.configMountPath }}/superset_init.sh"
+  enabled: true
+  loadExamples: false
+  initContainers:
+    - name: wait-for-postgres
+      image: busybox:latest
+      imagePullPolicy: IfNotPresent
+      envFrom:
+        - secretRef:
+            name: '{{ tpl .Values.envFromSecret . }}'
+      command: [ "/bin/sh", "-c", "until nc -zv $DB_HOST $DB_PORT -w1; do echo 'waiting for db'; sleep 1; done" ]
+  initscript: |-
+    #!/bin/sh
+    echo "Upgrading DB schema..."
+    superset db upgrade
+    echo "Initializing roles..."
+    superset init
+    echo "Creating admin user..."
+    superset fab create-admin \
+                    --username admin \
+                    --firstname admin \
+                    --lastname admin \
+                    --email {{ .Values.SUPERSET_ADMIN }} \
+                    --password {{ .Values.SUPERSET_PASSWORD }} || true
+
+##
+## Configuration values for the postgresql dependency.
+## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
+postgresql:
+  ##
+  ## Use the PostgreSQL chart dependency.
+  ## Set to false if bringing your own PostgreSQL.
+  enabled: false
+
+  ##
+  ## The name of an existing secret that contains the postgres password.
+  existingSecret:
+
+  ## Name of the key containing the secret.
+  existingSecretKey: postgresql-password
+
+  ##
+  ## If you are bringing your own PostgreSQL, you should set postgresHost and
+  ## also probably service.port, postgresqlUsername, postgresqlPassword, and postgresqlDatabase
+  ## postgresHost:
+  ##
+  ## PostgreSQL port
+  service:
+    port: 5432
+  ## PostgreSQL User to create.
+  postgresqlUsername: superset
+  ##
+  ## PostgreSQL Password for the new user.
+  ## If not set, a random 10 characters password will be used.
+  postgresqlPassword: superset
+  ##
+  ## PostgreSQL Database to create.
+  postgresqlDatabase: superset
+  ##
+  ## Persistent Volume Storage configuration.
+  ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
+  persistence:
+    ##
+    ## Enable PostgreSQL persistence using Persistent Volume Claims.
+    enabled: true
+    ##
+    ## Persistant class
+    # storageClass: classname
+    ##
+    ## Access modes:
+    accessModes:
+      - ReadWriteOnce
+
+## Configuration values for the Redis dependency.
+## ref: https://github.com/kubernetes/charts/blob/master/stable/redis/README.md
+redis:
+  ##
+  ## Use the redis chart dependency.
+  ## Set to false if bringing your own redis.
+  enabled: false
+
+  usePassword: false
+
+  ##
+  ## The name of an existing secret that contains the redis password.
+  existingSecret:
+
+  ## Name of the key containing the secret.
+  existingSecretKey: redis-password
+
+  ##
+  ## If you are bringing your own redis, you can set the host in redisHost.
+  ## redisHost:
+  ##
+  ## Redis password
+  ##
+  password: superset
+  ##
+  ## Master configuration
+  master:
+    ##
+    ## Image configuration
+    # image:
+    ##
+    ## docker registry secret names (list)
+    # pullSecrets: nil
+    ##
+    ## Configure persistance
+    persistence:
+      ##
+      ## Use a PVC to persist data.
+      enabled: false
+      ##
+      ## Persistant class
+      # storageClass: classname
+      ##
+      ## Access mode:
+      accessModes:
+        - ReadWriteOnce
+  ##
+  ## Disable cluster management by default.
+  cluster:
+    enabled: false
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+## Configure liveness/readiness params
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+##
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 6
+  timeoutSeconds: 3
+  periodSeconds: 5
+  failureThreshold: 3
+readinessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 10
+  timeoutSeconds: 3
+  periodSeconds: 5
+  failureThreshold: 3
+
+custom_security_manager: |-
+  import os
+  import logging
+  import jwt
+  import json
+  import secrets
+  from flask import request
+  from flask import render_template
+  from flask_appbuilder.security.views import AuthDBView
+  from flask_appbuilder.security.views import expose
+  from flask_login import login_user, logout_user
+  from superset.security import SupersetSecurityManager
+
+  class CustomAuthDBView(AuthDBView):
+
+      def getEmail(self, jwt_payload):
+          if 'email' in jwt_payload:
+              return jwt_payload.get('email')
+          else:
+              return jwt_payload.get('preferred_username')
+
+      def getFirstName(self, jwt_payload):
+          if 'given_name' in jwt_payload:
+              return jwt_payload.get('given_name')
+          else:
+              return jwt_payload.get('name')
+
+      def getLastName(self, jwt_payload):
+          if 'family_name' in jwt_payload:
+              return jwt_payload.get('family_name')
+          else:
+              return jwt_payload.get('name')
+
+      @expose('/user_register/', methods=['GET'])
+      def user_register(self):
+          token = request.args.get('token')
+          if token is not None:
+              jwt_payload = jwt.decode(token, '', verify=False)
+              user_name = jwt_payload.get("sub")
+              first_name = self.getFirstName(jwt_payload)
+              last_name = self.getLastName(jwt_payload)
+              email = self.getEmail(jwt_payload)
+              default_admins = os.environ.get("DEFAULT_ADMIN")
+              adminEmailsList = default_admins.split(";")
+              if email in adminEmailsList:
+                  grant_role = 'Admin'
+              else:
+                  grant_role = 'Public'
+              user = self.appbuilder.sm.find_user(username=user_name)
+              if not user:
+                  user = self.appbuilder.sm.add_user(
+                      username=user_name,
+                      first_name=first_name,
+                      last_name=last_name,
+                      password=secrets.token_hex(20),
+                      email=email,
+                      role=self.appbuilder.sm.find_role(grant_role))
+                  return 'New user registered successfully', 200
+              else:
+                  return 'User already exists', 210
+          else:
+              return 'Invalid token', 401
+
+      @expose('/login/', methods=['GET', 'POST'])
+      def login(self):
+          token = request.args.get('token')
+          if token is not None:
+              jwt_payload = jwt.decode(token, '', verify=False)
+              user_name = jwt_payload.get("sub")
+              user = self.appbuilder.sm.find_user(username=user_name)
+              if user is not None:
+                  login_user(user, remember=False)
+                  return f'<script src="/static/blotout.js?v=2"></script><br> {render_template("superset/authentication.json")}', 200
+              else:
+                  return 'User not registered', 210
+          else:
+              return super(CustomAuthDBView, self).login()
+
+      @expose('/logout/', methods=['GET'])
+      def sso_logout(self):
+          if request.args.get('token') is not None:
+              logout_user()
+              return 'User Logged out successfully', 200
+          else:
+              return 'Invalid Token', 401
+
+
+  class CustomSecurityManager(SupersetSecurityManager):
+      authdbview = CustomAuthDBView
+
+      def __init__(self, appbuilder):
+          super(CustomSecurityManager, self).__init__(appbuilder)
