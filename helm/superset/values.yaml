@@ -318,7 +318,7 @@ custom_security_manager: |-
                 if 'sub' in jwt_payload:
                     return jwt_payload.get('sub')
                 else:
-                    return jwt_payload.get('email')
+                    return str('email_' + jwt_payload.get('email'))
 
       def getEmail(self, jwt_payload):
           if 'email' in jwt_payload:
