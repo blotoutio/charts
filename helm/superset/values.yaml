@@ -315,16 +315,16 @@ custom_security_manager: |-
   class CustomAuthDBView(AuthDBView):
 
       def getSub(self, jwt_payload):
-                if 'sub' in jwt_payload:
-                    return jwt_payload.get('sub')
-                else:
-                    return str('email_' + jwt_payload.get('email'))
+          if 'sub' in jwt_payload:
+              return jwt_payload.get('sub')
+          else:
+              return str('email_' + jwt_payload.get('preferred_username'))
 
       def getEmail(self, jwt_payload):
-          if 'email' in jwt_payload:
+          if 'sub' in jwt_payload:
               return jwt_payload.get('email')
           else:
-              return jwt_payload.get('preferred_username')
+              return str('email_' + jwt_payload.get('email'))
 
       def getFirstName(self, jwt_payload):
           if 'given_name' in jwt_payload:
