@@ -75,6 +75,11 @@ spec:
               configMapKeyRef:
                 name: sdk-configmap
                 key: AWS_SECRET_ACCESS_KEY
+          - name: AWS_DEFAULT_REGION
+            valueFrom:
+              configMapKeyRef:
+                name: sdk-configmap
+                key: AWS_DEFAULT_REGION
           - name: REDIS_CLUSTER_NODES
             valueFrom:
               configMapKeyRef:
