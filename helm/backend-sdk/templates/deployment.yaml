@@ -87,11 +87,6 @@ spec:
         - name: {{ .Release.Name }}
           containerPort: {{ .Values.service.containerPort }}
           protocol: TCP
-        volumeMounts:
-        - mountPath: /app/application-dev.properties
-          name: app-conf
-          subPath: application-dev.properties
-          readOnly: true
         resources:
 {{- toYaml .Values.resources | nindent 10 }}
         livenessProbe:
@@ -115,10 +110,3 @@ spec:
         terminationMessagePath: /dev/termination-log
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
-      volumes:
-        - name: app-conf
-          configMap:
-            name: app-conf
-            items:
-              - key: configmap.env
-                path: application-dev.properties
