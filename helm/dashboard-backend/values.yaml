@@ -12,6 +12,8 @@ image:
   #  runAsGroup: 999
   #  fsGroup: 999
 
+env: {}
+
 autoscaling:
   enabled: false
   minReplicas: 1

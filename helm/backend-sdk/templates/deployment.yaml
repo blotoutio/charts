@@ -50,41 +50,13 @@ spec:
         - -jar
         - sdk-api-0.0.1.jar
         env:
-          - name: SERVER_PORT
-            valueFrom:
-              configMapKeyRef:
-                name: sdk-configmap
-                key: SERVER_PORT
-          - name: LOGGING_FILE
-            valueFrom:
-              configMapKeyRef:
-                name: sdk-configmap
-                key: LOGGING_FILE
-          - name: LOGGING_LEVEL_COM_BLOT
-            valueFrom:
-              configMapKeyRef:
-                name: sdk-configmap
-                key: LOGGING_LEVEL_COM_BLOT
-          - name: AWS_ACCESS_KEY_ID
-            valueFrom:
-              configMapKeyRef:
-                name: sdk-configmap
-                key: AWS_ACCESS_KEY_ID
-          - name: AWS_SECRET_ACCESS_KEY
-            valueFrom:
-              configMapKeyRef:
-                name: sdk-configmap
-                key: AWS_SECRET_ACCESS_KEY
-          - name: AWS_DEFAULT_REGION
-            valueFrom:
-              configMapKeyRef:
-                name: sdk-configmap
-                key: AWS_DEFAULT_REGION
-          - name: REDIS_CLUSTER_NODES
-            valueFrom:
-              configMapKeyRef:
-                name: sdk-configmap
-                key: REDIS_CLUSTER_NODES
+        {{- range $conf, $value := .Values.env }}
+          - name: {{ $conf | quote }}
+            value: {{ $value | quote }}
+        {{- end }}
+        envFrom:
+          - configMapRef:
+              name: sdk-configmap
         {{- if .Values.containerSecurityContext }}
         securityContext: {{- toYaml .Values.containerSecurityContext | nindent 10 }}
         {{- end }}
