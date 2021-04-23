@@ -41,9 +41,6 @@ extraEnv: {}
 
 configMountPath: "/app/pythonpath"
 
-SUPERSET_ADMIN:
-SUPERSET_PASSWORD:
-
 image:
   repository: blotout/superset
   tag: 0.6.0
@@ -91,16 +88,7 @@ supersetNode:
     db_host: 'postgresql.postgresql.svc.cluster.local'
     db_port: "5432"
     db_user: postgres
-    db_pass:
     db_name: superset
-    COMPOSE_PROJECT_NAME: superset
-    SLACK_API_TOKEN:
-    AUTH_USER_REGISTRATION_ROLE: Admin
-    DEFAULT_ADMIN:
-    SUPERSET_BASEURL:
-    SMTP_USER:
-    SMTP_PASSWORD:
-    SMTP_MAIL_FROM:
   forceReload: false
   initContainers:
     - name: wait-for-postgres
@@ -171,8 +159,8 @@ init:
                     --username admin \
                     --firstname admin \
                     --lastname admin \
-                    --email {{ .Values.SUPERSET_ADMIN }} \
-                    --password {{ .Values.SUPERSET_PASSWORD }} || true
+                    --email ${SUPERSET_ADMIN} \
+                    --password ${SUPERSET_PASSWORD} || true
 
 ##
 ## Configuration values for the postgresql dependency.
