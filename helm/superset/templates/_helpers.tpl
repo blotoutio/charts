@@ -75,7 +75,7 @@ FEATURE_FLAGS = {
     "THUMBNAILS" : True,
     "ALERT_REPORTS": True,
     "LISTVIEWS_DEFAULT_CARD_VIEW" : True,
-    "GLOBAL_ASYNC_QUERIES" : True,
+    "GLOBAL_ASYNC_QUERIES" : False,
     "CLIENT_CACHE": False,
     "DASHBOARD_CACHE": True,
     "ENABLE_TEMPLATE_PROCESSING": False,
@@ -131,19 +131,6 @@ WTF_CSRF_ENABLED = True
 WTF_CSRF_EXEMPT_LIST = []
 # A CSRF token that expires in 1 year
 WTF_CSRF_TIME_LIMIT = 60 * 60 * 24 * 365
-
-GLOBAL_ASYNC_QUERIES_REDIS_CONFIG = {
-    "port": env('REDIS_PORT'),
-    "host": env('REDIS_HOST'),
-    "db": 7,
-}
-GLOBAL_ASYNC_QUERIES_REDIS_STREAM_PREFIX = "async-events-"
-GLOBAL_ASYNC_QUERIES_REDIS_STREAM_LIMIT = 1000
-GLOBAL_ASYNC_QUERIES_REDIS_STREAM_LIMIT_FIREHOSE = 1000000
-GLOBAL_ASYNC_QUERIES_JWT_COOKIE_NAME = "943njnfdk9gengnvdfmfdkkg9d0kgernkgnrrokvkdpfognermlgkekkgwerewwebwekrwnjnk0dfkvlerlmerondnvkjdnfknvjdfoijoiger"
-GLOBAL_ASYNC_QUERIES_JWT_COOKIE_SECURE = False
-GLOBAL_ASYNC_QUERIES_JWT_SECRET = "943njnfdk9gengnvdfmfdkkg9d0kgernkgnrrokvkdpfognermlgkekkgwerewwebwekrwnjnk0dfkvlerlmerondnvkjdnfknvjdfoijoiger"
-GLOBAL_ASYNC_QUERIES_TRANSPORT = "polling"
 
 class CeleryConfig(object):
     BROKER_URL = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CELERY_DB}"
