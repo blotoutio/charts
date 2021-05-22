@@ -302,11 +302,17 @@ custom_security_manager: |-
 
   class CustomAuthDBView(AuthDBView):
 
+      def getSub(self, jwt_payload):
+          if 'sub' in jwt_payload:
+              return jwt_payload.get('sub')
+          else:
+              return str('email_' + jwt_payload.get('preferred_username'))
+
       def getEmail(self, jwt_payload):
-          if 'email' in jwt_payload:
+          if 'sub' in jwt_payload:
               return jwt_payload.get('email')
           else:
-              return jwt_payload.get('preferred_username')
+              return str('email_' + jwt_payload.get('email'))
 
       def getFirstName(self, jwt_payload):
           if 'given_name' in jwt_payload:
@@ -325,7 +331,7 @@ custom_security_manager: |-
           token = request.args.get('token')
           if token is not None:
               jwt_payload = jwt.decode(token, '', verify=False)
-              user_name = jwt_payload.get("sub")
+              user_name = self.getSub(jwt_payload)
               first_name = self.getFirstName(jwt_payload)
               last_name = self.getLastName(jwt_payload)
               email = self.getEmail(jwt_payload)
@@ -355,7 +361,7 @@ custom_security_manager: |-
           token = request.args.get('token')
           if token is not None:
               jwt_payload = jwt.decode(token, '', verify=False)
-              user_name = jwt_payload.get("sub")
+              user_name = self.getSub(jwt_payload)
               user = self.appbuilder.sm.find_user(username=user_name)
               if user is not None:
                   login_user(user, remember=False)
