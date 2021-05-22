@@ -75,7 +75,7 @@ FEATURE_FLAGS = {
     "THUMBNAILS" : True,
     "ALERT_REPORTS": True,
     "LISTVIEWS_DEFAULT_CARD_VIEW" : True,
-    "GLOBAL_ASYNC_QUERIES" : False,
+    "GLOBAL_ASYNC_QUERIES" : True,
     "CLIENT_CACHE": False,
     "DASHBOARD_CACHE": True,
     "ENABLE_TEMPLATE_PROCESSING": False,
@@ -114,6 +114,13 @@ DATA_CACHE_CONFIG: CacheConfig = {
       'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
 }
 
+CACHE_CONFIG : CacheConfig = {
+      'CACHE_TYPE': 'redis',
+      'CACHE_DEFAULT_TIMEOUT': 3*60*60,
+      'CACHE_KEY_PREFIX': 'superset_c_',
+      'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
+}
+
 SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{env('DB_USER')}:{env('DB_PASS')}@{env('DB_HOST')}:{env('DB_PORT')}/{env('DB_NAME')}"
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 SECRET_KEY = env('SECRET_KEY', 'thisISaSECRET_1234')
@@ -135,7 +142,7 @@ GLOBAL_ASYNC_QUERIES_REDIS_STREAM_LIMIT = 1000
 GLOBAL_ASYNC_QUERIES_REDIS_STREAM_LIMIT_FIREHOSE = 1000000
 GLOBAL_ASYNC_QUERIES_JWT_COOKIE_NAME = "943njnfdk9gengnvdfmfdkkg9d0kgernkgnrrokvkdpfognermlgkekkgwerewwebwekrwnjnk0dfkvlerlmerondnvkjdnfknvjdfoijoiger"
 GLOBAL_ASYNC_QUERIES_JWT_COOKIE_SECURE = False
-GLOBAL_ASYNC_QUERIES_JWT_SECRET = "test-secret-change-me"
+GLOBAL_ASYNC_QUERIES_JWT_SECRET = "943njnfdk9gengnvdfmfdkkg9d0kgernkgnrrokvkdpfognermlgkekkgwerewwebwekrwnjnk0dfkvlerlmerondnvkjdnfknvjdfoijoiger"
 GLOBAL_ASYNC_QUERIES_TRANSPORT = "polling"
 
 class CeleryConfig(object):
