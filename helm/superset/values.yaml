@@ -371,13 +371,10 @@ custom_security_manager: |-
           else:
               return super(CustomAuthDBView, self).login()
 
-      @expose('/logout/', methods=['GET'])
+      @expose('/session_expire/', methods=['GET'])
       def sso_logout(self):
-          if request.args.get('token') is not None:
-              logout_user()
-              return 'User Logged out successfully', 200
-          else:
-              return 'Invalid Token', 401
+          logout_user()
+          return 'User Logged out successfully', 200
 
 
   class CustomSecurityManager(SupersetSecurityManager):
