@@ -336,11 +336,15 @@ custom_security_manager: |-
               last_name = self.getLastName(jwt_payload)
               email = self.getEmail(jwt_payload)
               default_admins = os.environ.get("DEFAULT_ADMIN")
-              adminEmailsList = default_admins.split(";")
-              if email in adminEmailsList:
+              grant_role = 'Admin'
+              if default_admins == "ALL":
                   grant_role = 'Admin'
               else:
-                  grant_role = 'Public'
+                  adminEmailsList = default_admins.split(";")
+                  if email in adminEmailsList:
+                      grant_role = 'Admin'
+                  else:
+                      grant_role = 'Public'
               user = self.appbuilder.sm.find_user(username=user_name)
               if not user:
                   user = self.appbuilder.sm.add_user(
