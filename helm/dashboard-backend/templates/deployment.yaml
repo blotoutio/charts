@@ -41,7 +41,7 @@ spec:
       securityContext: {{- toYaml .Values.image.securityContext | nindent 8 }}
       {{- end }}
       containers:
-      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+      - image: blotout/dashboard-ui:0.8.2
         imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         name: {{ .Release.Name }}
         command:
