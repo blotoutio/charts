@@ -33,7 +33,7 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:0.9.0"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: {{  tpl (toJson .Values.supersetBeat.command) . }}
           env:

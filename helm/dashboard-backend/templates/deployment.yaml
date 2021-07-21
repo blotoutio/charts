@@ -41,7 +41,7 @@ spec:
       securityContext: {{- toYaml .Values.image.securityContext | nindent 8 }}
       {{- end }}
       containers:
-      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+      - image: "{{ .Values.image.repository }}:0.9.0"
         imagePullPolicy: {{ .Values.image.imagePullPolicy }}
         name: {{ .Release.Name }}
         command:
