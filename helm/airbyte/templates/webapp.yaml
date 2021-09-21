@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: airbyte-webapp-svc
+spec:
+  type: ClusterIP
+  ports:
+  - name: webapp-svc
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  selector:
+    airbyte: webapp
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -46,6 +60,11 @@ spec:
                 configMapKeyRef:
                   name: airbyte-env
                   key: FULLSTORY
+            - name: OPENREPLAY
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: OPENREPLAY
             - name: IS_DEMO
               valueFrom:
                 configMapKeyRef:

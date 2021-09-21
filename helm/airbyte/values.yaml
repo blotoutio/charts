@@ -7,8 +7,8 @@ global:
 
 webapp:
   image:
-    repository: 
-    tag: 
+    repository: blotout/airbyte-webapp
+    tag: 0.11.0
   replicas: 1
   service:
     name: airbyte-webapp-svc
@@ -16,18 +16,18 @@ webapp:
 
 server:
   image:
-    repository: 
-    tag: 
+    repository: blotout/airbyte-server
+    tag: 0.11.0
 
 scheduler:
   image:
-    repository: 
-    tag: 
+    repository: blotout/airbyte-scheduler
+    tag: 0.11.0
 
 seed:
   image:
-    repository: 
-    tag: 
+    repository: blotout/airbyte-seed
+    tag: 0.11.0
 
 temporal:
   image:
@@ -41,10 +41,10 @@ temporal:
 #   disksize: "5"
 
 ingress:
-  enabled: false
+  enabled: "true"
   annotations: {}
   labels: {}
   hosts:
-    - example.com
+    - airbyte.example.com
   paths:
     - /

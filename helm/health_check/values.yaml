@@ -1,0 +1,31 @@
+nameOverride: ""
+
+replicas: 1
+
+image:
+  repository: 
+  tag: 
+  imagePullPolicy: IfNotPresent
+  imagePullSecrets: []
+  securityContext: {}
+  #  runAsUser: 999
+  #  runAsGroup: 999
+  #  fsGroup: 999
+
+env: {}
+
+resources: {}
+#  limits:
+#    cpu: 1000m
+#    memory: 4Gi
+#  requests:
+#    cpu: 250m
+#    memory: 100Mi
+
+## Labels to set container specific security contexts
+containerSecurityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #     - all
+  # readOnlyRootFilesystem: true

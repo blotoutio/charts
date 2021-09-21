@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: airbyte-server-svc
+spec:
+  type: ClusterIP
+  ports:
+  - name: server-svc
+    protocol: TCP
+    port: 8001
+    targetPort: 8001
+  selector:
+    airbyte: server
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -61,15 +75,6 @@ spec:
                 configMapKeyRef:
                   name: airbyte-env
                   key: TRACKING_STRATEGY
-            - name: WAIT_BEFORE_HOSTS
-              value: "5"
-            - name: WAIT_HOSTS
-              valueFrom:
-                configMapKeyRef:
-                  name: airbyte-env
-                  key: WAIT_HOSTS
-            - name: WAIT_HOSTS_TIMEOUT
-              value: "45"
             - name: WORKER_ENVIRONMENT
               valueFrom:
                 configMapKeyRef:
@@ -90,16 +95,38 @@ spec:
                 configMapKeyRef:
                   name: airbyte-env
                   key: TEMPORAL_HOST
+            - name: LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: LOG_LEVEL
+            - name: RESOURCE_CPU_REQUEST
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: RESOURCE_CPU_REQUEST
+            - name: RESOURCE_CPU_LIMIT
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: RESOURCE_CPU_LIMIT
+            - name: RESOURCE_MEMORY_REQUEST
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: RESOURCE_MEMORY_REQUEST
+            - name: RESOURCE_MEMORY_LIMIT
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: RESOURCE_MEMORY_LIMIT
             - name: S3_LOG_BUCKET
               valueFrom:
                 configMapKeyRef:
                   name: airbyte-env
                   key: S3_LOG_BUCKET
             - name: S3_LOG_BUCKET_REGION
-              valueFrom:
-                configMapKeyRef:
-                  name: airbyte-env
-                  key: S3_LOG_BUCKET_REGION
+              value:
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 configMapKeyRef:
@@ -110,6 +137,26 @@ spec:
                 configMapKeyRef:
                   name: airbyte-env
                   key: AWS_SECRET_ACCESS_KEY
+            - name: S3_MINIO_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: S3_MINIO_ENDPOINT
+            - name: S3_PATH_STYLE_ACCESS
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: S3_PATH_STYLE_ACCESS
+            # - name: GOOGLE_APPLICATION_CREDENTIALS
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: airbyte-env
+            #       key: GOOGLE_APPLICATION_CREDENTIALS
+            # - name: GCP_STORAGE_BUCKET
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: airbyte-env
+            #       key: GCP_STORAGE_BUCKET
             - name: BLOTOUT_BASE_URL
               valueFrom:
                 configMapKeyRef:
@@ -127,6 +174,9 @@ spec:
               mountPath: /configs
             - name: airbyte-volume-workspace
               mountPath: /workspace
+            - name: gcs-log-creds-volume
+              mountPath: /secrets/gcs-log-creds
+              readOnly: true
       volumes:
         - name: airbyte-volume-workspace
           persistentVolumeClaim:
@@ -134,3 +184,6 @@ spec:
         - name: airbyte-volume-configs
           persistentVolumeClaim:
             claimName: airbyte-volume-configs
+        - name: gcs-log-creds-volume
+          secret:
+            secretName: gcs-log-creds
