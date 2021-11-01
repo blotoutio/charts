@@ -206,6 +206,8 @@ spec:
             - name: gcs-log-creds-volume
               mountPath: /secrets/gcs-log-creds
               readOnly: true
+      nodeSelector:
+        eks.amazonaws.com/nodegroup: managed-node
       initContainers:
         - name: postgres-init
           image: blotout/postgresql-client:0.28.0

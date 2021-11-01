@@ -104,12 +104,13 @@ spec:
                 configMapKeyRef:
                   name: airbyte-env
                   key: DATABASE_HOST
-
           ports:
             - containerPort: 7233
           volumeMounts:
             - name: airbyte-temporal-dynamicconfig
               mountPath: "/etc/temporal/config/dynamicconfig/"
+      nodeSelector:
+        eks.amazonaws.com/nodegroup: managed-node
       volumes:
         - name: airbyte-temporal-dynamicconfig
           configMap:

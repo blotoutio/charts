@@ -177,6 +177,8 @@ spec:
             - name: gcs-log-creds-volume
               mountPath: /secrets/gcs-log-creds
               readOnly: true
+      nodeSelector:
+        eks.amazonaws.com/nodegroup: managed-node
       volumes:
         - name: airbyte-volume-workspace
           persistentVolumeClaim:
