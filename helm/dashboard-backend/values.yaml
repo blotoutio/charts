@@ -4,7 +4,7 @@ replicas: 1
 
 image:
   repository: 
-  tag: 0.12.0
+  tag: 0.12.1
   imagePullPolicy: IfNotPresent
   imagePullSecrets: []
   securityContext: {}
