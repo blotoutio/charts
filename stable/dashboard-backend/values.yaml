@@ -4,7 +4,7 @@ replicas: 1
 
 image:
   repository: 
-  tag: 
+  tag: 0.13.1
   imagePullPolicy: IfNotPresent
   imagePullSecrets: []
   securityContext: {}
@@ -31,15 +31,15 @@ resources: {}
 
 readinessProbe:
   path: 
-  failureThreshold: 2
-  initialDelaySeconds: 30
+  failureThreshold: 4
+  initialDelaySeconds: 120
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 5
 livenessProbe:
   path: 
-  failureThreshold: 2
-  initialDelaySeconds: 60
+  failureThreshold: 4
+  initialDelaySeconds: 160
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 5

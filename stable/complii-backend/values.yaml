@@ -4,7 +4,7 @@ replicaCount: 1
 
 image:
   repository: 
-  tag: 
+  tag: 0.13.0
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

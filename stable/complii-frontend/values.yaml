@@ -4,7 +4,7 @@ replicas: 1
 
 image:
   repository: 
-  tag: 
+  tag: 0.13.0
   imagePullPolicy: IfNotPresent
   imagePullSecrets: []
   securityContext: {}
@@ -30,14 +30,14 @@ resources: {}
 #    memory: 100Mi
 
 readinessProbe:
-  path: 
+  path: /
   failureThreshold: 2
   initialDelaySeconds: 30
   periodSeconds: 10
   successThreshold: 1
   timeoutSeconds: 5
 livenessProbe:
-  path: 
+  path: /
   failureThreshold: 2
   initialDelaySeconds: 60
   periodSeconds: 10
@@ -46,7 +46,7 @@ livenessProbe:
 
 service:
   type: ClusterIP
-  containerPort: 8080
+  containerPort: 80
   annotations: {}
   labels: {}
 
