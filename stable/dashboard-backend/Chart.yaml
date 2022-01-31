@@ -6,5 +6,5 @@ keywords:
 maintainers:
 - name: satish
 - name: ojasvi
-name: app
+name: dashboard-backend
 version: 0.0.1
