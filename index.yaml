@@ -3,9 +3,9 @@ entries:
   airbyte:
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-03-02T05:49:30.074552547Z"
+    created: "2022-03-02T05:57:38.927565193Z"
     description: The open platform to manage all your data integration pipelines.
-    digest: eb2958d8de2a1adca271a3f84dfcb72ba790c21e6c094f93fc10830cd37b7f33
+    digest: 05e768d64320f695a119f313830c417d6804238c9998d6f104b7fda595a939be
     keywords:
     - airbyte
     - pipelines
@@ -19,10 +19,10 @@ entries:
   backend-sdk:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-03-02T05:49:30.075662359Z"
+    created: "2022-03-02T05:57:38.928864701Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
-    digest: 012f537773e3ce03711469092f0ee0ef53704087fee90ac4c0fc1b348aa4a836
+    digest: 92c8b021354c568e4f164d156ddd2e9f3a6a44aa7462bde4fb0c01c9825c5711
     keywords:
     - backend-sdk
     maintainers:
@@ -35,10 +35,10 @@ entries:
   complii:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-03-02T05:49:30.076457768Z"
+    created: "2022-03-02T05:57:38.929634005Z"
     description: A Helm chart for complii, a declarative, GitOps continuous delivery
       helm chart for Kubernetes.
-    digest: f6a146c3a78cd8a1ede8f71656cf5908b2501864155f0044a83a875151ee307c
+    digest: 6219d6dc3485dcf47870b39359a4ec06a79e002502f8d1270af34d26a113f541
     keywords:
     - frontend
     maintainers:
@@ -51,9 +51,9 @@ entries:
   complii-backend:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-03-02T05:49:30.077163775Z"
+    created: "2022-03-02T05:57:38.930685611Z"
     description: A Helm chart for complii
-    digest: 0352972d07f5de62a32e1985bfaac83136b19b61d0b8976d81037e4288101ac7
+    digest: 6bd695070f4c9b641053cbf350742f0e01345947470dff8c82a29669a06af3d1
     keywords:
     - complii-backend
     maintainers:
@@ -67,10 +67,10 @@ entries:
   dashboard-backend:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-03-02T05:49:30.080635312Z"
+    created: "2022-03-02T05:57:38.931361915Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
-    digest: 7e25c6a3a21613a69188ceb03840917e21adc5c5393da85c5f311b8e58c618e6
+    digest: bef96faeef330481198cbe3f79cbbee5fdc13b38f77bab9b1554de39f04c9bf1
     keywords:
     - dashboard-backend
     maintainers:
@@ -83,10 +83,10 @@ entries:
   dashboard-frontend:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-03-02T05:49:30.08137132Z"
+    created: "2022-03-02T05:57:38.931807017Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
-    digest: 1913f9d69504cdebd58932837afc890973ee5ff105a0596a4cf4830960cc6d44
+    digest: 840018882c4a936087a736e2301af8a7b606353decc757d54af7485c06b804d4
     keywords:
     - dashboard-frontend
     maintainers:
@@ -99,10 +99,10 @@ entries:
   health-check:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-03-02T05:49:30.081799225Z"
+    created: "2022-03-02T05:57:38.932089519Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
-    digest: 1a5627d48916314cd9aa60bb664fd91cb949ad1e9154fe9fc281d82f04319fbc
+    digest: 4f860dc6ca99f226e10f732572672972e6098b4d6301b8274b6b89c0dfd7f101
     keywords:
     - health-check
     maintainers:
@@ -114,9 +114,9 @@ entries:
   nlb-loadbalancer:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2022-03-02T05:49:30.082470132Z"
+    created: "2022-03-02T05:57:38.932439921Z"
     description: The for creating nlb loadbalancer
-    digest: c9c5bbf22c83dccd8d8c7f76a7e5fa80e1a70d1a413bf302a798fc1a40567b16
+    digest: c5d5952f2f77ae93ef5b363459fc96a40754df215f841bee06156ae0d14ddf93
     name: nlb-loadbalancer
     urls:
     - https://blotoutio.github.io/charts/nlb-loadbalancer-0.1.0.tgz
@@ -124,7 +124,21 @@ entries:
   superset:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-03-02T05:49:30.084039248Z"
+    created: "2022-03-02T05:57:38.935139236Z"
+    description: Apache Superset is a modern, enterprise-ready business intelligence
+      web application
+    digest: d595eeaa8631e02ee60767c5a6c00aa4380fd06026cd72f39ae0f6e8cfccde5a
+    maintainers:
+    - email: cychiang0823@gmail.com
+      name: Chuan-Yen Chiang
+      url: https://github.com/cychiang
+    name: superset
+    urls:
+    - https://blotoutio.github.io/charts/superset-0.13.1.tgz
+    version: 0.13.1
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2022-03-02T05:57:38.933948329Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 41ddde66ee42c85cf1dca6bfb15682ae657202606b15e1a1836516cabf6256f3
@@ -136,4 +150,4 @@ entries:
     urls:
     - https://blotoutio.github.io/charts/superset-0.1.0.tgz
     version: 0.1.0
-generated: "2022-03-02T05:49:30.073625637Z"
+generated: "2022-03-02T05:57:38.926768689Z"
