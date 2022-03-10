@@ -26,16 +26,6 @@ spec:
       labels:
         airbyte: server
     spec:
-      affinity:
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: airbyte
-                    operator: In
-                    values:
-                      - scheduler
-              topologyKey: kubernetes.io/hostname
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -50,6 +40,31 @@ spec:
                 configMapKeyRef:
                   name: airbyte-env
                   key: AIRBYTE_VERSION
+            - name: RUN_DATABASE_MIGRATION_ON_STARTUP
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: RUN_DATABASE_MIGRATION_ON_STARTUP
+            - name: VERSION_0_32_0_FORCE_UPGRADE
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: VERSION_0_32_0_FORCE_UPGRADE
+            - name: WORKER_POD_TOLERATIONS
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: WORKER_POD_TOLERATIONS
+            - name: WORKER_POD_NODE_SELECTORS
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: WORKER_POD_NODE_SELECTORS
+            # - name: JOBS_IMAGE_PULL_SECRET
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: airbyte-env
+            #       key: JOBS_IMAGE_PULL_SECRET
             - name: CONFIG_ROOT
               valueFrom:
                 configMapKeyRef:
@@ -172,15 +187,10 @@ spec:
           volumeMounts:
             - name: airbyte-volume-configs
               mountPath: /configs
-            - name: airbyte-volume-workspace
-              mountPath: /workspace
             - name: gcs-log-creds-volume
               mountPath: /secrets/gcs-log-creds
               readOnly: true
       volumes:
-        - name: airbyte-volume-workspace
-          persistentVolumeClaim:
-            claimName: airbyte-volume-workspace
         - name: airbyte-volume-configs
           persistentVolumeClaim:
             claimName: airbyte-volume-configs

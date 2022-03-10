@@ -8,5 +8,4 @@ maintainers:
 - email: satish@blotout.io
   name: Satish Verma
 name: airbyte
-version: "0.13.1"
-#updated airbyte version
+version: "0.14.0"
