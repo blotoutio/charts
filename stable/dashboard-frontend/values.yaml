@@ -3,7 +3,7 @@ nameOverride: ""
 replicas: 1
 
 image:
-  repository: 
+  repository: blotout/dashboard-ui
   tag: 0.14.0
   imagePullPolicy: IfNotPresent
   imagePullSecrets: []
