@@ -43,7 +43,7 @@ configMountPath: "/app/pythonpath"
 
 image:
   repository: blotout/superset
-  tag: 0.13.1
+  tag: 0.14.0
   pullPolicy: IfNotPresent
 
 service:
@@ -69,8 +69,8 @@ ingress:
 
 resources:
   limits:
-    cpu: 500m
-    memory: 700Mi
+    cpu: 1500m
+    memory: 1400Mi
   requests:
     cpu: 100m
     memory: 256Mi

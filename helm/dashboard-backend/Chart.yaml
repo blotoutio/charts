@@ -2,9 +2,9 @@ apiVersion: v1
 appVersion: 0.0.1
 description: A Helm chart for App, a declarative, GitOps continuous delivery helm chart for Kubernetes.
 keywords:
-- dashboard-frontend
+- dashboard-backend
 maintainers:
 - name: satish
 - name: ojasvi
-name: dashboard-frontend
-version: "0.13.1"
+name: dashboard-backend
+version: "0.14.0"

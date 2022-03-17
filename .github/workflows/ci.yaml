@@ -3,7 +3,7 @@ name: Lint and Test Charts
 on:
   pull_request:
     paths:
-      - 'stable/**'
+      - 'helm/**'
 
 jobs:
   lint-chart:
