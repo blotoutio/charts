@@ -43,18 +43,22 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 
 {{/*
+Create the name of the service account to use
+*/}}
+{{- define "superset.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+{{- default (include "superset.fullname" .) .Values.serviceAccountName -}}
+{{- else -}}
+{{- default "default" .Values.serviceAccountName -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create chart name and version as used by the chart label.
 */}}
 {{- define "superset.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
-
-{{- define "superset-bootstrap" }}
-#!/bin/sh
-
-pip install {{ range .Values.additionalRequirements }}{{ . }} {{ end }}
-
-{{ end -}}
 
 {{- define "superset-config" }}
 import os
@@ -133,55 +137,65 @@ WTF_CSRF_EXEMPT_LIST = []
 WTF_CSRF_TIME_LIMIT = 60 * 60 * 24 * 365
 
 class CeleryConfig(object):
-    BROKER_URL = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CELERY_DB}"
-    CELERY_IMPORTS = ("superset.sql_lab","superset.tasks", "superset.tasks.thumbnails")
-    CELERY_RESULT_BACKEND = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_RESULTS_DB}"
-    CELERYD_LOG_LEVEL = 'DEBUG'
-    CELERYD_PREFETCH_MULTIPLIER = 10
-    CELERY_ACKS_LATE = True
-    CELERY_ANNOTATIONS = {
-        'sql_lab.get_sql_results': {
-            'rate_limit': '100/s',
-        },
-        'email_reports.send': {
-            'rate_limit': '1/s',
-            'time_limit': 120,
-            'soft_time_limit': 150,
-            'ignore_result': True,
-        },
-    }
-    CELERYBEAT_SCHEDULE = {
-        'email_reports.schedule_hourly': {
-            'task': 'email_reports.schedule_hourly',
-            'schedule': crontab(minute=1, hour='*'),
-        },
-        'alerts.schedule_check': {
-            'task': 'alerts.schedule_check',
-            'schedule': crontab(minute='*', hour='*'),
-        },
-        'reports.scheduler': {
-            'task': 'reports.scheduler',
-            'schedule': crontab(minute='*', hour='*'),
-        },
-        'reports.prune_log': {
-            'task': 'reports.prune_log',
-            'schedule': crontab(minute=0, hour=0),
-        },
-        'cache-warmup-hourly': {
-             'task': 'cache-warmup',
-             'schedule': crontab(minute='*/30', hour='*'),
-              'kwargs': {
-                 'strategy_name': 'top_n_dashboards',
-                 'top_n': 10,
-                 'since': '7 days ago',
-             },
-        },
-    }
+  CELERY_IMPORTS = ("superset.sql_lab","superset.tasks", "superset.tasks.thumbnails")
+  CELERY_ANNOTATIONS = {'tasks.add': {'rate_limit': '10/s'}}
+  CELERYD_LOG_LEVEL = 'DEBUG'
+  CELERYD_PREFETCH_MULTIPLIER = 10
+  CELERY_ACKS_LATE = True
+  CELERY_ANNOTATIONS = {
+      'sql_lab.get_sql_results': {
+          'rate_limit': '100/s',
+      },
+      'email_reports.send': {
+          'rate_limit': '1/s',
+          'time_limit': 120,
+          'soft_time_limit': 150,
+          'ignore_result': True,
+      },
+  }
+  CELERYBEAT_SCHEDULE = {
+      'email_reports.schedule_hourly': {
+          'task': 'email_reports.schedule_hourly',
+          'schedule': crontab(minute=1, hour='*'),
+      },
+      'alerts.schedule_check': {
+          'task': 'alerts.schedule_check',
+          'schedule': crontab(minute='*', hour='*'),
+      },
+      'reports.scheduler': {
+          'task': 'reports.scheduler',
+          'schedule': crontab(minute='*', hour='*'),
+      },
+      'reports.prune_log': {
+          'task': 'reports.prune_log',
+          'schedule': crontab(minute=0, hour=0),
+      },
+      'cache-warmup-hourly': {
+           'task': 'cache-warmup',
+           'schedule': crontab(minute='*/30', hour='*'),
+            'kwargs': {
+               'strategy_name': 'top_n_dashboards',
+               'top_n': 10,
+               'since': '7 days ago',
+           },
+      },
+  }
+
+{{- if .Values.supersetNode.connections.redis_password }}
+  BROKER_URL = f"redis://:{env('REDIS_PASSWORD')}@{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
+  CELERY_RESULT_BACKEND = f"redis://:{env('REDIS_PASSWORD')}@{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
+{{- else }}
+  BROKER_URL = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
+  CELERY_RESULT_BACKEND = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
+{{- end }}
 
 CELERY_CONFIG = CeleryConfig
 
 RESULTS_BACKEND = RedisCache(
       host=env('REDIS_HOST'),
+{{- if .Values.supersetNode.connections.redis_password }}
+      password=env('REDIS_PASSWORD'),
+{{- end }}
       port=env('REDIS_PORT'),
       key_prefix='superset_results'
 )
@@ -207,4 +221,21 @@ WEBDRIVER_OPTION_ARGS = [
         "--disable-setuid-sandbox",
         "--disable-extensions",
         ]
+
+{{ if .Values.configOverrides }}
+# Overrides
+{{- range $key, $value := .Values.configOverrides }}
+# {{ $key }}
+{{ tpl $value $ }}
+{{- end }}
+{{- end }}
+{{ if .Values.configOverridesFiles }}
+# Overrides from files
+{{- $files := .Files }}
+{{- range $key, $value := .Values.configOverridesFiles }}
+# {{ $key }}
+{{ $files.Get $value }}
+{{- end }}
+{{- end }}
+
 {{- end }}

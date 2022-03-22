@@ -14,29 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+{{- if .Values.extraConfigs }}
 apiVersion: v1
-kind: Service
+kind: ConfigMap
 metadata:
-  name: {{ template "superset.fullname" . }}
+  name: {{ template "superset.fullname" . }}-extra-config
   labels:
     app: {{ template "superset.name" . }}
     chart: {{ template "superset.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-{{- with .Values.service.annotations }}
-  annotations:
-{{- toYaml . | nindent 4 }}
-{{- end }}
-spec:
-  type: {{ .Values.service.type }}
-  ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
-  selector:
-    app: {{ template "superset.name" . }}
-    release: {{ .Release.Name }}
-  {{- if .Values.service.loadBalancerIP }}
-  loadBalancerIP: {{ .Values.service.loadBalancerIP }}
-  {{- end }}
+data:
+{{- range $path, $config := .Values.extraConfigs }}
+  {{ $path }}: |
+{{- tpl $config $ | nindent 4 -}}
+{{- end -}}
+{{- end -}}
