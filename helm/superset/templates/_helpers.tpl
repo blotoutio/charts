@@ -63,6 +63,7 @@ from superset.typing import CacheConfig
 REDIS_CELERY_DB = os.environ.get("REDIS_CELERY_DB", 4)
 REDIS_RESULTS_DB = os.environ.get("REDIS_RESULTS_DB", 5)
 REDIS_CACHE_DB = os.environ.get("REDIS_CACHE_DB", 6)
+PUBLIC_ROLE_LIKE = os.environ.get("PUBLIC_ROLE_LIKE", Admin)
 
 FEATURE_FLAGS = {
     "THUMBNAILS" : True,
