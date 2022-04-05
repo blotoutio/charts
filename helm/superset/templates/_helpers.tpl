@@ -104,14 +104,14 @@ DATA_CACHE_CONFIG: CacheConfig = {
       'CACHE_TYPE': 'redis',
       'CACHE_DEFAULT_TIMEOUT': 3*60*60,
       'CACHE_KEY_PREFIX': 'superset_data_',
-      'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
+      'CACHE_REDIS_URL': f"redis://:{env('REDIS_PASSWORD')}@{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
 }
 
 CACHE_CONFIG : CacheConfig = {
       'CACHE_TYPE': 'redis',
       'CACHE_DEFAULT_TIMEOUT': 3*60*60,
       'CACHE_KEY_PREFIX': 'superset_c_',
-      'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
+      'CACHE_REDIS_URL': f"redis://:{env('REDIS_PASSWORD')}@{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
 }
 
 SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{env('DB_USER')}:{env('DB_PASS')}@{env('DB_HOST')}:{env('DB_PORT')}/{env('DB_NAME')}"
@@ -126,9 +126,9 @@ WTF_CSRF_EXEMPT_LIST = []
 WTF_CSRF_TIME_LIMIT = 60 * 60 * 24 * 365
 
 class CeleryConfig(object):
-    BROKER_URL = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CELERY_DB}"
+    BROKER_URL = f"redis://:{env('REDIS_PASSWORD')}@{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CELERY_DB}"
     CELERY_IMPORTS = ("superset.sql_lab","superset.tasks", "superset.tasks.thumbnails")
-    CELERY_RESULT_BACKEND = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_RESULTS_DB}"
+    CELERY_RESULT_BACKEND = f"redis://:{env('REDIS_PASSWORD')}@{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_RESULTS_DB}"
     CELERYD_LOG_LEVEL = 'DEBUG'
     CELERYD_PREFETCH_MULTIPLIER = 10
     CELERY_ACKS_LATE = True
@@ -185,7 +185,7 @@ THUMBNAIL_CACHE_CONFIG: CacheConfig = {
     'CACHE_DEFAULT_TIMEOUT': 15*60,
     'CACHE_KEY_PREFIX': 'thumbnail_',
     'CACHE_NO_NULL_WARNING': True,
-    'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
+    'CACHE_REDIS_URL': f"redis://:{env('REDIS_PASSWORD')}@{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
 }
 
 WEBDRIVER_TYPE= "chrome"
