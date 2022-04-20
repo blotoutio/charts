@@ -141,7 +141,10 @@ spec:
                   name: airbyte-env
                   key: S3_LOG_BUCKET
             - name: S3_LOG_BUCKET_REGION
-              value:
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: S3_LOG_BUCKET_REGION
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 configMapKeyRef:
@@ -153,15 +156,9 @@ spec:
                   name: airbyte-env
                   key: AWS_SECRET_ACCESS_KEY
             - name: S3_MINIO_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  name: airbyte-env
-                  key: S3_MINIO_ENDPOINT
+              value:
             - name: S3_PATH_STYLE_ACCESS
-              valueFrom:
-                configMapKeyRef:
-                  name: airbyte-env
-                  key: S3_PATH_STYLE_ACCESS
+              value:
             # - name: GOOGLE_APPLICATION_CREDENTIALS
             #   valueFrom:
             #     configMapKeyRef:
