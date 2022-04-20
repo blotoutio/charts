@@ -43,7 +43,7 @@ configMountPath: "/app/pythonpath"
 
 image:
   repository: blotout/superset
-  tag: 0.14.0
+  tag: 0.14.2
   pullPolicy: IfNotPresent
 
 service:
