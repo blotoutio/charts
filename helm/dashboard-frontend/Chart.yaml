@@ -7,4 +7,4 @@ maintainers:
 - name: satish
 - name: ojasvi
 name: dashboard-frontend
-version: "0.14.0"
+version: "0.14.2"
