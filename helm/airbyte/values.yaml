@@ -35,11 +35,6 @@ temporal:
     tag: 1.7.0
   replicas: 1
 
-# volumeconfigs:
-#   disksize: "5"
-# volumeworkspace:
-#   disksize: "5"
-
 ingress:
   enabled: "true"
   annotations: {}
