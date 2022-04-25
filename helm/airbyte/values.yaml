@@ -8,7 +8,7 @@ global:
 webapp:
   image:
     repository: blotout/airbyte-webapp
-    tag: 0.14.2
+    tag: 0.15.0
   replicas: 1
   service:
     name: airbyte-webapp-svc
@@ -17,28 +17,23 @@ webapp:
 server:
   image:
     repository: blotout/airbyte-server
-    tag: 0.14.2
+    tag: 0.15.0
 
 scheduler:
   image:
     repository: blotout/airbyte-scheduler
-    tag: 0.14.2
+    tag: 0.15.0
 
 worker:
   image:
     repository: blotout/airbyte-worker
-    tag: 0.14.2
+    tag: 0.15.0
 
 temporal:
   image:
     repository: temporalio/auto-setup
     tag: 1.7.0
   replicas: 1
-
-# volumeconfigs:
-#   disksize: "5"
-# volumeworkspace:
-#   disksize: "5"
 
 ingress:
   enabled: "true"

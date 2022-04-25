@@ -49,13 +49,6 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{- define "superset-bootstrap" }}
-#!/bin/sh
-
-pip install {{ range .Values.additionalRequirements }}{{ . }} {{ end }}
-
-{{ end -}}
-
 {{- define "superset-config" }}
 import os
 import flask
@@ -207,4 +200,13 @@ WEBDRIVER_OPTION_ARGS = [
         "--disable-setuid-sandbox",
         "--disable-extensions",
         ]
+
+{{ if .Values.configOverrides }}
+# Overrides
+{{- range $key, $value := .Values.configOverrides }}
+# {{ $key }}
+{{ tpl $value $ }}
+{{- end }}
+{{- end }}
+
 {{- end }}

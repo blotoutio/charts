@@ -141,7 +141,10 @@ spec:
                   name: airbyte-env
                   key: S3_LOG_BUCKET
             - name: S3_LOG_BUCKET_REGION
-              value:
+              valueFrom:
+                configMapKeyRef:
+                  name: airbyte-env
+                  key: S3_LOG_BUCKET_REGION
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 configMapKeyRef:

@@ -19,11 +19,21 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+replicaCount: 2
 
-## These requirements are used to build a requirements file which is then applied on init
-## of superset containers
-additionalRequirements: {}
+# User ID directive. This user must have enough permissions to run the bootstrap script
+# Runn containers as root is not recommended in production. Change this to another UID - e.g. 1000 to be more secure
+runAsUser: 0
+
+# Install additional packages and do any other bootstrap configuration in this script
+# For production clusters it's recommended to build own image with this step done in CI
+bootstrapScript: |
+  #!/bin/bash
+  rm -rf /var/lib/apt/lists/* && \
+  pip install \
+    psycopg2==2.8.5 \
+    redis==3.5.3 && \
+  if [ ! -f ~/bootstrap ]; then echo "Running Superset with uid {{ .Values.runAsUser }}" > ~/bootstrap; fi
 
 ## The name of the secret which we will use to generate a superset_config.py file
 ## Note: this secret must have the key superset_config.py in it and can include other files as well
@@ -34,46 +44,163 @@ configFromSecret: '{{ template "superset.fullname" . }}-config'
 ## This can be useful for secret keys, etc.
 ##
 envFromSecret: '{{ template "superset.fullname" . }}-env'
+## This can be a list of template strings
+envFromSecrets: []
 
 ## Extra environment variables that will be passed into pods
 ##
 extraEnv: {}
+  # Extend timeout to allow long running queries.
+  # GUNICORN_TIMEOUT: 300
+
+
+  # OAUTH_HOME_DOMAIN: ..
+  # # If a whitelist is not set, any address that can use your OAuth2 endpoint will be able to login.
+  # #   this includes any random Gmail address if your OAuth2 Web App is set to External.
+  # OAUTH_WHITELIST_REGEX: ...
+
+## Extra environment variables in RAW format that will be passed into pods
+##
+extraEnvRaw: []
+  # Load DB password from other secret (e.g. for zalando operator)
+  # - name: DB_PASS
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: superset.superset-postgres.credentials.postgresql.acid.zalan.do
+  #       key: password
+
+## Extra environment variables to pass as secrets
+##
+extraSecretEnv: {}
+  # MAPBOX_API_KEY: ...
+  # # Google API Keys: https://console.cloud.google.com/apis/credentials
+  # GOOGLE_KEY: ...
+  # GOOGLE_SECRET: ...
+
+extraConfigs: {}
+  # datasources-init.yaml: |
+  #     databases:
+  #     - allow_csv_upload: true
+  #       allow_ctas: true
+  #       allow_cvas: true
+  #       database_name: example-db
+  #       extra: "{\r\n    \"metadata_params\": {},\r\n    \"engine_params\": {},\r\n    \"\
+  #         metadata_cache_timeout\": {},\r\n    \"schemas_allowed_for_csv_upload\": []\r\n\
+  #         }"
+  #       sqlalchemy_uri: example://example-db.local
+  #       tables: []
+
+extraSecrets: {}
+
+extraVolumes: []
+ # - name: customConfig
+ #   configMap:
+ #     name: '{{ template "superset.fullname" . }}-custom-config'
+ # - name: additionalSecret
+ #   secret:
+ #     secretName: my-secret
+ #     defaultMode: 0600
+
+extraVolumeMounts: []
+ # - name: customConfig
+ #   mountPath: /mnt/config
+ #   readOnly: true
+ # - name: additionalSecret:
+ #   mountPath: /mnt/secret
+
+# A dictionary of overrides to append at the end of superset_config.py - the name does not matter
+# WARNING: the order is not guaranteed
+configOverrides: {}
+  #  extend_timeout: |
+  #    # Extend timeout to allow long running queries.
+  #    SUPERSET_WEBSERVER_TIMEOUT = ...
+  # enable_oauth: |
+  #   from flask_appbuilder.security.manager import (AUTH_DB, AUTH_OAUTH)
+  #   AUTH_TYPE = AUTH_OAUTH
+
+  #   OAUTH_PROVIDERS = [
+  #       {
+  #           "name": "google",
+  #           "whitelist": [ os.getenv("OAUTH_WHITELIST_REGEX", "") ],
+  #           "icon": "fa-google",
+  #           "token_key": "access_token",
+  #           "remote_app": {
+  #               "client_id": os.environ.get("GOOGLE_KEY"),
+  #               "client_secret": os.environ.get("GOOGLE_SECRET"),
+  #               "api_base_url": "https://www.googleapis.com/oauth2/v2/",
+  #               "client_kwargs": {"scope": "email profile"},
+  #               "request_token_url": None,
+  #               "access_token_url": "https://accounts.google.com/o/oauth2/token",
+  #               "authorize_url": "https://accounts.google.com/o/oauth2/auth",
+  #               "authorize_params": {"hd": os.getenv("OAUTH_HOME_DOMAIN", "")}
+  #           }
+  #       }
+  #   ]
+  #   # Map Authlib roles to superset roles
+  #   AUTH_ROLE_ADMIN = 'Admin'
+  #   AUTH_ROLE_PUBLIC = 'Public'
+  #   # Will allow user self registration, allowing to create Flask users from Authorized User
+  #   AUTH_USER_REGISTRATION = True
+  #   # The default user self registration role
+  #   AUTH_USER_REGISTRATION_ROLE = "Admin"
 
 configMountPath: "/app/pythonpath"
 
+extraConfigMountPath: "/app/configs"
+
 image:
   repository: blotout/superset
-  tag: 0.14.2
+  tag: 0.15.0
   pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
 
 service:
   type: ClusterIP
   port: 8088
+  annotations: {}
+    # cloud.google.com/load-balancer-type: "Internal"
+  loadBalancerIP: null
 
 ingress:
   enabled: false
   annotations:
     kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-    # nginx.ingress.kubernetes.io/server-snippet: |
-    #   if ($http_x_forwarded_proto != 'https') {
-    #      return 301 https://$host$request_uri;
-    #   }
+    ## Extend timeout to allow long running queries.
+    # nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
+    # nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    # nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
   path: /
+  pathType: ImplementationSpecific
   hosts:
-    - superset.domain.com
+    - chart-example.local
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
 resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 1500m
-    memory: 1400Mi
+    cpu: 2000m
+    memory: 2000Mi
   requests:
-    cpu: 100m
-    memory: 256Mi
+    cpu: 800m
+    memory: 800Mi
+
+##
+## Custom hostAliases for all superset pods
+## https://kubernetes.io/docs/tasks/network/customize-hosts-file-for-pods/
+hostAliases: []
+# - hostnames:
+#   - nodns.my.lan
+#   ip: 18.27.36.45
+
 
 ##
 ## Superset node configuration
@@ -83,13 +210,15 @@ supersetNode:
     - "-c"
     - ". {{ .Values.configMountPath }}/superset_bootstrap.sh; /usr/bin/docker-entrypoint.sh"
   connections:
-    redis_host: 'redis-master.redis.svc.cluster.local'
+    redis_host: '{{ template "superset.fullname" . }}-redis-headless'
     redis_port: "6379"
-    db_host: 'postgresql.postgresql.svc.cluster.local'
+    db_host: '{{ template "superset.fullname" . }}-postgresql'
     db_port: "5432"
-    db_user: postgres
+    db_user: superset
+    db_pass: superset
     db_name: superset
-  forceReload: false
+  env: {}
+  forceReload: false # If true, forces deployment to reload on each upgrade
   initContainers:
     - name: wait-for-postgres
       image: busybox:latest
@@ -98,6 +227,10 @@ supersetNode:
         - secretRef:
             name: '{{ tpl .Values.envFromSecret . }}'
       command: [ "/bin/sh", "-c", "until nc -zv $DB_HOST $DB_PORT -w1; do echo 'waiting for db'; sleep 1; done" ]
+  ## Annotations to be added to supersetNode deployment
+  deploymentAnnotations: {}
+  ## Annotations to be added to supersetNode pods
+  podAnnotations: {}
 
 ##
 ## Superset worker configuration
@@ -115,12 +248,20 @@ supersetWorker:
         - secretRef:
             name: '{{ tpl .Values.envFromSecret . }}'
       command: [ "/bin/sh", "-c", "until nc -zv $DB_HOST $DB_PORT -w1; do echo 'waiting for db'; sleep 1; done" ]
+  ## Annotations to be added to supersetWorker deployment
+  deploymentAnnotations: {}
+  ## Annotations to be added to supersetWorker pods
+  podAnnotations: {}
 
-supersetBeat:
+##
+## Superset beat configuration (to trigger scheduled jobs like reports)
+supersetCeleryBeat:
+  # This is only required if you intend to use alerts and reports
+  enabled: false
   command:
     - "/bin/sh"
     - "-c"
-    - ". {{ .Values.configMountPath }}/superset_bootstrap.sh; celery beat --app=superset.tasks.celery_app:app"
+    - ". {{ .Values.configMountPath }}/superset_bootstrap.sh; celery --app=superset.tasks.celery_app:app beat --pidfile /tmp/celerybeat.pid --schedule /tmp/celerybeat-schedule"
   forceReload: false # If true, forces deployment to reload on each upgrade
   initContainers:
     - name: wait-for-postgres
@@ -130,16 +271,37 @@ supersetBeat:
         - secretRef:
             name: '{{ tpl .Values.envFromSecret . }}'
       command: [ "/bin/sh", "-c", "until nc -zv $DB_HOST $DB_PORT -w1; do echo 'waiting for db'; sleep 1; done" ]
+  ## Annotations to be added to supersetCeleryBeat deployment
+  deploymentAnnotations: {}
+  ## Annotations to be added to supersetCeleryBeat pods
+  podAnnotations: {}
 
 ##
 ## Init job configuration
 init:
+  # Configure resources
+  # Warning: fab command consumes a lot of ram and can
+  # cause the process to be killed due to OOM if it exceeds limit
+  resources: {}
+    # limits:
+    #   cpu:
+    #   memory:
+    # requests:
+    #   cpu:
+    #   memory:
   command:
     - "/bin/sh"
     - "-c"
     - ". {{ .Values.configMountPath }}/superset_bootstrap.sh; . {{ .Values.configMountPath }}/superset_init.sh"
   enabled: true
   loadExamples: false
+  createAdmin: true
+  adminUser:
+    username: admin
+    firstname: Superset
+    lastname: Admin
+    email: admin@superset.com
+    password: admin
   initContainers:
     - name: wait-for-postgres
       image: busybox:latest
@@ -150,18 +312,29 @@ init:
       command: [ "/bin/sh", "-c", "until nc -zv $DB_HOST $DB_PORT -w1; do echo 'waiting for db'; sleep 1; done" ]
   initscript: |-
     #!/bin/sh
+    set -eu
     echo "Upgrading DB schema..."
     superset db upgrade
     echo "Initializing roles..."
     superset init
+    {{ if .Values.init.createAdmin }}
     echo "Creating admin user..."
     superset fab create-admin \
-                    --username admin \
-                    --firstname admin \
-                    --lastname admin \
-                    --email ${SUPERSET_ADMIN} \
-                    --password ${SUPERSET_PASSWORD} || true
-
+                    --username {{ .Values.init.adminUser.username }} \
+                    --firstname {{ .Values.init.adminUser.firstname }} \
+                    --lastname {{ .Values.init.adminUser.lastname }} \
+                    --email {{ .Values.init.adminUser.email }} \
+                    --password {{ .Values.init.adminUser.password }} \
+                    || true
+    {{- end }}
+    {{ if .Values.init.loadExamples }}
+    echo "Loading examples..."
+    superset load_examples
+    {{- end }}
+    if [ -f "{{ .Values.extraConfigMountPath }}/import_datasources.yaml" ]; then
+      echo "Importing database connections.... "
+      superset import_datasources -p {{ .Values.extraConfigMountPath }}/import_datasources.yaml
+    fi
 ##
 ## Configuration values for the postgresql dependency.
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
@@ -169,15 +342,12 @@ postgresql:
   ##
   ## Use the PostgreSQL chart dependency.
   ## Set to false if bringing your own PostgreSQL.
-  enabled: false
-
+  enabled: true
   ##
   ## The name of an existing secret that contains the postgres password.
   existingSecret:
-
   ## Name of the key containing the secret.
   existingSecretKey: postgresql-password
-
   ##
   ## If you are bringing your own PostgreSQL, you should set postgresHost and
   ## also probably service.port, postgresqlUsername, postgresqlPassword, and postgresqlDatabase
@@ -216,17 +386,13 @@ redis:
   ##
   ## Use the redis chart dependency.
   ## Set to false if bringing your own redis.
-  enabled: false
-
+  enabled: true
   usePassword: false
-
   ##
   ## The name of an existing secret that contains the redis password.
   existingSecret:
-
   ## Name of the key containing the secret.
   existingSecretKey: redis-password
-
   ##
   ## If you are bringing your own redis, you can set the host in redisHost.
   ## redisHost:
@@ -240,9 +406,9 @@ redis:
     ##
     ## Image configuration
     # image:
-    ##
-    ## docker registry secret names (list)
-    # pullSecrets: nil
+      ##
+      ## docker registry secret names (list)
+      # pullSecrets: nil
     ##
     ## Configure persistance
     persistence:
@@ -255,7 +421,7 @@ redis:
       ##
       ## Access mode:
       accessModes:
-        - ReadWriteOnce
+      - ReadWriteOnce
   ##
   ## Disable cluster management by default.
   cluster:
@@ -266,26 +432,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-## Configure liveness/readiness params
-## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
-##
-livenessProbe:
-  httpGet:
-    path: /health
-    port: http
-  initialDelaySeconds: 6
-  timeoutSeconds: 3
-  periodSeconds: 5
-  failureThreshold: 3
-readinessProbe:
-  httpGet:
-    path: /health
-    port: http
-  initialDelaySeconds: 10
-  timeoutSeconds: 3
-  periodSeconds: 5
-  failureThreshold: 3
 
 custom_security_manager: |-
   import os
