@@ -3,9 +3,24 @@ entries:
   airbyte:
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-04-20T18:19:26.69989526Z"
+    created: "2022-04-25T09:39:02.017523987Z"
     description: The open platform to manage all your data integration pipelines.
-    digest: 3ba25ed8dc5b0a88f9eebfd734e0a977ccd4c29d689dc7c740872e84d4cbca6f
+    digest: 1970231125ffae889d20809d4e80adf4eaa4bc19efa17b27e2e4b7ca4b3fbe14
+    keywords:
+    - airbyte
+    - pipelines
+    maintainers:
+    - email: satish@blotout.io
+      name: Satish Verma
+    name: airbyte
+    urls:
+    - https://blotoutio.github.io/charts/airbyte-0.15.0.tgz
+    version: 0.15.0
+  - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2022-04-25T09:39:02.016997795Z"
+    description: The open platform to manage all your data integration pipelines.
+    digest: 2ca9bc4bb32554d591d5a009f63959bb00bdbf9e676a85f46ae360d0443ae662
     keywords:
     - airbyte
     - pipelines
@@ -18,7 +33,7 @@ entries:
     version: 0.14.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-04-20T18:19:26.699263731Z"
+    created: "2022-04-25T09:39:02.016432302Z"
     description: The open platform to manage all your data integration pipelines.
     digest: ef42db539a440f65356960b7df1cd511450e7b21906d6a7a9bd32518aef5f67c
     keywords:
@@ -33,7 +48,7 @@ entries:
     version: 0.14.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-04-20T18:19:26.698681204Z"
+    created: "2022-04-25T09:39:02.015811511Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 05e768d64320f695a119f313830c417d6804238c9998d6f104b7fda595a939be
     keywords:
@@ -49,7 +64,22 @@ entries:
   backend-sdk:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.701281723Z"
+    created: "2022-04-25T09:39:02.019598959Z"
+    description: A Helm chart for App, a declarative, GitOps continuous delivery helm
+      chart for Kubernetes.
+    digest: 3a7a6f1596c5708f24033b37e9ef1b341972a8d468aedb881bfbc01a49fa18af
+    keywords:
+    - backend-sdk
+    maintainers:
+    - name: satish
+    - name: ojasvi
+    name: backend-sdk
+    urls:
+    - https://blotoutio.github.io/charts/backend-sdk-0.15.0.tgz
+    version: 0.15.0
+  - apiVersion: v1
+    appVersion: 0.0.1
+    created: "2022-04-25T09:39:02.019150865Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 3d2f97e883a71030790e402f114cf82a66324bb3cfb472e9e5077c6bd9cb5a3c
@@ -64,7 +94,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.700819602Z"
+    created: "2022-04-25T09:39:02.018381276Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 362dd9939c05eed29eed51b23297a7b4daf7a0d4e14ca488a95cfeb978ed3a81
@@ -79,7 +109,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.70034438Z"
+    created: "2022-04-25T09:39:02.017964881Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 92c8b021354c568e4f164d156ddd2e9f3a6a44aa7462bde4fb0c01c9825c5711
@@ -95,10 +125,10 @@ entries:
   complii:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.701739144Z"
+    created: "2022-04-25T09:39:02.020031454Z"
     description: A Helm chart for complii, a declarative, GitOps continuous delivery
       helm chart for Kubernetes.
-    digest: b0a36a24fff79a3dc390db2c51be6c0beff77547c7aafe09cbd8a4da348e3aa1
+    digest: 78b83b1c6adff5773390744f5ef740141b628b0f74ee1d4d66fb928f10995b36
     keywords:
     - frontend
     maintainers:
@@ -111,9 +141,9 @@ entries:
   complii-backend:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-04-20T18:19:26.702162463Z"
+    created: "2022-04-25T09:39:02.020426348Z"
     description: A Helm chart for complii
-    digest: 4ba65c6c5542379515790425a333376a526ccdccc7d1e54d087c376f68d21e75
+    digest: 55fb37ca2b68c4bae53f28c8febded042b219f7e9e028e909ea82c9cfede3616
     keywords:
     - complii-backend
     maintainers:
@@ -127,7 +157,22 @@ entries:
   dashboard-backend:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.703656331Z"
+    created: "2022-04-25T09:39:02.022205824Z"
+    description: A Helm chart for App, a declarative, GitOps continuous delivery helm
+      chart for Kubernetes.
+    digest: e6b90c36af659ebe828187876b799e953514eb2b32d3b6f4f5798ef19faba3ad
+    keywords:
+    - dashboard-backend
+    maintainers:
+    - name: satish
+    - name: ojasvi
+    name: dashboard-backend
+    urls:
+    - https://blotoutio.github.io/charts/dashboard-backend-0.15.0.tgz
+    version: 0.15.0
+  - apiVersion: v1
+    appVersion: 0.0.1
+    created: "2022-04-25T09:39:02.02175413Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 6defa56f78aa4c1539f205df58e3bcf74b3487aa218b7af38a2eb05d0290528e
@@ -142,7 +187,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.703142808Z"
+    created: "2022-04-25T09:39:02.021323236Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: a53e06e4c5d118456b425fede09caf0bed5230e62b0627a2bc74cce6384294ea
@@ -157,7 +202,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.702647985Z"
+    created: "2022-04-25T09:39:02.020872842Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: bef96faeef330481198cbe3f79cbbee5fdc13b38f77bab9b1554de39f04c9bf1
@@ -173,7 +218,22 @@ entries:
   dashboard-frontend:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.70494419Z"
+    created: "2022-04-25T09:39:02.025112285Z"
+    description: A Helm chart for App, a declarative, GitOps continuous delivery helm
+      chart for Kubernetes.
+    digest: bab5655fd910a25e004a24d0f908db4b1e8d0b55b79ae6eb8d47e89c80435439
+    keywords:
+    - dashboard-frontend
+    maintainers:
+    - name: satish
+    - name: ojasvi
+    name: dashboard-frontend
+    urls:
+    - https://blotoutio.github.io/charts/dashboard-frontend-0.15.0.tgz
+    version: 0.15.0
+  - apiVersion: v1
+    appVersion: 0.0.1
+    created: "2022-04-25T09:39:02.024118498Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: eddc922d18e90e3ae6611279dd6c336aafde8426444e70566ffea804d9d1eed7
@@ -188,7 +248,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.704524171Z"
+    created: "2022-04-25T09:39:02.023512407Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 6da46ec60abbc2b411ce226d72b1fba218f75fe96e73d271a130153d5c1fbc31
@@ -203,7 +263,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.704097152Z"
+    created: "2022-04-25T09:39:02.022843916Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 840018882c4a936087a736e2301af8a7b606353decc757d54af7485c06b804d4
@@ -219,10 +279,10 @@ entries:
   health-check:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.705447113Z"
+    created: "2022-04-25T09:39:02.025641678Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
-    digest: 4c7034e1ea871c73dbeeb336b87a4d8688019cb2bd409c32ea7a8062e5680934
+    digest: b0da4709c30046397a76c49597a086937cd918fc2975826324209ef40bcfbe90
     keywords:
     - health-check
     maintainers:
@@ -233,7 +293,7 @@ entries:
     version: 0.13.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-04-20T18:19:26.705192602Z"
+    created: "2022-04-25T09:39:02.025396581Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 4f860dc6ca99f226e10f732572672972e6098b4d6301b8274b6b89c0dfd7f101
@@ -248,16 +308,16 @@ entries:
   nlb-loadbalancer:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2022-04-20T18:19:26.706824076Z"
+    created: "2022-04-25T09:39:02.026315669Z"
     description: The for creating nlb loadbalancer
-    digest: 6dc2d5db0d65ab01df2af0446e5f2818a62822b70f9a51b0223e17ef6eeddcb7
+    digest: a8d9fb0cefd33cbbaa46d10edfcc712756627c14cb8d56532cf42b26bb1414f5
     name: nlb-loadbalancer
     urls:
     - https://blotoutio.github.io/charts/nlb-loadbalancer-0.13.1.tgz
     version: 0.13.1
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2022-04-20T18:19:26.706387456Z"
+    created: "2022-04-25T09:39:02.025984773Z"
     description: The for creating nlb loadbalancer
     digest: c5d5952f2f77ae93ef5b363459fc96a40754df215f841bee06156ae0d14ddf93
     name: nlb-loadbalancer
@@ -265,9 +325,23 @@ entries:
     - https://blotoutio.github.io/charts/nlb-loadbalancer-0.1.0.tgz
     version: 0.1.0
   superset:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2022-04-25T09:39:02.032755882Z"
+    description: Apache Superset is a modern, enterprise-ready business intelligence
+      web application
+    digest: 6c62d3e4c4a1897c921ebeeab6e25582ef7e7450fea751de47e46cbcdefe052f
+    maintainers:
+    - email: craig@craigrueda.com
+      name: craig-rueda
+      url: https://github.com/craig-rueda
+    name: superset
+    urls:
+    - https://blotoutio.github.io/charts/superset-0.15.0.tgz
+    version: 0.15.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-04-20T18:19:26.71280945Z"
+    created: "2022-04-25T09:39:02.031242002Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 40370a88353915d0b35c4cf59f332410faa3dffadb26bd7a4c7050783a9a4e05
@@ -281,7 +355,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-04-20T18:19:26.711463788Z"
+    created: "2022-04-25T09:39:02.030017619Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: f4b4220dac7ae42e0a32c3341902efbb604930fed0d1cc4e34f6b4e04bd53a0e
@@ -295,7 +369,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-04-20T18:19:26.710158728Z"
+    created: "2022-04-25T09:39:02.028801335Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: d595eeaa8631e02ee60767c5a6c00aa4380fd06026cd72f39ae0f6e8cfccde5a
@@ -309,7 +383,7 @@ entries:
     version: 0.13.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-04-20T18:19:26.708845868Z"
+    created: "2022-04-25T09:39:02.027552552Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 41ddde66ee42c85cf1dca6bfb15682ae657202606b15e1a1836516cabf6256f3
@@ -321,4 +395,4 @@ entries:
     urls:
     - https://blotoutio.github.io/charts/superset-0.1.0.tgz
     version: 0.1.0
-generated: "2022-04-20T18:19:26.697921269Z"
+generated: "2022-04-25T09:39:02.015064221Z"
