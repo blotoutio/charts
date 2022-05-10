@@ -150,7 +150,7 @@ extraConfigMountPath: "/app/configs"
 
 image:
   repository: blotout/superset
-  tag: 0.15.0
+  tag: 0.16.0
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -190,7 +190,7 @@ resources:
     cpu: 2000m
     memory: 2000Mi
   requests:
-    cpu: 800m
+    cpu: 400m
     memory: 800Mi
 
 ##
@@ -257,7 +257,7 @@ supersetWorker:
 ## Superset beat configuration (to trigger scheduled jobs like reports)
 supersetCeleryBeat:
   # This is only required if you intend to use alerts and reports
-  enabled: false
+  enabled: true
   command:
     - "/bin/sh"
     - "-c"
