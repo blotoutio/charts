@@ -4,7 +4,7 @@ replicas: 1
 
 image:
   repository: blotout/dashboard-ui
-  tag: rolling_window-f5ec224520c977c4c0a8c57dde52455aba04b881
+  tag: 0.18.1
   imagePullPolicy: IfNotPresent
   imagePullSecrets: []
   securityContext: {}

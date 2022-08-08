@@ -4,7 +4,7 @@ replicas: 1
 
 image:
   repository: blotout/dashboard-backend
-  tag: unified_column-2e75c4d3d23c9c0305747e447866d37c72aaee90
+  tag: 0.18.1
   imagePullPolicy: IfNotPresent
   imagePullSecrets: []
   securityContext: {}
