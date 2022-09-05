@@ -47,6 +47,7 @@ spec:
         command:
         - java
         args:
+        - -Xss1024k 
         - -jar
         - blotout-0.0.1.jar
         env:
