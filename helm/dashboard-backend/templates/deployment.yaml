@@ -51,7 +51,7 @@ spec:
         - -Xmx3024m
         - -XX:PermSize=64m
         - -XX:MaxPermSize=500m
-        - -Xss1024k  
+        - -Xss1024k
         - -jar
         - blotout-0.0.1.jar
         env:
