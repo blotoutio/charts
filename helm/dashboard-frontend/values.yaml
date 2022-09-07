@@ -4,7 +4,7 @@ replicas: 1
 
 image:
   repository: blotout/cloud-app-ui
-  tag: 0.19.0
+  tag: 0.19.1
   imagePullPolicy: IfNotPresent
   imagePullSecrets: []
   securityContext: {}
