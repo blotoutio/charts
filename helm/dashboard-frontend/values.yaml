@@ -3,8 +3,8 @@ nameOverride: ""
 replicas: 1
 
 image:
-  repository: blotout/dashboard-ui
-  tag: 0.18.1
+  repository: blotout/cloud-app-ui
+  tag: 0.19.1
   imagePullPolicy: IfNotPresent
   imagePullSecrets: []
   securityContext: {}
