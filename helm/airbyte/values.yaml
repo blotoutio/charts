@@ -8,7 +8,7 @@ global:
 webapp:
   image:
     repository: blotout/airbyte-webapp
-    tag: 0.19.1
+    tag: 0.19.2
   replicas: 1
   service:
     name: airbyte-webapp-svc
@@ -17,17 +17,17 @@ webapp:
 server:
   image:
     repository: blotout/airbyte-server
-    tag: 0.19.1
+    tag: 0.19.2
 
 scheduler:
   image:
     repository: blotout/airbyte-scheduler
-    tag: 0.19.1
+    tag: 0.19.2
 
 worker:
   image:
     repository: blotout/airbyte-worker
-    tag: 0.19.1
+    tag: 0.19.2
 
 temporal:
   image:
