@@ -3,7 +3,22 @@ entries:
   airbyte:
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.580921333Z"
+    created: "2022-11-02T05:40:22.696735993Z"
+    description: The open platform to manage all your data integration pipelines.
+    digest: de469bfa6dcc9046492df853cd33fa84bf8f7cde23caa40a9607a1372e5c2a02
+    keywords:
+    - airbyte
+    - pipelines
+    maintainers:
+    - email: satish@blotout.io
+      name: Satish Verma
+    name: airbyte
+    urls:
+    - https://blotoutio.github.io/charts/airbyte-0.20.0.tgz
+    version: 0.20.0
+  - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2022-11-02T05:40:22.696169883Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 5cc251f86e94fcd0440e4cd26ec377edb8ce44c69ff7a173bf6a32d8324e2724
     keywords:
@@ -18,7 +33,7 @@ entries:
     version: 0.19.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.580031633Z"
+    created: "2022-11-02T05:40:22.695610074Z"
     description: The open platform to manage all your data integration pipelines.
     digest: e9bc4455197538e3d41996d015db4b556596fe6955b7d864bbbd5a70d3f823d7
     keywords:
@@ -33,7 +48,7 @@ entries:
     version: 0.19.1
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.578922533Z"
+    created: "2022-11-02T05:40:22.694520757Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 49643b1569a711181a913fe515778e8ff59c17bf09b0f72cc766d4d60665fb32
     keywords:
@@ -48,7 +63,7 @@ entries:
     version: 0.19.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.577338233Z"
+    created: "2022-11-02T05:40:22.693983548Z"
     description: The open platform to manage all your data integration pipelines.
     digest: bd5682bfaa55e144a1279b0b467ef8c82ff42d0997e22df949dbef921a732923
     keywords:
@@ -63,7 +78,7 @@ entries:
     version: 0.18.1
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.576672833Z"
+    created: "2022-11-02T05:40:22.693396139Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 76ba843cc48b5d8afd3675aad83322de574e194116b9768e78e0a2d67ddb89f3
     keywords:
@@ -78,7 +93,7 @@ entries:
     version: 0.18.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.575998033Z"
+    created: "2022-11-02T05:40:22.69285003Z"
     description: The open platform to manage all your data integration pipelines.
     digest: adef0a786ef155a48a8e6f0c021532616de70f6fa3806eb9ee58c8ef504ce867
     keywords:
@@ -93,7 +108,7 @@ entries:
     version: 0.17.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.575275133Z"
+    created: "2022-11-02T05:40:22.692306921Z"
     description: The open platform to manage all your data integration pipelines.
     digest: e049773756b78b5fee9579eb30335f8ffa85f1d5be72e843ae9040a00b2bba84
     keywords:
@@ -108,7 +123,7 @@ entries:
     version: 0.17.1
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.573951432Z"
+    created: "2022-11-02T05:40:22.691582809Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 9b7443559e6dd96c87b7913e89a0ede5fd66c113203cc1f4b8f091dc0058e9b7
     keywords:
@@ -123,7 +138,7 @@ entries:
     version: 0.17.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.573239832Z"
+    created: "2022-11-02T05:40:22.690758696Z"
     description: The open platform to manage all your data integration pipelines.
     digest: c9ca38e2d8a07b784cd3be0372df98786fc361cc1ac3b0e8eef519d01364c45a
     keywords:
@@ -138,7 +153,7 @@ entries:
     version: 0.16.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.572545832Z"
+    created: "2022-11-02T05:40:22.690068485Z"
     description: The open platform to manage all your data integration pipelines.
     digest: ec12c26f5a650b27aa5b140248f3ba685f86544126850d01539869bfa3ff4426
     keywords:
@@ -153,7 +168,7 @@ entries:
     version: 0.15.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.571763532Z"
+    created: "2022-11-02T05:40:22.689335473Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 2ca9bc4bb32554d591d5a009f63959bb00bdbf9e676a85f46ae360d0443ae662
     keywords:
@@ -168,7 +183,7 @@ entries:
     version: 0.14.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.571036332Z"
+    created: "2022-11-02T05:40:22.688311356Z"
     description: The open platform to manage all your data integration pipelines.
     digest: ef42db539a440f65356960b7df1cd511450e7b21906d6a7a9bd32518aef5f67c
     keywords:
@@ -183,7 +198,7 @@ entries:
     version: 0.14.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2022-10-18T14:18:34.570303932Z"
+    created: "2022-11-02T05:40:22.687734347Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 05e768d64320f695a119f313830c417d6804238c9998d6f104b7fda595a939be
     keywords:
@@ -199,7 +214,22 @@ entries:
   backend-sdk:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.589442734Z"
+    created: "2022-11-02T05:40:22.703558703Z"
+    description: A Helm chart for App, a declarative, GitOps continuous delivery helm
+      chart for Kubernetes.
+    digest: 389855831478fae18c9005b8c4a80ca6417f8f871e9b7925b3b22bd004ce4490
+    keywords:
+    - backend-sdk
+    maintainers:
+    - name: satish
+    - name: ojasvi
+    name: backend-sdk
+    urls:
+    - https://blotoutio.github.io/charts/backend-sdk-0.20.0.tgz
+    version: 0.20.0
+  - apiVersion: v1
+    appVersion: 0.0.1
+    created: "2022-11-02T05:40:22.702627088Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 2d351f1e421deb9029867b473a6951165ba99acd9a30ccce5ee718bacf925027
@@ -214,7 +244,7 @@ entries:
     version: 0.19.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.588861734Z"
+    created: "2022-11-02T05:40:22.702217481Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 874aca8a75fe2f8a15dbeef0cbedde3c457b999cd6398c80abdddb9954992cf9
@@ -229,7 +259,7 @@ entries:
     version: 0.19.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.588278834Z"
+    created: "2022-11-02T05:40:22.701298967Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 72f3d0d29ff03bdf03c703359f3d3b32d0b42e97bd113f42a6fc75ab35f7aa21
@@ -244,7 +274,7 @@ entries:
     version: 0.19.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.587743434Z"
+    created: "2022-11-02T05:40:22.70089166Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: ddfeef213ea033e69822beec41cb82a8b032f503435aa314a636fe3f097a9904
@@ -259,7 +289,7 @@ entries:
     version: 0.18.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.587176434Z"
+    created: "2022-11-02T05:40:22.700484853Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 0fc4db1e69545f9af445d1da5e133e68b37be17f348a035a706923f7250ab0bc
@@ -274,7 +304,7 @@ entries:
     version: 0.18.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.586647734Z"
+    created: "2022-11-02T05:40:22.700074647Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: e16a3ba833d73b730818c4ef4a12280eec51fa58e8e2324c1a50a4c39167d283
@@ -289,7 +319,7 @@ entries:
     version: 0.17.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.586109934Z"
+    created: "2022-11-02T05:40:22.69965524Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: b02e927a9346c35d41f22fd46ea9911d245c97908f5be9a69ccd437e7c29539a
@@ -304,7 +334,7 @@ entries:
     version: 0.17.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.585578334Z"
+    created: "2022-11-02T05:40:22.699233333Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: a54bcca6a8dba4de44e5abb140b8b6f38029f73a3fa71c87a0d6a1b9d96fa83b
@@ -319,7 +349,7 @@ entries:
     version: 0.17.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.585045134Z"
+    created: "2022-11-02T05:40:22.698827227Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 2ce57df5bf48755ce9f2d230c19f2e8326206778f709bb8eec8aefc434e649c1
@@ -334,7 +364,7 @@ entries:
     version: 0.16.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.584490034Z"
+    created: "2022-11-02T05:40:22.69842172Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 9977c37ec6b54841c0b11fcd6c0b929bcc9d87f3e4a4db9661ef29238cad4523
@@ -349,7 +379,7 @@ entries:
     version: 0.15.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.583923433Z"
+    created: "2022-11-02T05:40:22.698012213Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 3d2f97e883a71030790e402f114cf82a66324bb3cfb472e9e5077c6bd9cb5a3c
@@ -364,7 +394,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.582951333Z"
+    created: "2022-11-02T05:40:22.697575106Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 362dd9939c05eed29eed51b23297a7b4daf7a0d4e14ca488a95cfeb978ed3a81
@@ -379,7 +409,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.582195933Z"
+    created: "2022-11-02T05:40:22.697162Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 92c8b021354c568e4f164d156ddd2e9f3a6a44aa7462bde4fb0c01c9825c5711
@@ -395,10 +425,10 @@ entries:
   complii:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.590093134Z"
+    created: "2022-11-02T05:40:22.704157913Z"
     description: A Helm chart for complii, a declarative, GitOps continuous delivery
       helm chart for Kubernetes.
-    digest: d920c68305bde82016de44289e669df2fa4fa377c609fc57aa154b922418baac
+    digest: c3595516dc36fcada7d8f13389a38055d6a8abc828cfe09f108f964838d4cb73
     keywords:
     - frontend
     maintainers:
@@ -411,9 +441,9 @@ entries:
   complii-backend:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2022-10-18T14:18:34.590623234Z"
+    created: "2022-11-02T05:40:22.704712122Z"
     description: A Helm chart for complii
-    digest: f50e0665d68c2d679b1d876c809414652f3a2b54d3ca843ef53178e4ed0c893d
+    digest: a697c70b6846093a8555bd8d2d9d2eabbe30b5573e2dcb21859fbab4ff0bffb3
     keywords:
     - complii-backend
     maintainers:
@@ -427,7 +457,22 @@ entries:
   dashboard-backend:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.600047835Z"
+    created: "2022-11-02T05:40:22.711842337Z"
+    description: A Helm chart for App, a declarative, GitOps continuous delivery helm
+      chart for Kubernetes.
+    digest: c50a48352318e0815be5705c56cdff5bb48a99550b32ea5c765b888ed030e40f
+    keywords:
+    - dashboard-backend
+    maintainers:
+    - name: satish
+    - name: ojasvi
+    name: dashboard-backend
+    urls:
+    - https://blotoutio.github.io/charts/dashboard-backend-0.20.0.tgz
+    version: 0.20.0
+  - apiVersion: v1
+    appVersion: 0.0.1
+    created: "2022-11-02T05:40:22.711341729Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: c9c3e211f1cbd10297402256eb796e4f383efe0ee265c4f483855239eae85434
@@ -442,7 +487,7 @@ entries:
     version: 0.19.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.598816535Z"
+    created: "2022-11-02T05:40:22.710871222Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 17ef39d4aa0ae45c9a9b92456e7301e04352c03e44ac4687677d53f9135349e4
@@ -457,7 +502,7 @@ entries:
     version: 0.19.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.597847535Z"
+    created: "2022-11-02T05:40:22.710394614Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 1df861684d26ddd7fc4b650ce0f07eac9efddf0ff9996c78db2dbd9694ff8984
@@ -472,7 +517,7 @@ entries:
     version: 0.19.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.597242435Z"
+    created: "2022-11-02T05:40:22.709921606Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: a6e7b0fd8a59495abfe6d5ce28ae34e6e3eb01067b817b301df717ce257a22f4
@@ -487,7 +532,7 @@ entries:
     version: 0.18.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.596579335Z"
+    created: "2022-11-02T05:40:22.709418498Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: e36f2276363d1f881824ad5712d1c5879dac18286726cf607ee63d3479b4515a
@@ -502,7 +547,7 @@ entries:
     version: 0.18.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.595997935Z"
+    created: "2022-11-02T05:40:22.708953291Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 71a05c08b2c9f0a9d8c12c3ada6c93273f8026141ddf9bd7ee71ebd454c0df5a
@@ -517,7 +562,7 @@ entries:
     version: 0.17.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.594745035Z"
+    created: "2022-11-02T05:40:22.708489383Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 29ea3f5737264087fc737d40b588df68faf1615dc1cd8068a1476d8919304c45
@@ -532,7 +577,7 @@ entries:
     version: 0.17.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.594179934Z"
+    created: "2022-11-02T05:40:22.708021376Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 05f0b7996f3a7ba1ee373a59827938a2393cefd833ee0f897221def6effc16c6
@@ -547,7 +592,7 @@ entries:
     version: 0.17.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.593618734Z"
+    created: "2022-11-02T05:40:22.707515067Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: d8c1866b4c10a1e7f4d4e862eacb754243acb7cecf4b266fb02bd27674321bb1
@@ -562,7 +607,7 @@ entries:
     version: 0.16.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.593030034Z"
+    created: "2022-11-02T05:40:22.70704826Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 9f4b6721b86da177ef921e828a5d10b5097f4fe3b1407394d36f6a9c814749c3
@@ -577,7 +622,7 @@ entries:
     version: 0.15.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.592456834Z"
+    created: "2022-11-02T05:40:22.706586652Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 6defa56f78aa4c1539f205df58e3bcf74b3487aa218b7af38a2eb05d0290528e
@@ -592,7 +637,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.591874134Z"
+    created: "2022-11-02T05:40:22.706123045Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: a53e06e4c5d118456b425fede09caf0bed5230e62b0627a2bc74cce6384294ea
@@ -607,7 +652,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.591265834Z"
+    created: "2022-11-02T05:40:22.705611336Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: bef96faeef330481198cbe3f79cbbee5fdc13b38f77bab9b1554de39f04c9bf1
@@ -623,7 +668,22 @@ entries:
   dashboard-frontend:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.608542836Z"
+    created: "2022-11-02T05:40:22.719331559Z"
+    description: A Helm chart for App, a declarative, GitOps continuous delivery helm
+      chart for Kubernetes.
+    digest: ace7a22585a1a69213bc5dbd10d99cce8c3ef3d136a22b8c2309c45112d4ba23
+    keywords:
+    - dashboard-frontend
+    maintainers:
+    - name: satish
+    - name: ojasvi
+    name: dashboard-frontend
+    urls:
+    - https://blotoutio.github.io/charts/dashboard-frontend-0.20.0.tgz
+    version: 0.20.0
+  - apiVersion: v1
+    appVersion: 0.0.1
+    created: "2022-11-02T05:40:22.718907352Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 88054074de65d071a3155b046c3aa743f444df06263b095a13c1b1cb70484345
@@ -638,7 +698,7 @@ entries:
     version: 0.19.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.608021236Z"
+    created: "2022-11-02T05:40:22.718482345Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: dd5f8f98e43f5fd2f2d851a87af0859ab15365538d52e704cb09626ec53bb4a1
@@ -653,7 +713,7 @@ entries:
     version: 0.19.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.607488336Z"
+    created: "2022-11-02T05:40:22.718005837Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 8ea5aa61a67f37b2e6a816d0d740d15cc1cb93b1b132181eea40ef25d8ef23af
@@ -668,7 +728,7 @@ entries:
     version: 0.19.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.606947636Z"
+    created: "2022-11-02T05:40:22.717016821Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: aa798f90ef9854920567b79590f059b2993ec77d3f2b03b84fe15108e34ffb8f
@@ -683,7 +743,7 @@ entries:
     version: 0.18.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.606423636Z"
+    created: "2022-11-02T05:40:22.716395911Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 3a67be10f002984b5a42fa7996419e39171c2207e800d3f4969528b148adfa1f
@@ -698,7 +758,7 @@ entries:
     version: 0.18.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.605895036Z"
+    created: "2022-11-02T05:40:22.715779301Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 4d990c8ffaffef1093f2a4e5c4141279d08ab90fc5316a80c72b909c417db90b
@@ -713,7 +773,7 @@ entries:
     version: 0.17.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.605318836Z"
+    created: "2022-11-02T05:40:22.714931487Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 69e3641ea7141ada4b8fb0dbfe7ff20117acd90fd223bbb04f521845172eae94
@@ -728,7 +788,7 @@ entries:
     version: 0.17.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.604779236Z"
+    created: "2022-11-02T05:40:22.71448898Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: a36180c7d3bbdd4ef64695e9478d768de168fe0f526454b4a43fe5e9c2edac6f
@@ -743,7 +803,7 @@ entries:
     version: 0.17.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.604023635Z"
+    created: "2022-11-02T05:40:22.714020773Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: e5a17e5776792c920c9a3752e55fe1e73e9dcd9f521b3a965e633dc4295c399f
@@ -758,7 +818,7 @@ entries:
     version: 0.16.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.603492235Z"
+    created: "2022-11-02T05:40:22.713604966Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: d4f221882143aa60de22f3352a4d1af5e1c008baa0d268e5c8a014307b2dc227
@@ -773,7 +833,7 @@ entries:
     version: 0.15.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.602861935Z"
+    created: "2022-11-02T05:40:22.713176659Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: eddc922d18e90e3ae6611279dd6c336aafde8426444e70566ffea804d9d1eed7
@@ -788,7 +848,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.601639335Z"
+    created: "2022-11-02T05:40:22.712727852Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 6da46ec60abbc2b411ce226d72b1fba218f75fe96e73d271a130153d5c1fbc31
@@ -803,7 +863,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.600891235Z"
+    created: "2022-11-02T05:40:22.712263644Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 840018882c4a936087a736e2301af8a7b606353decc757d54af7485c06b804d4
@@ -819,10 +879,10 @@ entries:
   health-check:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.609181536Z"
+    created: "2022-11-02T05:40:22.719880368Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
-    digest: 6ccbfeba68eb39f7bb009c0556edc9e33c8871907c00e3ea04fbcaacbe76187f
+    digest: 162cebb7261e558667977765c7d30ce62c550e4a7e53c93733a020a5f1bc09ed
     keywords:
     - health-check
     maintainers:
@@ -833,7 +893,7 @@ entries:
     version: 0.13.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2022-10-18T14:18:34.608866836Z"
+    created: "2022-11-02T05:40:22.719590963Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 4f860dc6ca99f226e10f732572672972e6098b4d6301b8274b6b89c0dfd7f101
@@ -848,16 +908,16 @@ entries:
   nlb-loadbalancer:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2022-10-18T14:18:34.610099836Z"
+    created: "2022-11-02T05:40:22.720542378Z"
     description: The for creating nlb loadbalancer
-    digest: 9943eb2af080a6dc45646032219b2b605150cec5c1b85892ce7f5cb7a677faa8
+    digest: 851b1d2390f7e2c7c1eea777c339ab4e14aaa6cf16e1f19d5642531e37350ad6
     name: nlb-loadbalancer
     urls:
     - https://blotoutio.github.io/charts/nlb-loadbalancer-0.13.1.tgz
     version: 0.13.1
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2022-10-18T14:18:34.609596236Z"
+    created: "2022-11-02T05:40:22.720210373Z"
     description: The for creating nlb loadbalancer
     digest: c5d5952f2f77ae93ef5b363459fc96a40754df215f841bee06156ae0d14ddf93
     name: nlb-loadbalancer
@@ -867,7 +927,21 @@ entries:
   superset:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.639175739Z"
+    created: "2022-11-02T05:40:22.743959758Z"
+    description: Apache Superset is a modern, enterprise-ready business intelligence
+      web application
+    digest: e942c3eab33d47ae991b7b8109bc88e00a5dda17848f8d29731bd70ceba8d05d
+    maintainers:
+    - email: craig@craigrueda.com
+      name: craig-rueda
+      url: https://github.com/craig-rueda
+    name: superset
+    urls:
+    - https://blotoutio.github.io/charts/superset-0.20.0.tgz
+    version: 0.20.0
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2022-11-02T05:40:22.74165202Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 5d652cf369969a0fe6cf9b6b97d6c56c96a0334f4d24a0342771db08caab6df2
@@ -881,7 +955,7 @@ entries:
     version: 0.19.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.636653939Z"
+    created: "2022-11-02T05:40:22.740177697Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: aaa9ee990c67169b5e1910e32f3c493b3517fcae8e4ff8859b7f2e55252b1488
@@ -895,7 +969,7 @@ entries:
     version: 0.19.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.633396338Z"
+    created: "2022-11-02T05:40:22.738677472Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 7785e45b49db021e357f060bf6b5d927825a33b1755593b4f3ae5e12c2a9f85e
@@ -909,7 +983,7 @@ entries:
     version: 0.19.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.631514638Z"
+    created: "2022-11-02T05:40:22.737193848Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: ff494db5d4ec90c182532fbe24ccfc0678baebc6beb24a1b9bf10d96c445fdcb
@@ -923,7 +997,7 @@ entries:
     version: 0.18.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.629480438Z"
+    created: "2022-11-02T05:40:22.735710024Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: c005b64011454608199a21f9ac6abd369019b0bd1d5d0f84c0fdb375ec61e570
@@ -937,7 +1011,7 @@ entries:
     version: 0.18.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.627489438Z"
+    created: "2022-11-02T05:40:22.7342051Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: a3352f568313d45bced439ceddf0b070425fd9acbfc3ad23bfeaa9d71b184159
@@ -951,7 +1025,7 @@ entries:
     version: 0.17.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.625626538Z"
+    created: "2022-11-02T05:40:22.732715476Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: c25278564464ae527ec06d2e8997e1b07555311f45b9d878c32a9328f99821dd
@@ -965,7 +1039,7 @@ entries:
     version: 0.17.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.623807737Z"
+    created: "2022-11-02T05:40:22.731169051Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: eb5ec32e79b00a69669028b9332e8dcfc373af88bab9400e63e96f3551f5a66a
@@ -979,7 +1053,7 @@ entries:
     version: 0.17.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.621935937Z"
+    created: "2022-11-02T05:40:22.729026516Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 5222193da33d996471c7eed76f9b617a08c43e4f347251caf10d02229cdbfbfb
@@ -993,7 +1067,7 @@ entries:
     version: 0.16.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.619938637Z"
+    created: "2022-11-02T05:40:22.727081684Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 84db2db8376e96a06ea13c12c3ba37d20be129e938acbc8fcc1981d3eed6c60b
@@ -1007,7 +1081,7 @@ entries:
     version: 0.15.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.617104937Z"
+    created: "2022-11-02T05:40:22.72560006Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 40370a88353915d0b35c4cf59f332410faa3dffadb26bd7a4c7050783a9a4e05
@@ -1021,7 +1095,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.614727637Z"
+    created: "2022-11-02T05:40:22.72433504Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: f4b4220dac7ae42e0a32c3341902efbb604930fed0d1cc4e34f6b4e04bd53a0e
@@ -1035,7 +1109,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.613202736Z"
+    created: "2022-11-02T05:40:22.72307842Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: d595eeaa8631e02ee60767c5a6c00aa4380fd06026cd72f39ae0f6e8cfccde5a
@@ -1049,7 +1123,7 @@ entries:
     version: 0.13.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-10-18T14:18:34.611679036Z"
+    created: "2022-11-02T05:40:22.721817499Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 41ddde66ee42c85cf1dca6bfb15682ae657202606b15e1a1836516cabf6256f3
@@ -1061,4 +1135,4 @@ entries:
     urls:
     - https://blotoutio.github.io/charts/superset-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-18T14:18:34.569128532Z"
+generated: "2022-11-02T05:40:22.686981435Z"
