@@ -150,7 +150,7 @@ extraConfigMountPath: "/app/configs"
 
 image:
   repository: blotout/superset
-  tag: 0.20.0-rc.1
+  tag: 0.20.1
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
