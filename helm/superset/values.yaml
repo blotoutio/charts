@@ -19,7 +19,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+replicaCount: 2
 
 # User ID directive. This user must have enough permissions to run the bootstrap script
 # Runn containers as root is not recommended in production. Change this to another UID - e.g. 1000 to be more secure
@@ -148,6 +148,9 @@ configOverrides: {}
   #   AUTH_USER_REGISTRATION = True
   #   # The default user self registration role
   #   AUTH_USER_REGISTRATION_ROLE = "Admin"
+  # secret: |
+  #   # Generate your own secret key for encryption. Use openssl rand -base64 42 to generate a good key
+  #   SECRET_KEY = 'YOUR_OWN_RANDOM_GENERATED_SECRET_KEY'
 # Same as above but the values are files
 configOverridesFiles: {}
   # extend_timeout: extend_timeout.py
@@ -159,8 +162,8 @@ configMountPath: "/app/pythonpath"
 extraConfigMountPath: "/app/configs"
 
 image:
-  repository: apache/superset
-  tag: latest
+  repository: blotout/superset
+  tag: 0.20.1
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -179,8 +182,9 @@ service:
 
 ingress:
   enabled: false
-  ingressClassName: nginx
-  annotations: {}
+  # ingressClassName: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     ## Extend timeout to allow long running queries.
     # nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
@@ -195,17 +199,17 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: {}
+resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  limits:
+    cpu: 2000m
+    memory: 2000Mi
+  requests:
+    cpu: 400m
+    memory: 800Mi
 
 ##
 ## Custom hostAliases for all superset pods
@@ -250,6 +254,14 @@ supersetNode:
   podAnnotations: {}
   ## Labels to be added to supersetNode pods
   podLabels: {}
+  # Resource settings for the supersetNode pods - these settings overwrite might existing values from the global resources object defined above.
+  resources: {}
+    # limits:
+    #  cpu: 100m
+    #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+    #  memory: 128Mi
 ##
 ## Superset worker configuration
 supersetWorker:
@@ -272,11 +284,19 @@ supersetWorker:
   podAnnotations: {}
   ## Labels to be added to supersetWorker pods
   podLabels: {}
+  # Resource settings for the supersetWorker pods - these settings overwrite might existing values from the global resources object defined above.
+  resources: {}
+    # limits:
+    #  cpu: 100m
+    #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+    #  memory: 128Mi
 ##
 ## Superset beat configuration (to trigger scheduled jobs like reports)
 supersetCeleryBeat:
   # This is only required if you intend to use alerts and reports
-  enabled: false
+  enabled: true
   command:
     - "/bin/sh"
     - "-c"
@@ -296,12 +316,22 @@ supersetCeleryBeat:
   podAnnotations: {}
   ## Labels to be added to supersetCeleryBeat pods
   podLabels: {}
+  # Resource settings for the CeleryBeat pods - these settings overwrite might existing values from the global resources object defined above.
+  resources: {}
+    # limits:
+    #  cpu: 100m
+    #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+    #  memory: 128Mi
 ##
 ## Init job configuration
 init:
   # Configure resources
   # Warning: fab command consumes a lot of ram and can
   # cause the process to be killed due to OOM if it exceeds limit
+  # Make sure you are giving a strong password for the admin user creation( else make sure you are changing after setup)
+  # Also change the admin email to your own custom email.
   resources: {}
     # limits:
     #   cpu:
@@ -365,42 +395,39 @@ postgresql:
   ## Use the PostgreSQL chart dependency.
   ## Set to false if bringing your own PostgreSQL.
   enabled: true
-  ##
-  ## The name of an existing secret that contains the postgres password.
-  existingSecret:
-  ## Name of the key containing the secret.
-  existingSecretKey: postgresql-password
-  ##
-  ## If you are bringing your own PostgreSQL, you should set postgresHost and
-  ## also probably service.port, postgresqlUsername, postgresqlPassword, and postgresqlDatabase
-  ## postgresHost:
-  ##
-  ## PostgreSQL port
-  service:
-    port: 5432
-  ## PostgreSQL User to create.
-  postgresqlUsername: superset
-  ##
-  ## PostgreSQL Password for the new user.
-  ## If not set, a random 10 characters password will be used.
-  postgresqlPassword: superset
-  ##
-  ## PostgreSQL Database to create.
-  postgresqlDatabase: superset
-  ##
-  ## Persistent Volume Storage configuration.
-  ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
-  persistence:
+
+  ## Authentication parameters
+  auth:
+    ## The name of an existing secret that contains the postgres password.
+    existingSecret:
+    ## PostgreSQL name for a custom user to create
+    username: superset
+    ## PostgreSQL password for the custom user to create. Ignored if `auth.existingSecret` with key `password` is provided
+    password: superset
+    ## PostgreSQL name for a custom database to create
+    database: superset
+
+
+  ## PostgreSQL Primary parameters
+  primary:
     ##
-    ## Enable PostgreSQL persistence using Persistent Volume Claims.
-    enabled: true
-    ##
-    ## Persistant class
-    # storageClass: classname
-    ##
-    ## Access modes:
-    accessModes:
-      - ReadWriteOnce
+    ## Persistent Volume Storage configuration.
+    ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
+    persistence:
+      ##
+      ## Enable PostgreSQL persistence using Persistent Volume Claims.
+      enabled: true
+      ##
+      ## Persistant class
+      # storageClass: classname
+      ##
+      ## Access modes:
+      accessModes:
+        - ReadWriteOnce
+    ## PostgreSQL port
+    service:
+      ports:
+        postgresql: "5432"
 
 ## Configuration values for the Redis dependency.
 ## ref: https://github.com/bitnami/charts/blob/master/bitnami/redis
@@ -458,7 +485,7 @@ tolerations: []
 
 affinity: {}
 
-custom_security_manager: |
+custom_security_manager: |-
   import os
   import logging
   import jwt
@@ -470,27 +497,33 @@ custom_security_manager: |
   from flask_appbuilder.security.views import expose
   from flask_login import login_user, logout_user
   from superset.security import SupersetSecurityManager
+
   class CustomAuthDBView(AuthDBView):
+
       def getSub(self, jwt_payload):
           if 'sub' in jwt_payload:
               return jwt_payload.get('sub')
           else:
               return str('email_' + jwt_payload.get('preferred_username'))
+
       def getEmail(self, jwt_payload):
           if 'sub' in jwt_payload:
               return jwt_payload.get('email')
           else:
               return str('email_' + jwt_payload.get('email'))
+
       def getFirstName(self, jwt_payload):
           if 'given_name' in jwt_payload:
               return jwt_payload.get('given_name')
           else:
               return jwt_payload.get('name')
+
       def getLastName(self, jwt_payload):
           if 'family_name' in jwt_payload:
               return jwt_payload.get('family_name')
           else:
               return jwt_payload.get('name')
+
       @expose('/user_register/', methods=['GET'])
       def user_register(self):
           token = request.args.get('token')
@@ -524,6 +557,7 @@ custom_security_manager: |
                   return 'User already exists', 210
           else:
               return 'Invalid token', 401
+
       @expose('/login/', methods=['GET', 'POST'])
       def login(self):
           token = request.args.get('token')
@@ -538,11 +572,15 @@ custom_security_manager: |
                   return 'User not registered', 210
           else:
               return super(CustomAuthDBView, self).login()
+
       @expose('/session_expire/', methods=['GET'])
       def sso_logout(self):
           logout_user()
           return 'User Logged out successfully', 200
+
+
   class CustomSecurityManager(SupersetSecurityManager):
       authdbview = CustomAuthDBView
+
       def __init__(self, appbuilder):
           super(CustomSecurityManager, self).__init__(appbuilder)
