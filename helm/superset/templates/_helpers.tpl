@@ -122,11 +122,11 @@ CACHE_CONFIG : CacheConfig = {
       'CACHE_TYPE': 'redis',
       'CACHE_DEFAULT_TIMEOUT': 3*60*60,
       'CACHE_KEY_PREFIX': 'superset_c_',
-      'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
+      'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}",
       'CACHE_REDIS_HOST': env('REDIS_HOST'),
       'CACHE_REDIS_PORT': env('REDIS_PORT'),
       'CACHE_REDIS_PASSWORD': env('REDIS_PASSWORD'),
-      'CACHE_REDIS_DB': env('REDIS_CACHE_DB', 1),
+      'CACHE_REDIS_DB': env('REDIS_CACHE_DB', 1)
 }
 
 SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{env('DB_USER')}:{env('DB_PASS')}@{env('DB_HOST')}:{env('DB_PORT')}/{env('DB_NAME')}"
