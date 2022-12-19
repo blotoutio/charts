@@ -46,7 +46,7 @@ livenessProbe:
 
 service:
   type: ClusterIP
-  containerPort: 8080
+  containerPort: 3000
   annotations: {}
   labels: {}
 
