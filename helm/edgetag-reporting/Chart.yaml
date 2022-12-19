@@ -1,0 +1,10 @@
+apiVersion: v1
+appVersion: 0.1.0
+description: A Helm chart for App, a declarative, GitOps continuous delivery helm chart for Kubernetes.
+keywords:
+- edgetag-reporting
+maintainers:
+- name: satish
+- name: ojasvi
+name: edgetag-reporting
+version: "0.1.0"
