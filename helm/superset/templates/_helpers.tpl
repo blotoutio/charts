@@ -43,6 +43,17 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 
 {{/*
+Create the name of the service account to use
+*/}}
+{{- define "superset.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+{{- default (include "superset.fullname" .) .Values.serviceAccountName -}}
+{{- else -}}
+{{- default "default" .Values.serviceAccountName -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create chart name and version as used by the chart label.
 */}}
 {{- define "superset.chart" -}}
@@ -55,7 +66,7 @@ import flask
 from flask import request, g
 
 from cachelib.redis import RedisCache
-from celery.schedules import crontab
+
 from custom_security_manager import CustomSecurityManager
 CUSTOM_SECURITY_MANAGER = CustomSecurityManager
 from superset.typing import CacheConfig
@@ -74,45 +85,25 @@ FEATURE_FLAGS = {
     "ENABLE_TEMPLATE_PROCESSING": False,
 }
 
-# Console Log Settings
-LOG_FORMAT = "%(asctime)s:%(levelname)s:%(name)s:%(message)s"
-LOG_LEVEL = "ERROR"
-
 SUPERSET_WEBSERVER_TIMEOUT = 120
 SQLLAB_TIMEOUT = 60
-ENABLE_TIME_ROTATE = True
-ENABLE_SCHEDULED_EMAIL_REPORTS = True
 
 def env(key, default=None):
     return os.getenv(key, default)
 
-SCHEDULED_EMAIL_DEBUG_MODE = False
-ENABLE_TIME_ROTATE = True
-ENABLE_SCHEDULED_EMAIL_REPORTS = True
-EMAIL_NOTIFICATIONS = True
-SMTP_HOST = "smtp.gmail.com"
-SMTP_STARTTLS = True
-SMTP_SSL = False
-SMTP_USER = os.environ.get("SMTP_USER")
-SMTP_PORT = 587
-SMTP_PASSWORD = os.environ.get("SMTP_PASSWORD")
-SMTP_MAIL_FROM = os.environ.get("SMTP_MAIL_FROM")
-EMAIL_REPORTS_USER = "admin"
-
 MAPBOX_API_KEY = env('MAPBOX_API_KEY', '')
-DATA_CACHE_CONFIG: CacheConfig = {
+CACHE_CONFIG = {
       'CACHE_TYPE': 'redis',
-      'CACHE_DEFAULT_TIMEOUT': 3*60*60,
-      'CACHE_KEY_PREFIX': 'superset_data_',
-      'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
+      'CACHE_DEFAULT_TIMEOUT': 300,
+      'CACHE_KEY_PREFIX': 'superset_',
+      'CACHE_REDIS_HOST': env('REDIS_HOST'),
+      'CACHE_REDIS_PORT': env('REDIS_PORT'),
+      'CACHE_REDIS_PASSWORD': env('REDIS_PASSWORD'),
+      'CACHE_REDIS_DB': env('REDIS_DB', 1),
 }
+DATA_CACHE_CONFIG = CACHE_CONFIG
 
-CACHE_CONFIG : CacheConfig = {
-      'CACHE_TYPE': 'redis',
-      'CACHE_DEFAULT_TIMEOUT': 3*60*60,
-      'CACHE_KEY_PREFIX': 'superset_c_',
-      'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
-}
+FILTER_STATE_CACHE_CONFIG = CACHE_CONFIG
 
 SQLALCHEMY_DATABASE_URI = f"postgresql+psycopg2://{env('DB_USER')}:{env('DB_PASS')}@{env('DB_HOST')}:{env('DB_PORT')}/{env('DB_NAME')}"
 SQLALCHEMY_TRACK_MODIFICATIONS = True
@@ -124,57 +115,24 @@ WTF_CSRF_ENABLED = True
 WTF_CSRF_EXEMPT_LIST = []
 # A CSRF token that expires in 1 year
 WTF_CSRF_TIME_LIMIT = 60 * 60 * 24 * 365
-
 class CeleryConfig(object):
-    BROKER_URL = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CELERY_DB}"
-    CELERY_IMPORTS = ("superset.sql_lab","superset.tasks", "superset.tasks.thumbnails")
-    CELERY_RESULT_BACKEND = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_RESULTS_DB}"
-    CELERYD_LOG_LEVEL = 'DEBUG'
-    CELERYD_PREFETCH_MULTIPLIER = 10
-    CELERY_ACKS_LATE = True
-    CELERY_ANNOTATIONS = {
-        'sql_lab.get_sql_results': {
-            'rate_limit': '100/s',
-        },
-        'email_reports.send': {
-            'rate_limit': '1/s',
-            'time_limit': 120,
-            'soft_time_limit': 150,
-            'ignore_result': True,
-        },
-    }
-    CELERYBEAT_SCHEDULE = {
-        'email_reports.schedule_hourly': {
-            'task': 'email_reports.schedule_hourly',
-            'schedule': crontab(minute=1, hour='*'),
-        },
-        'alerts.schedule_check': {
-            'task': 'alerts.schedule_check',
-            'schedule': crontab(minute='*', hour='*'),
-        },
-        'reports.scheduler': {
-            'task': 'reports.scheduler',
-            'schedule': crontab(minute='*', hour='*'),
-        },
-        'reports.prune_log': {
-            'task': 'reports.prune_log',
-            'schedule': crontab(minute=0, hour=0),
-        },
-        'cache-warmup-hourly': {
-             'task': 'cache-warmup',
-             'schedule': crontab(minute='*/30', hour='*'),
-              'kwargs': {
-                 'strategy_name': 'top_n_dashboards',
-                 'top_n': 10,
-                 'since': '7 days ago',
-             },
-        },
-    }
+  CELERY_IMPORTS = ('superset.sql_lab', )
+  CELERY_ANNOTATIONS = {'tasks.add': {'rate_limit': '10/s'}}
+{{- if .Values.supersetNode.connections.redis_password }}
+  BROKER_URL = f"redis://:{env('REDIS_PASSWORD')}@{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
+  CELERY_RESULT_BACKEND = f"redis://:{env('REDIS_PASSWORD')}@{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
+{{- else }}
+  BROKER_URL = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
+  CELERY_RESULT_BACKEND = f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/0"
+{{- end }}
 
 CELERY_CONFIG = CeleryConfig
 
 RESULTS_BACKEND = RedisCache(
       host=env('REDIS_HOST'),
+{{- if .Values.supersetNode.connections.redis_password }}
+      password=env('REDIS_PASSWORD'),
+{{- end }}
       port=env('REDIS_PORT'),
       key_prefix='superset_results'
 )
@@ -185,7 +143,7 @@ THUMBNAIL_CACHE_CONFIG: CacheConfig = {
     'CACHE_DEFAULT_TIMEOUT': 15*60,
     'CACHE_KEY_PREFIX': 'thumbnail_',
     'CACHE_NO_NULL_WARNING': True,
-    'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/{REDIS_CACHE_DB}"
+    'CACHE_REDIS_URL': f"redis://{env('REDIS_HOST')}:{env('REDIS_PORT')}/1"
 }
 
 WEBDRIVER_TYPE= "chrome"
@@ -206,6 +164,14 @@ WEBDRIVER_OPTION_ARGS = [
 {{- range $key, $value := .Values.configOverrides }}
 # {{ $key }}
 {{ tpl $value $ }}
+{{- end }}
+{{- end }}
+{{ if .Values.configOverridesFiles }}
+# Overrides from files
+{{- $files := .Files }}
+{{- range $key, $value := .Values.configOverridesFiles }}
+# {{ $key }}
+{{ $files.Get $value }}
 {{- end }}
 {{- end }}
 
