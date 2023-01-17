@@ -19,11 +19,16 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 2
+replicaCount: 1
 
 # User ID directive. This user must have enough permissions to run the bootstrap script
 # Runn containers as root is not recommended in production. Change this to another UID - e.g. 1000 to be more secure
 runAsUser: 0
+
+# Create custom service account for Superset. If create: true and name is not provided, superset.fullname will be used.
+# serviceAccountName: superset
+serviceAccount:
+  create: false
 
 # Install additional packages and do any other bootstrap configuration in this script
 # For production clusters it's recommended to build own image with this step done in CI
@@ -31,8 +36,10 @@ bootstrapScript: |
   #!/bin/bash
   rm -rf /var/lib/apt/lists/* && \
   pip install \
-    psycopg2==2.8.5 \
-    redis==3.5.3 && \
+    psycopg2-binary==2.9.1 \
+    redis==3.5.3 \
+    PyAthena>1.2.0 \
+    PyAthenaJDBC>1.0.9 && \
   if [ ! -f ~/bootstrap ]; then echo "Running Superset with uid {{ .Values.runAsUser }}" > ~/bootstrap; fi
 
 ## The name of the secret which we will use to generate a superset_config.py file
@@ -78,14 +85,14 @@ extraSecretEnv: {}
   # GOOGLE_SECRET: ...
 
 extraConfigs: {}
-  # datasources-init.yaml: |
+  # import_datasources.yaml: |
   #     databases:
-  #     - allow_csv_upload: true
+  #     - allow_file_upload: true
   #       allow_ctas: true
   #       allow_cvas: true
   #       database_name: example-db
   #       extra: "{\r\n    \"metadata_params\": {},\r\n    \"engine_params\": {},\r\n    \"\
-  #         metadata_cache_timeout\": {},\r\n    \"schemas_allowed_for_csv_upload\": []\r\n\
+  #         metadata_cache_timeout\": {},\r\n    \"schemas_allowed_for_file_upload\": []\r\n\
   #         }"
   #       sqlalchemy_uri: example://example-db.local
   #       tables: []
@@ -143,18 +150,30 @@ configOverrides: {}
   #   AUTH_USER_REGISTRATION = True
   #   # The default user self registration role
   #   AUTH_USER_REGISTRATION_ROLE = "Admin"
+  # secret: |
+  #   # Generate your own secret key for encryption. Use openssl rand -base64 42 to generate a good key
+  #   SECRET_KEY = 'YOUR_OWN_RANDOM_GENERATED_SECRET_KEY'
+# Same as above but the values are files
+configOverridesFiles: {}
+  # extend_timeout: extend_timeout.py
+  # enable_oauth: enable_oauth.py
+
 
 configMountPath: "/app/pythonpath"
 
 extraConfigMountPath: "/app/configs"
 
 image:
-  repository: blotout/superset
-  tag: 0.20.4
+  repository: apache/superset
+  tag: latest
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 
+initImage:
+  repository: busybox
+  tag: latest
+  pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
@@ -165,8 +184,8 @@ service:
 
 ingress:
   enabled: false
-  annotations:
-    kubernetes.io/ingress.class: nginx
+  # ingressClassName: nginx
+  annotations: {}
     # kubernetes.io/tls-acme: "true"
     ## Extend timeout to allow long running queries.
     # nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
@@ -181,17 +200,19 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources:
+resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  limits:
-    cpu: 2000m
-    memory: 2000Mi
-  requests:
-    cpu: 400m
-    memory: 800Mi
+  # The limits below will apply to all Superset components. To set individual resource limitations refer to the pod specific values below.
+  # The pod specific values will overwrite anything that is set here.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
 ##
 ## Custom hostAliases for all superset pods
@@ -208,10 +229,13 @@ supersetNode:
   command:
     - "/bin/sh"
     - "-c"
-    - ". {{ .Values.configMountPath }}/superset_bootstrap.sh; /usr/bin/docker-entrypoint.sh"
+    - ". {{ .Values.configMountPath }}/superset_bootstrap.sh; /usr/bin/run-server.sh"
   connections:
+    # Change in case of bringing your own redis and then also set redis.enabled:false
     redis_host: '{{ template "superset.fullname" . }}-redis-headless'
+    # redis_password: superset
     redis_port: "6379"
+    # You need to change below configuration incase bringing own PostgresSQL instance and also set postgresql.enabled:false
     db_host: '{{ template "superset.fullname" . }}-postgresql'
     db_port: "5432"
     db_user: superset
@@ -221,8 +245,8 @@ supersetNode:
   forceReload: false # If true, forces deployment to reload on each upgrade
   initContainers:
     - name: wait-for-postgres
-      image: busybox:latest
-      imagePullPolicy: IfNotPresent
+      image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+      imagePullPolicy: "{{ .Values.initImage.pullPolicy }}"
       envFrom:
         - secretRef:
             name: '{{ tpl .Values.envFromSecret . }}'
@@ -231,7 +255,16 @@ supersetNode:
   deploymentAnnotations: {}
   ## Annotations to be added to supersetNode pods
   podAnnotations: {}
-
+  ## Labels to be added to supersetNode pods
+  podLabels: {}
+  # Resource settings for the supersetNode pods - these settings overwrite might existing values from the global resources object defined above.
+  resources: {}
+    # limits:
+    #  cpu: 100m
+    #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+    #  memory: 128Mi
 ##
 ## Superset worker configuration
 supersetWorker:
@@ -242,8 +275,8 @@ supersetWorker:
   forceReload: false # If true, forces deployment to reload on each upgrade
   initContainers:
     - name: wait-for-postgres
-      image: busybox:latest
-      imagePullPolicy: IfNotPresent
+      image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+      imagePullPolicy: "{{ .Values.initImage.pullPolicy }}"
       envFrom:
         - secretRef:
             name: '{{ tpl .Values.envFromSecret . }}'
@@ -252,12 +285,21 @@ supersetWorker:
   deploymentAnnotations: {}
   ## Annotations to be added to supersetWorker pods
   podAnnotations: {}
-
+  ## Labels to be added to supersetWorker pods
+  podLabels: {}
+  # Resource settings for the supersetWorker pods - these settings overwrite might existing values from the global resources object defined above.
+  resources: {}
+    # limits:
+    #  cpu: 100m
+    #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+    #  memory: 128Mi
 ##
 ## Superset beat configuration (to trigger scheduled jobs like reports)
 supersetCeleryBeat:
   # This is only required if you intend to use alerts and reports
-  enabled: true
+  enabled: false
   command:
     - "/bin/sh"
     - "-c"
@@ -265,8 +307,8 @@ supersetCeleryBeat:
   forceReload: false # If true, forces deployment to reload on each upgrade
   initContainers:
     - name: wait-for-postgres
-      image: busybox:latest
-      imagePullPolicy: IfNotPresent
+      image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+      imagePullPolicy: "{{ .Values.initImage.pullPolicy }}"
       envFrom:
         - secretRef:
             name: '{{ tpl .Values.envFromSecret . }}'
@@ -275,13 +317,24 @@ supersetCeleryBeat:
   deploymentAnnotations: {}
   ## Annotations to be added to supersetCeleryBeat pods
   podAnnotations: {}
-
+  ## Labels to be added to supersetCeleryBeat pods
+  podLabels: {}
+  # Resource settings for the CeleryBeat pods - these settings overwrite might existing values from the global resources object defined above.
+  resources: {}
+    # limits:
+    #  cpu: 100m
+    #  memory: 128Mi
+    # requests:
+    #  cpu: 100m
+    #  memory: 128Mi
 ##
 ## Init job configuration
 init:
   # Configure resources
   # Warning: fab command consumes a lot of ram and can
   # cause the process to be killed due to OOM if it exceeds limit
+  # Make sure you are giving a strong password for the admin user creation( else make sure you are changing after setup)
+  # Also change the admin email to your own custom email.
   resources: {}
     # limits:
     #   cpu:
@@ -304,8 +357,8 @@ init:
     password: admin
   initContainers:
     - name: wait-for-postgres
-      image: busybox:latest
-      imagePullPolicy: IfNotPresent
+      image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
+      imagePullPolicy: "{{ .Values.initImage.pullPolicy }}"
       envFrom:
         - secretRef:
             name: '{{ tpl .Values.envFromSecret . }}'
@@ -335,6 +388,8 @@ init:
       echo "Importing database connections.... "
       superset import_datasources -p {{ .Values.extraConfigMountPath }}/import_datasources.yaml
     fi
+  ## Annotations to be added to init job pods
+  podAnnotations: {}
 ##
 ## Configuration values for the postgresql dependency.
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/postgresql/README.md
@@ -343,65 +398,69 @@ postgresql:
   ## Use the PostgreSQL chart dependency.
   ## Set to false if bringing your own PostgreSQL.
   enabled: true
-  ##
-  ## The name of an existing secret that contains the postgres password.
-  existingSecret:
-  ## Name of the key containing the secret.
-  existingSecretKey: postgresql-password
-  ##
-  ## If you are bringing your own PostgreSQL, you should set postgresHost and
-  ## also probably service.port, postgresqlUsername, postgresqlPassword, and postgresqlDatabase
-  ## postgresHost:
-  ##
-  ## PostgreSQL port
-  service:
-    port: 5432
-  ## PostgreSQL User to create.
-  postgresqlUsername: superset
-  ##
-  ## PostgreSQL Password for the new user.
-  ## If not set, a random 10 characters password will be used.
-  postgresqlPassword: superset
-  ##
-  ## PostgreSQL Database to create.
-  postgresqlDatabase: superset
-  ##
-  ## Persistent Volume Storage configuration.
-  ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
-  persistence:
+
+  ## Authentication parameters
+  auth:
+    ## The name of an existing secret that contains the postgres password.
+    existingSecret:
+    ## PostgreSQL name for a custom user to create
+    username: superset
+    ## PostgreSQL password for the custom user to create. Ignored if `auth.existingSecret` with key `password` is provided
+    password: superset
+    ## PostgreSQL name for a custom database to create
+    database: superset
+
+
+  ## PostgreSQL Primary parameters
+  primary:
     ##
-    ## Enable PostgreSQL persistence using Persistent Volume Claims.
-    enabled: true
-    ##
-    ## Persistant class
-    # storageClass: classname
-    ##
-    ## Access modes:
-    accessModes:
-      - ReadWriteOnce
+    ## Persistent Volume Storage configuration.
+    ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes
+    persistence:
+      ##
+      ## Enable PostgreSQL persistence using Persistent Volume Claims.
+      enabled: true
+      ##
+      ## Persistant class
+      # storageClass: classname
+      ##
+      ## Access modes:
+      accessModes:
+        - ReadWriteOnce
+    ## PostgreSQL port
+    service:
+      ports:
+        postgresql: "5432"
 
 ## Configuration values for the Redis dependency.
-## ref: https://github.com/kubernetes/charts/blob/master/stable/redis/README.md
+## ref: https://github.com/bitnami/charts/blob/master/bitnami/redis
+## More documentation can be found here: https://artifacthub.io/packages/helm/bitnami/redis
 redis:
   ##
   ## Use the redis chart dependency.
+  ##
+  ## If you are bringing your own redis, you can set the host in supersetNode.connections.redis_host
+  ##
   ## Set to false if bringing your own redis.
   enabled: true
-  usePassword: false
   ##
-  ## The name of an existing secret that contains the redis password.
-  existingSecret:
-  ## Name of the key containing the secret.
-  existingSecretKey: redis-password
+  ## Set architecture to standalone/replication
+  architecture: standalone
   ##
-  ## If you are bringing your own redis, you can set the host in redisHost.
-  ## redisHost:
+  ## Auth configuration:
   ##
-  ## Redis password
-  ##
-  password: superset
+  auth:
+    ## Enable password authentication
+    enabled: false
+    ## The name of an existing secret that contains the redis password.
+    existingSecret: ""
+    ## Name of the key containing the secret.
+    existingSecretKey: ""
+    ## Redis password
+    password: superset
   ##
   ## Master configuration
+  ##
   master:
     ##
     ## Image configuration
@@ -422,10 +481,6 @@ redis:
       ## Access mode:
       accessModes:
       - ReadWriteOnce
-  ##
-  ## Disable cluster management by default.
-  cluster:
-    enabled: false
 
 nodeSelector: {}
 
@@ -476,7 +531,7 @@ custom_security_manager: |-
       def user_register(self):
           token = request.args.get('token')
           if token is not None:
-              jwt_payload = jwt.decode(token, '', verify=False)
+              jwt_payload = jwt.decode(token, options={"verify_signature": False})
               user_name = self.getSub(jwt_payload)
               first_name = self.getFirstName(jwt_payload)
               last_name = self.getLastName(jwt_payload)
@@ -510,7 +565,7 @@ custom_security_manager: |-
       def login(self):
           token = request.args.get('token')
           if token is not None:
-              jwt_payload = jwt.decode(token, '', verify=False)
+              jwt_payload = jwt.decode(token, options={"verify_signature": False})
               user_name = self.getSub(jwt_payload)
               user = self.appbuilder.sm.find_user(username=user_name)
               if user is not None:
