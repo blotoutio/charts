@@ -8,7 +8,7 @@ image:
   repository: blotout/cloud-app-ui
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 1.25.0
+  tag: "0.23.0"
 
 env: {}
 

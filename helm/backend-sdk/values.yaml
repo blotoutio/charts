@@ -8,7 +8,7 @@ image:
   repository: blotout/sdk-backend
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 1.25.0
+  tag: "0.23.0"
 
 env: {}
 
@@ -40,7 +40,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 ingress:
   enabled: false
@@ -73,7 +73,7 @@ resources: {}
 readinessProbe:
   httpGet:
     path: 
-    port: 
+    port: 8080
   failureThreshold: 2
   initialDelaySeconds: 30
   periodSeconds: 10
@@ -82,7 +82,7 @@ readinessProbe:
 livenessProbe:
   httpGet:
     path: 
-    port: 
+    port: 8080
   failureThreshold: 2
   initialDelaySeconds: 60
   periodSeconds: 10
