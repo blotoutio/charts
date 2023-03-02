@@ -33,19 +33,28 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+          - java
+          args:
+          - -jar
+          - sdk-api-0.0.1.jar
           env:
           {{- range $conf, $value := .Values.env }}
             - name: {{ $conf | quote }}
               value: {{ $value | quote }}
           {{- end }}
+          envFrom:
+            - configMapRef:
+                name: sdk-configmap
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          terminationMessagePath: /dev/termination-log
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
