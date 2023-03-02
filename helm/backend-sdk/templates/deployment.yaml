@@ -37,6 +37,7 @@ spec:
           {{- range $conf, $value := .Values.env }}
             - name: {{ $conf | quote }}
               value: {{ $value | quote }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
