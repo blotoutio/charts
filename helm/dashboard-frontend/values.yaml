@@ -73,7 +73,7 @@ resources: {}
 readinessProbe:
   httpGet:
     path: 
-    port: 
+    port: 80
   failureThreshold: 2
   initialDelaySeconds: 30
   periodSeconds: 10
@@ -82,7 +82,7 @@ readinessProbe:
 livenessProbe:
   httpGet:
     path: 
-    port: 
+    port: 80
   failureThreshold: 2
   initialDelaySeconds: 60
   periodSeconds: 10
