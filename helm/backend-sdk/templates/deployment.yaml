@@ -1,89 +1,61 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "app.fullname" . }}
+  name: {{ include "backend-sdk.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ include "app.name" . }}-{{ .Release.Name }}
-    helm.sh/chart: {{ include "app.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/part-of: application
-    app.kubernetes.io/component: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Values.image.tag | quote }}
+    {{- include "backend-sdk.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicas }}
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "app.name" . }}-{{ .Release.Name }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
-  revisionHistoryLimit: 5
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
+      {{- include "backend-sdk.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
-        app.kubernetes.io/name: {{ include "app.name" . }}-{{ .Release.Name }}
-        helm.sh/chart: {{ include "app.chart" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/managed-by: {{ .Release.Service }}
-        app.kubernetes.io/part-of: application
-        app.kubernetes.io/component: {{ .Release.Name }}
-        app.kubernetes.io/version: {{ .Values.image.tag | quote }}
+        {{- include "backend-sdk.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.image.imagePullSecrets }}
+      {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.securityContext }}
-      securityContext: {{- toYaml .Values.image.securityContext | nindent 8 }}
-      {{- end }}
+      serviceAccountName: {{ include "backend-sdk.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-      - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.imagePullPolicy }}
-        name: {{ .Release.Name }}
-        command:
-        - java
-        args:
-        - -jar
-        - sdk-api-0.0.1.jar
-        env:
-        {{- range $conf, $value := .Values.env }}
-          - name: {{ $conf | quote }}
-            value: {{ $value | quote }}
-        {{- end }}
-        envFrom:
-          - configMapRef:
-              name: sdk-configmap
-        {{- if .Values.containerSecurityContext }}
-        securityContext: {{- toYaml .Values.containerSecurityContext | nindent 10 }}
-        {{- end }}
-        ports:
-        - name: {{ .Release.Name }}
-          containerPort: {{ .Values.service.containerPort }}
-          protocol: TCP
-        resources:
-{{- toYaml .Values.resources | nindent 10 }}
-        livenessProbe:
-          httpGet:
-            path: {{ .Values.livenessProbe.path }}
-            port: {{ .Values.service.containerPort }}
-          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
-          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
-          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
-          successThreshold: {{ .Values.livenessProbe.successThreshold }}
-          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
-        readinessProbe:
-          httpGet:
-            path: {{ .Values.readinessProbe.path }}
-            port: {{ .Values.service.containerPort }}
-          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
-          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
-          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
-          successThreshold: {{ .Values.readinessProbe.successThreshold }}
-          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
-        terminationMessagePath: /dev/termination-log
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 30
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          {{- range $conf, $value := .Values.env }}
+            - name: {{ $conf | quote }}
+              value: {{ $value | quote }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.resources | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.resources | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
