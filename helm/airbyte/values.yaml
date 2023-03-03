@@ -36,7 +36,7 @@ temporal:
   replicas: 1
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
