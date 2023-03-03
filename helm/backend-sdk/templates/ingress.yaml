@@ -10,7 +10,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ template "app.fullname" . }}
+  name: {{ $fullName }}
 {{- if .Values.ingress.annotations }}
   labels:
     app.kubernetes.io/name: {{ include "app.name" . }}-{{ .Release.Name }}
