@@ -2,8 +2,8 @@ apiVersion: v1
 appVersion: 0.0.1
 description: A Helm chart for App, a declarative, GitOps continuous delivery helm chart for Kubernetes.
 keywords:
-- data_lineage
+- data-lineage
 maintainers:
 - name: satish
-name: data_lineage
+name: data-lineage
 version: "0.0.1"
