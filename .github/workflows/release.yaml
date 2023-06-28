@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - eks_upgrade
     paths:
       - 'helm/**'
   release:
