@@ -38,6 +38,7 @@ bootstrapScript: |
   pip install \
     psycopg2-binary==2.9.1 \
     redis==3.5.3 \
+    PyAthena[SQLAlchemy]>1.2.0, <2.0.0 \
     PyAthena==1.11.5 \
     PyAthenaJDBC==1.0.9 && \
   if [ ! -f ~/bootstrap ]; then echo "Running Superset with uid {{ .Values.runAsUser }}" > ~/bootstrap; fi
