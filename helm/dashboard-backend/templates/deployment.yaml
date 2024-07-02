@@ -42,7 +42,7 @@ spec:
           - -XX:MaxMetaspaceSize=500m
           - -Xss1024k
           - -jar
-          - dashboard-backend-0.0.1.jar
+          - blotout-0.0.1.jar
           env:
           {{- range $conf, $value := .Values.env }}
             - name: {{ $conf | quote }}
