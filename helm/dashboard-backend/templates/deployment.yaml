@@ -49,8 +49,8 @@ spec:
         args:
         - -Xms512m
         - -Xmx3024m
-        - -XX:PermSize=64m
-        - -XX:MaxPermSize=500m
+        - -XX:MetaspaceSize=64m
+        - -XX:MaxMetaspaceSize=500m
         - -Xss1024k
         - -jar
         - blotout-0.0.1.jar
