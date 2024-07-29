@@ -55,9 +55,10 @@ ingress:
   annotations: {}
   labels: {}
   hosts:
-    - example.com
-  paths:
-    - /
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
 # swagger ingress
 swagger:
   enabled: false

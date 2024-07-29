@@ -31,16 +31,24 @@ metadata:
 {{- end }}
 spec:
   rules:
-  {{- if .Values.ingress.hosts }}
-  {{- range $host := .Values.ingress.hosts }}
-    - host: {{ $host }}
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host | quote }}
       http:
         paths:
-  {{- range $p := $paths }}
-          - path: {{ $p}}
+          {{- range .paths }}
+          - path: {{ .path }}
+            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: ImplementationSpecific
+            {{- end }}
             backend:
-              serviceName: {{ $serviceName }}
-              servicePort: {{ $servicePort }}
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+              {{- else }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
   {{- end -}}
   {{- end -}}
   {{- end -}}
