@@ -4,3 +4,52 @@ description: Helm chart to deploy airbyte
 name: airbyte
 type: application
 version: "v1.0.0"
+dependencies:
+  - name: server
+    version: "1.2.0"
+    repository: "file://../server"
+  - name: temporal
+    version: "1.2.0"
+    repository: "file://../temporal"
+  - name: keycloak-setup
+    version: "1.2.0"
+    repository: "file://../keycloak-setup"
+  - name: metrics
+    version: "1.2.0"
+    repository: "file://../metrics"
+  - name: temporal-ui
+    version: "1.2.0"
+    repository: "file://../temporal-ui"
+  - name: worker
+    version: "1.2.0"
+    repository: "file://../worker"
+  - name: workload-api-server
+    version: "1.2.0"
+    repository: "file://../workload-api-server"
+  - name: common
+    version: "1.2.0"
+    repository: "file://../common"
+  - name: cron
+    version: "1.2.0"
+    repository: "file://../cron"
+  - name: connector-rollout-worker
+    version: "1.2.0"
+    repository: "file://../connector-rollout-worker"
+  - name: keycloak
+    version: "1.2.0"
+    repository: "file://../keycloak"
+  - name: webapp
+    version: "1.2.0"
+    repository: "file://../webapp"
+  - name: workload-launcher
+    version: "1.2.0"
+    repository: "file://../workload-launcher"
+  - name: airbyte-bootloader
+    version: "1.2.0"
+    repository: "file://../airbyte-bootloader"
+  - name: connector-builder-server
+    version: "1.2.0"
+    repository: "file://../connector-builder-server"
+  - name: pod-sweeper
+    version: "1.2.0"
+    repository: "file://../pod-sweeper"
