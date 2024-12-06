@@ -67,6 +67,6 @@ dependencies:
   repository: https://airbytehq.github.io/helm-charts/
   version: 1.2.0
 description: Helm chart to deploy airbyte
-name: airbyte
+name: airbyte-v1
 type: application
 version: "v1.0.0"
