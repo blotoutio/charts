@@ -77,13 +77,15 @@ global:
     secretName: "airbyte-airbyte-secrets" # e.g. "airbyte-airbyte-secrets"
 
     # -- The database host
-    host: ""
+    # -- Value will be overriden by TF
+    host: "airbyte-host"
 
     # -- The database port
-    port: ""
+    # -- Value will be overriden by TF
+    port: "3306"
 
     # -- The database name
-    database: ""
+    database: "airbyte-v1"
 
     # -- The database user
     user: "rds_admin"
@@ -91,7 +93,7 @@ global:
     #userSecretKey: "" # e.g. "database-user"
 
     # -- The database password
-    password: ""
+    password: "pwd"
     # -- The key within `secretName` where the password is stored
     #passwordSecretKey: "" # e.g."database-password"
 

@@ -11,7 +11,7 @@ Renders the database host
     {{- else if .Values.global.database.host }}
         {{- .Values.global.database.host }}
     {{- else }}
-        {{ printf "%s" "" }}
+        {{ $host := .Values.global.database.host | required "You must set `global.database.host` when using an external database" }}
     {{- end }}
 {{- end }}
 
@@ -35,7 +35,7 @@ Renders the database port
     {{- else if .Values.global.database.port }}
         {{- .Values.global.database.port }}
     {{- else }}
-        {{ printf "%s" "" }}
+        {{ $port := .Values.global.database.port | required "You must set `global.database.port` when using an external database" }}
     {{- end }}
 {{- end }}
 
@@ -59,7 +59,7 @@ Renders the database name
     {{- else if .Values.global.database.database }}
         {{- .Values.global.database.database }}
     {{- else }}
-        {{ printf "%s" "" }}
+        {{ $database := .Values.global.database.database | required "You must set `global.database.database` when using an external database" }}
     {{- end }}
 {{- end }}
 
@@ -84,9 +84,9 @@ Renders the database user
         {{- .Values.global.database.user }}
     {{- else }}
         {{- if .Values.global.database.userSecretKey }}
-            {{ printf "%s" "" }}
+            {{ $secretName := .Values.global.database.secretName | required "You must set `global.database.secretName` when using an external database" }}
         {{- else }}
-            {{ printf "%s" "" }}
+            {{ $user := .Values.global.database.user | required "You must set `global.database.user` when using an external database" }}
         {{- end }}
     {{- end }}
 {{- end }}
@@ -96,7 +96,7 @@ Renders the name of the secret where the database user will be referenced
 */}}
 {{- define "airbyte.database.userSecretKey" }}
     {{- if .Values.global.database.userSecretKey }}
-        {{ printf "%s" "" }}
+        {{ $secretName := .Values.global.database.secretName | required "You must set `global.database.secretName` when using an external database" }}
         {{- .Values.global.database.userSecretKey }}
     {{- else }}
         {{- printf "%s" "DATABASE_USER" }}
@@ -128,9 +128,9 @@ Renders the database password
         {{- .Values.global.database.password }}
     {{- else }}
         {{- if .Values.global.database.passwordSecretKey }}
-            {{ printf "%s" "" }}
+            {{ $secretName := .Values.global.database.secretName | required "You must set `global.database.secretName` when using an external database" }}
         {{- else }}
-            {{ printf "%s" "" }}
+            {{ $password := .Values.global.database.password | required "You must set `global.database.password` when using an external database" }}
         {{- end }}
     {{- end }}
 {{- end }}
@@ -140,7 +140,7 @@ Renders the name of the secret where the database password will be referenced
 */}}
 {{- define "airbyte.database.passwordSecretKey" }}
     {{- if .Values.global.database.passwordSecretKey }}
-        {{ printf "%s" "" }}
+        {{ $secretName := .Values.global.database.secretName | required "You must set `global.database.secretName` when using an external database" }}
         {{- .Values.global.database.passwordSecretKey }}
     {{- else }}
         {{- printf "%s" "DATABASE_PASSWORD" }}
