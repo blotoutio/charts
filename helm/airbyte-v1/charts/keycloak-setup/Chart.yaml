@@ -1,11 +1,5 @@
 apiVersion: v2
 appVersion: 1.2.0
-dependencies:
-- name: common
-  repository: https://charts.bitnami.com/bitnami
-  tags:
-  - bitnami-common
-  version: 1.x.x
 description: Helm chart to deploy airbyte-keycloak-setup
 name: keycloak-setup
 type: application
