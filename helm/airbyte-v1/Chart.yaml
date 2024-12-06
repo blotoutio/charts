@@ -7,49 +7,49 @@ version: "v1.0.0"
 dependencies:
   - name: server
     version: "1.2.0"
-    repository: "file://../server"
+    repository: "file://./charts/server"
   - name: temporal
     version: "1.2.0"
-    repository: "file://../temporal"
+    repository: "file://./charts/temporal"
   - name: keycloak-setup
     version: "1.2.0"
-    repository: "file://../keycloak-setup"
+    repository: "file://./charts/keycloak-setup"
   - name: metrics
     version: "1.2.0"
-    repository: "file://../metrics"
+    repository: "file://./charts/metrics"
   - name: temporal-ui
     version: "1.2.0"
-    repository: "file://../temporal-ui"
+    repository: "file://./charts/temporal-ui"
   - name: worker
     version: "1.2.0"
-    repository: "file://../worker"
+    repository: "file://./charts/worker"
   - name: workload-api-server
     version: "1.2.0"
-    repository: "file://../workload-api-server"
+    repository: "file://./charts/workload-api-server"
   - name: common
     version: "1.2.0"
-    repository: "file://../common"
+    repository: "file://./charts/common"
   - name: cron
     version: "1.2.0"
-    repository: "file://../cron"
+    repository: "file://./charts/cron"
   - name: connector-rollout-worker
     version: "1.2.0"
-    repository: "file://../connector-rollout-worker"
+    repository: "file://./charts/connector-rollout-worker"
   - name: keycloak
     version: "1.2.0"
-    repository: "file://../keycloak"
+    repository: "file://./charts/keycloak"
   - name: webapp
     version: "1.2.0"
-    repository: "file://../webapp"
+    repository: "file://./charts/webapp"
   - name: workload-launcher
     version: "1.2.0"
-    repository: "file://../workload-launcher"
+    repository: "file://./charts/workload-launcher"
   - name: airbyte-bootloader
     version: "1.2.0"
-    repository: "file://../airbyte-bootloader"
+    repository: "file://./charts/airbyte-bootloader"
   - name: connector-builder-server
     version: "1.2.0"
-    repository: "file://../connector-builder-server"
+    repository: "file://./charts/connector-builder-server"
   - name: pod-sweeper
     version: "1.2.0"
-    repository: "file://../pod-sweeper"
+    repository: "file://./charts/pod-sweeper"
