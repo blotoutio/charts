@@ -1117,7 +1117,6 @@ connector-rollout-worker:
   log:
     # -- The log level to log at
     level: "INFO"
-
   ## Example:
   ##
   ## extraEnv:
