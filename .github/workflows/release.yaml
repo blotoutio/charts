@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - eks_upgrade
+      - airbyte_v1
     paths:
       - 'helm/**'
   release:
