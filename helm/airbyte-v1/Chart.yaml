@@ -69,4 +69,4 @@ dependencies:
 description: Helm chart to deploy airbyte
 name: airbyte
 type: application
-version: 1.2.0
+version: "v1.0.0"
