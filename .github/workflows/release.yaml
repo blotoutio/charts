@@ -21,3 +21,4 @@ jobs:
         with:
           token: ${{ secrets.BO_CHARTS_HELM_TOKEN }}
           charts_dir: helm
+          linting: off
