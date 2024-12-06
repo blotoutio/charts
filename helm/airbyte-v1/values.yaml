@@ -86,7 +86,7 @@ global:
     database: ""
 
     # -- The database user
-    user: ""
+    user: "rds_admin"
     # -- The key within `secretName` where the user is stored
     #userSecretKey: "" # e.g. "database-user"
 
