@@ -1659,7 +1659,7 @@ externalDatabase:
 
 minio:
   image:
-    # -- Minio image used by Minio helm chart
+    # -- Minio image used by Minio helm chart 
     repository: minio/minio
     # -- Minio tag image
     tag: latest
