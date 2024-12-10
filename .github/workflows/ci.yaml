@@ -2,8 +2,8 @@ name: Lint and Test Charts
 
 on:
   pull_request:
-    paths:
-      - 'helm/**'
+    paths-ignore:
+      - 'helm/airbyte-v1/**'
 
 jobs:
   lint-chart:
