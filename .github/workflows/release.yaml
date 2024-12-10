@@ -6,7 +6,7 @@ on:
       - eks_upgrade
       - airbyte_v1
     paths-ignore:
-      - 'helm/backend-sdk/**'
+      - 'helm/airbyte-v1/**'
   release:
     types: [published, created]
 
