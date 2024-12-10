@@ -1,0 +1,24 @@
+name: (Airbyte-v1) Release
+on: 
+  push:
+    branches:
+      - main
+      - eks_upgrade
+      - airbyte_v1
+    paths:
+      - 'helm/airbyte-v1/**'
+  release:
+    types: [published, created]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Publish Helm charts
+        uses: stefanprodan/helm-gh-pages@v1.4.1
+        with:
+          token: ${{ secrets.BO_CHARTS_HELM_TOKEN }}
+          charts_dir: helm
+          linting: off

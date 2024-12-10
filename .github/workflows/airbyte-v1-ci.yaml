@@ -1,14 +1,9 @@
-name: Lint and Test Charts, Release
-on: 
-  push:
-    branches:
-      - main
-      - eks_upgrade
-      - airbyte_v1
+name: (Airbyte-v1) Lint and Test Charts
+
+on:
+  pull_request:
     paths:
       - 'helm/airbyte-v1/**'
-  release:
-    types: [published, created]
 
 jobs:
   lint-chart:
@@ -21,18 +16,6 @@ jobs:
         with:
           command: lint
           config: .github/ct.yaml
-
-  kubeval-chart:
-    runs-on: ubuntu-latest
-    needs:
-      - lint-chart
-    strategy:
-      matrix:
-        k8s:
-          - v1.24.1
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
 
   install-chart:
     name: install-chart
@@ -55,15 +38,3 @@ jobs:
         with:
           command: install
           config: .github/ct.yaml
-
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Publish Helm charts
-        uses: stefanprodan/helm-gh-pages@v1.4.1
-        with:
-          token: ${{ secrets.BO_CHARTS_HELM_TOKEN }}
-          charts_dir: helm
-          linting: off
