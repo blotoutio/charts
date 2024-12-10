@@ -1,6 +1,3 @@
-### TEST FOR RELEASE WORKFLOW
-
-
 # Global params that are overwritten with umbrella chart
 global:
   # -- Service Account name override
@@ -48,23 +45,6 @@ global:
       emailSecretKey: "instance-admin-email"
       # -- The key within `passwordSecretName` where the initial user's password is stored
       passwordSecretKey: "instance-admin-password"
-    
-    # -- SSO Identify Provider configuration; (requires Enterprise)
-    #identityProvider:
-    #  # -- Secret name where the OIDC configuration is stored
-    #  secretName: "airbyte-v1-airbyte-secrets"
-    #  # -- The identity provider type (e.g. oidc)
-    #  type: ""
-    #  # -- OIDC configuration (required if `auth.identityProvider.type` is "oidc")
-    #  oidc:
-    #    # -- OIDC application domain
-    #    domain: ""
-    #    # -- OIDC application name
-    #    appName: ""
-    #    # -- The key within `clientIdSecretName` where the OIDC client id is stored
-    #    clientIdSecretKey: "client-id"
-    #    # -- The key within `clientSecretSecretName` where the OIDC client secret is stored
-    #    clientSecretSecretKey: "client-secret"
 
   # -- Environment variables
   env_vars: {}
@@ -89,15 +69,9 @@ global:
 
     # -- The database user
     user: "rds_admin"
-    # -- The key within `secretName` where the user is stored
-    #userSecretKey: "" # e.g. "database-user"
 
     # -- The database password
     password: "pwd"
-    # -- The key within `secretName` where the password is stored
-    #passwordSecretKey: "" # e.g."database-password"
-
-
 
   storage:
     # -- The storage backend type. Supports s3, gcs, azure, minio (default)
@@ -113,25 +87,6 @@ global:
     #s3:
     #  region: "" ## e.g. us-east-1
     #  authenticationType: credentials ## Use "credentials" or "instanceProfile"
-
-    # GCS
-    #bucket: ## GCS bucket names that you've created. We recommend storing the following all in one bucket.
-    #  log: airbyte-bucket
-    #  state: airbyte-bucket
-    #  workloadOutput: airbyte-bucket
-    #gcs:
-    #  projectId: <project-id>
-    #  credentialsJson: /secrets/gcs-log-creds/gcp.json
-
-    # Azure
-    #bucket: ## Azure Blob Storage container names that you've created. We recommend storing the following all in one bucket.
-    #  log: airbyte-bucket
-    #  state: airbyte-bucket
-    #  workloadOutput: airbyte-bucket
-    #azure:
-    #  # one of the following: connectionString, connectionStringSecretKey
-    #  connectionString: <azure storage connection string>
-    #  connectionStringSecretKey: <secret coordinate containing an existing connection-string secret>
 
   metrics:
     # -- The metric client to configure globally. Supports "otel"
@@ -400,32 +355,6 @@ webapp:
   # -- Additional init containers for server pods
   extraInitContainers: []
 
-  ## Example: (With default env vars and values taken from generated config map)
-  # extraEnv:
-  #   - name: POSTGRES_USER
-  #     valueFrom:
-  #       secretKeyRef:
-  #         name: airbyte-secrets
-  #         key: DATABASE_USER
-  #   - name: POSTGRES_PWD
-  #     valueFrom:
-  #       secretKeyRef:
-  #         name: airbyte-secrets
-  #         key: DATABASE_PASSWORD
-  #   - name: DYNAMIC_CONFIG_FILE_PATH
-  #     value: "config/dynamicconfig/development.yaml"
-  #   - name: DB
-  #     value: "postgresql"
-  #   - name: DB_PORT
-  #     valueFrom:
-  #       configMapKeyRef:
-  #         name: airbyte-env
-  #         key: DATABASE_PORT
-  #   - name: POSTGRES_SEEDS
-  #     valueFrom:
-  #       configMapKeyRef:
-  #         name: airbyte-env
-  #         key: DATABASE_HOST
   # -- Supply extra env variables to main container using full notation
   extraEnv: []
   ## Example:
@@ -1736,7 +1665,7 @@ minio:
     tag: latest
 
   mcImage:
-    repository: airbyte/mc
+    repository: minio/minio
     tag: latest
 
   storage:
