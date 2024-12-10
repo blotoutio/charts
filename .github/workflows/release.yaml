@@ -5,11 +5,8 @@ on:
       - main
       - eks_upgrade
       - airbyte_v1
-    paths:
-      - 'helm/**'
     paths-ignore:
-      # Ignore airbyte-v1 charts, airbyte-v1 runs under airbyte-v1.yaml workflow due to incompatibility on Publish
-      - 'helm/airbyte-v1/**'
+      - 'helm/backend-sdk/**'
   release:
     types: [published, created]
 
