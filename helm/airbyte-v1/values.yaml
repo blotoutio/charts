@@ -27,7 +27,8 @@ global:
     tag: "1.2.0"
 
   # Docker image pull secret
-  imagePullSecrets: []
+  imagePullSecrets: 
+     - name: regcred
 
   # -- Auth configuration
   auth:
@@ -953,7 +954,7 @@ workload-launcher:
 connector-rollout-worker:
   enabled: false
   # -- Number of connector rollout worker replicas
-  replicaCount: 1
+  replicaCount: 2
 
   image:
     # -- The repository to use for the airbyte connector rollout worker image.
