@@ -79,18 +79,18 @@ global:
 
   storage:
     # -- The storage backend type. Supports s3, gcs, azure, minio (default)
-    type: minio # default storage used
+    type: s3 # default storage used
     # -- Secret name where storage provider credentials are stored
-    #storageSecretName: "airbyte-v1-airbyte-secrets"
+    storageSecretName: "airbyte-v1-airbyte-secrets"
 
     # S3
-    #bucket: ## S3 bucket names that you've created. We recommend storing the following all in one bucket.
-    #  log: airbyte-bucket
-    #  state: airbyte-bucket
-    #  workloadOutput: airbyte-bucket
-    #s3:
-    #  region: "" ## e.g. us-east-1
-    #  authenticationType: credentials ## Use "credentials" or "instanceProfile"
+    bucket: ## S3 bucket names that you've created. We recommend storing the following all in one bucket.
+     log: b-multitenantdev-dev-airbyte-v1-logs
+     state: b-multitenantdev-dev-airbyte-v1-logs
+     workloadOutput: b-multitenantdev-dev-airbyte-v1-logs
+    s3:
+     region: "us-east-1" ## e.g. us-east-1
+     authenticationType: credentials ## Use "credentials" or "instanceProfile"
 
   metrics:
     # -- The metric client to configure globally. Supports "otel"
