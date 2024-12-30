@@ -25,7 +25,7 @@ Renders an environment variable definition that provides the database host
       name: {{ .Release.Name }}-airbyte-env
       key: DATABASE_HOST
 {{- end }}
-
+ 
 {{/*
 Renders the database port
 */}}

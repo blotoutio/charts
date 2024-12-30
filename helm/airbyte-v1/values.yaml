@@ -1660,7 +1660,7 @@ temporal-ui:
 # PostgreSQL chart configuration, see https://github.com/bitnami/charts/blob/master/bitnami/postgresql/values.yaml
 postgresql:
   # -- Switch to enable or disable the PostgreSQL helm chart
-  enabled: true
+  enabled: false
 
   ## image.repository Repository for airbyte-db statefulset
   image:
