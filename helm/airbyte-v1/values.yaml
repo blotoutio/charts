@@ -14,7 +14,7 @@ global:
 
   enterprise:
     # -- Secret name where an Airbyte license key is stored
-    secretName: "airbyte-config-secrets"
+    secretName: "airbyte-v1-airbyte-secrets"
     # -- The key within `licenseKeySecretName` where the Airbyte license key is stored
     licenseKeySecretKey: "license-key"
 
@@ -40,7 +40,7 @@ global:
     # -- Admin user configuration
     instanceAdmin:
       # -- Secret name where the instanceAdmin configuration is stored
-      secretName: "airbyte-config-secrets"
+      secretName: "airbyte-v1-airbyte-secrets"
       # -- The first name of the initial user
       firstName: ""
       # -- The last name of the initial user
@@ -53,7 +53,7 @@ global:
     # -- SSO Identify Provider configuration; (requires Enterprise)
     #identityProvider:
     #  # -- Secret name where the OIDC configuration is stored
-    #  secretName: "airbyte-config-secrets"
+    #  secretName: "airbyte-v1-airbyte-secrets"
     #  # -- The identity provider type (e.g. oidc)
     #  type: ""
     #  # -- OIDC configuration (required if `auth.identityProvider.type` is "oidc")
@@ -75,7 +75,7 @@ global:
     type: "external" # "external"
 
     # -- Secret name where database credentials are stored
-    secretName: "airbyte-config-secrets"
+    secretName: "airbyte-v1-airbyte-secrets"
 
     # -- The database host
     host: "airbyte-host"
@@ -102,7 +102,7 @@ global:
     # -- The storage backend type. Supports s3, gcs, azure, minio (default)
     type: s3 # default storage used
     # -- Secret name where storage provider credentials are stored
-    storageSecretName: "airbyte-config-secrets"
+    storageSecretName: "airbyte-v1-airbyte-secrets"
 
     # S3
     bucket: ## S3 bucket names that you've created. We recommend storing the following all in one bucket.
