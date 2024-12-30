@@ -71,15 +71,13 @@ spec:
         {{- if eq .Values.global.database.type "external" }}
         # Assume an external database requires SSL.
           - name: POSTGRES_TLS_ENABLED
-            value: "false"
+            value: "true"
           - name: POSTGRES_TLS_DISABLE_HOST_VERIFICATION
-            value: "false"
+            value: "true"
           - name: SQL_TLS_ENABLED
-            value: "false"
+            value: "true"
           - name: SQL_TLS_DISABLE_HOST_VERIFICATION
-            value: "false"
-          - name: SQL_SSL_MODE
-            value: "disable"
+            value: "true"
         {{- end }}
 
         {{- if .Values.extraEnv }}
