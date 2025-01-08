@@ -119,8 +119,8 @@ global:
     s3:
      region: "us-east-1" ## e.g. us-east-1
      authenticationType: credentials ## Use "credentials" or "instanceProfile"
-     accessKeyIdSecretKey: ""
-     secretAccessKeySecretKey: ""
+     accessKeyId: ""
+     secretAccessKey: ""
 
 
     # GCS
