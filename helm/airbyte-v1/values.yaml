@@ -10,6 +10,13 @@ global:
   # -- Edition; "community" or "pro"
   edition: "community"
 
+  # --AWS keys
+  aws_access_key: ""
+  aws_secret_key: ""
+  # -- Blotout configuration
+  blotout_auth_endpoint: "/api/v1/auth/validation"
+  blotout_base_url: ""
+  # -- Airbyte configuration
   airbyteYml: ""
 
   enterprise:
@@ -112,6 +119,9 @@ global:
     s3:
      region: "us-east-1" ## e.g. us-east-1
      authenticationType: credentials ## Use "credentials" or "instanceProfile"
+     accessKeyIdSecretKey: ""
+     secretAccessKeySecretKey: ""
+
 
     # GCS
     #bucket: ## GCS bucket names that you've created. We recommend storing the following all in one bucket.

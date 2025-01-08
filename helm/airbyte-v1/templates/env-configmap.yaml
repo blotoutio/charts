@@ -1,4 +1,5 @@
-{{- $airbyteYmlDict := (default "" .Values.global.airbyteYml | fromYaml) }} # default to empty dict if airbyteYml is undefined
+{{- $airbyteYmlDict := (default "" .Values.global.airbyteYml | fromYaml) }} 
+# default to empty dict if airbyteYml is undefined
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -21,6 +22,11 @@ data:
   {{- else}}
   AIRBYTE_URL: {{ .Values.global.airbyteUrl | quote }}
   {{- end }}
+
+  BLOTOUT_AUTH_ENDPOINT: {{ .Values.global.blotout_auth_endpoint | default "" | quote }}
+  BLOTOUT_BASE_URL: {{ .Values.global.blotout_base_url | default "" }}
+  AWS_SECRET_ACCESS_KEY: {{ .Values.global.aws_secret_key | default ""  }}
+  AWS_ACCESS_KEY_ID: {{ .Values.global.aws_access_key | default "" | quote }}
 
   AIRBYTE_SERVER_HOST: {{ .Release.Name }}-airbyte-server-svc:{{ .Values.server.service.port }}
   API_URL: {{ .Values.webapp.api.url }}
