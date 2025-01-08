@@ -23,10 +23,20 @@ data:
   AIRBYTE_URL: {{ .Values.global.airbyteUrl | quote }}
   {{- end }}
 
+### Env vars requested by the Blotout team
   BLOTOUT_AUTH_ENDPOINT: {{ .Values.global.blotout_auth_endpoint | default "" | quote }}
   BLOTOUT_BASE_URL: {{ .Values.global.blotout_base_url | default "" }}
   AWS_SECRET_ACCESS_KEY: {{ .Values.global.aws_secret_key | default ""  }}
   AWS_ACCESS_KEY_ID: {{ .Values.global.aws_access_key | default "" | quote }}
+  JOB_MAIN_CONTAINER_CPU_REQUEST: {{ .Values.global.resource_cpu_request | default "0.5" }}
+  JOB_MAIN_CONTAINER_CPU_LIMIT: {{ .Values.global.resource_cpu_limit | default "2" }}
+  JOB_MAIN_CONTAINER_MEMORY_REQUEST: {{ .Values.global.resource_memory_request | default "1Gi" }}
+  JOB_MAIN_CONTAINER_MEMORY_LIMIT: {{ .Values.global.resource_memory_limit | default "2Gi" }}
+  SECRET_PERSISTENCE: {{ .Values.global.secret_persistence | default "" }}
+  S3_PATH_STYLE_ACCESS: {{ .Values.global.s3_path_style_access | default "" }}
+
+#####################################################
+
 
   AIRBYTE_SERVER_HOST: {{ .Release.Name }}-airbyte-server-svc:{{ .Values.server.service.port }}
   API_URL: {{ .Values.webapp.api.url }}
