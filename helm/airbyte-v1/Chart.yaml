@@ -24,7 +24,8 @@ dependencies:
   version: 1.3.0
 - condition: server.enabled
   name: server
-  repository: https://airbytehq.github.io/helm-charts/
+  # repository: https://airbytehq.github.io/helm-charts/
+  repository: 'file://charts/server'
   version: 1.3.0
 - condition: worker.enabled
   name: worker
@@ -69,4 +70,4 @@ dependencies:
 description: Helm chart to deploy airbyte
 name: airbyte-v1
 type: application
-version: "v1.3.5"
+version: "v1.3.6"
