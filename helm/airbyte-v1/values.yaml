@@ -14,8 +14,6 @@ global:
   aws_access_key: ""
   aws_secret_key: ""
   # -- Blotout required configuration
-  blotout_auth_endpoint: "/api/v1/auth/validation"
-  blotout_base_url: ""
   resource_cpu_limit: "2"
   resource_cpu_request: "0.5"
   resource_memory_limit: "6Gi"
@@ -741,7 +739,9 @@ server:
   ##   DATABASE_HOST: airbyte-db
   ##   DATABASE_PORT: 5432
   # -- Supply extra env variables to main container using simplified notation
-  env_vars: {}
+  env_vars:
+     blotout_auth_endpoint: ""
+     blotout_base_url: ""
 
 ## @section Worker Parameters
 

@@ -24,8 +24,8 @@ data:
   {{- end }}
 
 ### Env vars requested by the Blotout team
-  BLOTOUT_AUTH_ENDPOINT: {{ .Values.global.blotout_auth_endpoint | default "" | quote }}
-  BLOTOUT_BASE_URL: {{ .Values.global.blotout_base_url | default "" }}
+  BLOTOUT_AUTH_ENDPOINT: {{ .Values.server.env_vars.blotout_auth_endpoint | default "" | quote }}
+  BLOTOUT_BASE_URL: {{ .Values.server.env_vars.blotout_base_url | default "" }}
   AWS_SECRET_ACCESS_KEY: {{ .Values.global.aws_secret_key | default ""  }}
   AWS_ACCESS_KEY_ID: {{ .Values.global.aws_access_key | default "" | quote }}
   JOB_MAIN_CONTAINER_CPU_REQUEST: {{ .Values.global.resource_cpu_request | default "0.5" }}
