@@ -740,8 +740,8 @@ server:
   ##   DATABASE_PORT: 5432
   # -- Supply extra env variables to main container using simplified notation
   env_vars:
-     blotout_auth_endpoint: ""
-     blotout_base_url: ""
+     BLOTOUT_AUTH_ENDPOINT: ""
+     BLOTOUT_BASE_URL: ""
 
 ## @section Worker Parameters
 
