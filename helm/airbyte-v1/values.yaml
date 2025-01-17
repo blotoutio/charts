@@ -638,13 +638,17 @@ server:
     ##    cpu: 200m
     ##    memory: 1Gi
     # -- The resources limits for the server container
-    limits: {}
+    limits:
+      cpu: 950m
+      memory: 4Gi
     ## Examples:
     ## requests:
     ##    memory: 256Mi
     ##    cpu: 250m
-    # -- The requested resources for the server container
-    requests: {}
+    # -- The requested resources for the workload launcher container
+    requests:
+      cpu: 400m
+      memory: 1Gi
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -820,14 +824,17 @@ worker:
     ##    cpu: 200m
     ##    memory: 1Gi
     #! -- The resources limits for the worker container
-    limits: {}
+    limits:
+      cpu: 950m
+      memory: 4Gi
     ## Examples:
     ## requests:
     ##    memory: 256Mi
     ##    cpu: 250m
-    # -- The requested resources for the worker container
-    requests: {}
-
+    # -- The requested resources for the workload launcher container
+    requests:
+      cpu: 400m
+      memory: 1Gi
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
 
@@ -955,13 +962,17 @@ workload-launcher:
     ##    cpu: 200m
     ##    memory: 1Gi
     # -- The resources limits for the workload launcher container
-    limits: {}
+    limits:
+      cpu: 950m
+      memory: 4Gi
     ## Examples:
     ## requests:
     ##    memory: 256Mi
     ##    cpu: 250m
     # -- The requested resources for the workload launcher container
-    requests: {}
+    requests:
+      cpu: 400m
+      memory: 1Gi
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -2221,13 +2232,17 @@ workload-api-server:
     ##    cpu: 200m
     ##    memory: 1Gi
     # -- The resources limits for the airbyte-workload-api-server container
-    limits: {}
+    limits:
+      cpu: 950m
+      memory: 4Gi
     ## Examples:
     ## requests:
     ##    memory: 256Mi
     ##    cpu: 250m
-    # -- The requested resources for the airbyte-workload-api-server container
-    requests: {}
+    # -- The requested resources for the workload launcher container
+    requests:
+      cpu: 400m
+      memory: 1Gi
 
   log:
     # -- The log level at which to log
