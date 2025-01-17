@@ -963,7 +963,7 @@ workload-launcher:
     ##    memory: 1Gi
     # -- The resources limits for the workload launcher container
     limits:
-      cpu: 950m
+      cpu: "1"
       memory: 4Gi
     ## Examples:
     ## requests:

@@ -100,16 +100,16 @@ spec:
             configMapKeyRef:
               name: {{ .Release.Name }}-airbyte-env
               key: CONFIG_ROOT
-        - name: BLOTOUT_AUTH_ENDPOINT
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .Release.Name }}-airbyte-env
-              key: BLOTOUT_AUTH_ENDPOINT
-        - name: BLOTOUT_BASE_URL
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .Release.Name }}-airbyte-env
-              key: BLOTOUT_BASE_URL                            
+        # - name: BLOTOUT_AUTH_ENDPOINT
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: {{ .Release.Name }}-airbyte-env
+        #       key: BLOTOUT_AUTH_ENDPOINT
+        # - name: BLOTOUT_BASE_URL
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: {{ .Release.Name }}-airbyte-env
+        #       key: BLOTOUT_BASE_URL                            
         - name: MICROMETER_METRICS_ENABLED
           valueFrom:
             configMapKeyRef:
