@@ -963,7 +963,7 @@ workload-launcher:
     ##    memory: 1Gi
     # -- The resources limits for the workload launcher container
     limits:
-      cpu: "1"
+      cpu: 950m
       memory: 4Gi
     ## Examples:
     ## requests:
@@ -1114,18 +1114,24 @@ connector-rollout-worker:
   ## resources, such as Minikube. If you do want to specify resources, uncomment the following
   ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   resources:
+     requests:
+       memory: 1Gi
+       cpu: 350m
+     limits:
+       cpu: 900m
+       memory: 4Gi
     ## Example:
     ## limits:
     ##    cpu: 200m
     ##    memory: 1Gi
     # -- The resources limits for the connector rollout worker container
-    limits: {}
+    # limits: {}
     ## Examples:
     ## requests:
     ##    memory: 256Mi
     ##    cpu: 250m
     # -- The requested resources for the connector rollout worker container
-    requests: {}
+    # requests: {}
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
