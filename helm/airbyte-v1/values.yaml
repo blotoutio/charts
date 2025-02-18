@@ -14,9 +14,9 @@ global:
   aws_access_key: ""
   aws_secret_key: ""
   # -- Blotout required configuration
-  resource_cpu_limit: "2"
+  resource_cpu_limit: "6"
   resource_cpu_request: "0.5"
-  resource_memory_limit: "6Gi"
+  resource_memory_limit: "9Gi"
   resource_memory_request: "1Gi"
 
   # -- Airbyte configuration
@@ -639,8 +639,8 @@ server:
     ##    memory: 1Gi
     # -- The resources limits for the server container
     limits:
-      cpu: 950m
-      memory: 4Gi
+      cpu: 2
+      memory: 6Gi
     ## Examples:
     ## requests:
     ##    memory: 256Mi
@@ -825,8 +825,8 @@ worker:
     ##    memory: 1Gi
     #! -- The resources limits for the worker container
     limits:
-      cpu: 950m
-      memory: 4Gi
+      cpu: 2
+      memory: 6Gi
     ## Examples:
     ## requests:
     ##    memory: 256Mi
@@ -963,8 +963,8 @@ workload-launcher:
     ##    memory: 1Gi
     # -- The resources limits for the workload launcher container
     limits:
-      cpu: 950m
-      memory: 4Gi
+      cpu: 2
+      memory: 6Gi
     ## Examples:
     ## requests:
     ##    memory: 256Mi
@@ -1118,8 +1118,8 @@ connector-rollout-worker:
        memory: 1Gi
        cpu: 350m
      limits:
-       cpu: 900m
-       memory: 4Gi
+       cpu: 2
+       memory: 6Gi
     ## Example:
     ## limits:
     ##    cpu: 200m
@@ -1789,8 +1789,8 @@ minio:
        memory: 1Gi
        cpu: 250m
      limits:
-       cpu: 300m
-       memory: 2Gi
+       cpu: 1
+       memory: 4Gi
 ## @section cron parameters
 cron:
   enabled: true
@@ -2239,8 +2239,8 @@ workload-api-server:
     ##    memory: 1Gi
     # -- The resources limits for the airbyte-workload-api-server container
     limits:
-      cpu: 950m
-      memory: 4Gi
+      cpu: 2
+      memory: 6Gi
     ## Examples:
     ## requests:
     ##    memory: 256Mi
