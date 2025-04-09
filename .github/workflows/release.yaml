@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - shopgt_backend
     paths:
       - 'helm/**'
   release:
