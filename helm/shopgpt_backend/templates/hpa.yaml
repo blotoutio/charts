@@ -1,4 +1,4 @@
-{{- if (and .Values.autoscaling.enabled (or (eq .Values.deployment "deployment") (eq .Values.deployment "statefulset"))) }}
+{{- if .Values.autoscaling.enabled }}
 {{- if .Capabilities.APIVersions.Has "autoscaling/v2" }}
 apiVersion: autoscaling/v2
 {{- else }}
