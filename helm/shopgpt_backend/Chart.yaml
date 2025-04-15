@@ -4,4 +4,4 @@ description: A Helm chart for App, a declarative, GitOps continuous delivery hel
 keywords:
 - shopgpt-backend
 name: shopgpt-backend
-version: "v0.1.5"
+version: "v0.1.6"

@@ -1,4 +1,9 @@
-{{- if .Values.autoscaling.enabled }}
+{{- if (and .Values.autoscaling.enabled (or (eq .Values.deployment "deployment") (eq .Values.deployment "statefulset"))) }}
+{{- if .Capabilities.APIVersions.Has "autoscaling/v2" }}
+apiVersion: autoscaling/v2
+{{- else }}
+apiVersion: autoscaling/v2beta2
+{{- end }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
