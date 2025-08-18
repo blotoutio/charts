@@ -36,13 +36,8 @@ spec:
           command:
           - java
           args:
-          - -Xms512m
-          - -Xmx3024m
-          - -XX:MetaspaceSize=64m
-          - -XX:MaxMetaspaceSize=500m
-          - -Xss1024k
           - -jar
-          - mcp-service-0.0.1-SNAPSHOT.jar
+          - /app/mcp-service/target/mcp-service-0.0.1-SNAPSHOT.jar
           env:
           {{- range $conf, $value := .Values.env }}
             - name: {{ $conf | quote }}
