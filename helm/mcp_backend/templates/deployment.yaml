@@ -33,11 +33,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command:
-          - java
-          args:
-          - -jar
-          - /app/mcp-service/target/mcp-service-0.0.1-SNAPSHOT.jar
           env:
           {{- range $conf, $value := .Values.env }}
             - name: {{ $conf | quote }}
