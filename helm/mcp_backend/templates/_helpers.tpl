@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "shopgpt-backend.name" -}}
+{{- define "mcp-backend.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "shopgpt-backend.fullname" -}}
+{{- define "mcp-backend.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "shopgpt-backend.chart" -}}
+{{- define "mcp-backend.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "shopgpt-backend.labels" -}}
-helm.sh/chart: {{ include "shopgpt-backend.chart" . }}
-{{ include "shopgpt-backend.selectorLabels" . }}
+{{- define "mcp-backend.labels" -}}
+helm.sh/chart: {{ include "mcp-backend.chart" . }}
+{{ include "mcp-backend.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "shopgpt-backend.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "shopgpt-backend.name" . }}
+{{- define "mcp-backend.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "mcp-backend.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "shopgpt-backend.serviceAccountName" -}}
+{{- define "mcp-backend.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "shopgpt-backend.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "mcp-backend.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "shopgpt-backend.fullname" . }}
+  name: {{ include "mcp-backend.fullname" . }}
   labels:
-    {{- include "shopgpt-backend.labels" . | nindent 4 }}
+    {{- include "mcp-backend.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "shopgpt-backend.selectorLabels" . | nindent 6 }}
+      {{- include "mcp-backend.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "shopgpt-backend.selectorLabels" . | nindent 8 }}
+        {{- include "mcp-backend.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "shopgpt-backend.serviceAccountName" . }}
+      serviceAccountName: {{ include "mcp-backend.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -33,6 +33,16 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command:
+          - java
+          args:
+          - -Xms512m
+          - -Xmx3024m
+          - -XX:MetaspaceSize=64m
+          - -XX:MaxMetaspaceSize=500m
+          - -Xss1024k
+          - -jar
+          - mcp-service-0.0.1-SNAPSHOT.jar
           env:
           {{- range $conf, $value := .Values.env }}
             - name: {{ $conf | quote }}
@@ -40,7 +50,7 @@ spec:
           {{- end }}
           envFrom:
           - configMapRef:
-              name: shopgpt-configmap
+              name: mcp-configmap
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

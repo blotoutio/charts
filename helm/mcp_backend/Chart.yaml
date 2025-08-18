@@ -1,7 +1,7 @@
 apiVersion: v2
-appVersion: 0.1.4
+appVersion: 0.1.0
 description: A Helm chart for App, a declarative, GitOps continuous delivery helm chart for Kubernetes.
 keywords:
-- shopgpt-backend
-name: shopgpt-backend
-version: "v0.2.1"
+- mcp-backend
+name: mcp-backend
+version: "v0.0.1"
