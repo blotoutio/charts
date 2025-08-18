@@ -1,7 +1,7 @@
 apiVersion: v2
-appVersion: 0.1.0
+appVersion: 0.2.0
 description: A Helm chart for App, a declarative, GitOps continuous delivery helm chart for Kubernetes.
 keywords:
 - mcp-backend
 name: mcp-backend
-version: "v0.0.1"
+version: "v0.0.2"
