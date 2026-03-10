@@ -5,6 +5,7 @@ on:
       - main
       - eks_upgrade
       - airbyte_v1
+      - airbyte_v2
     # paths-ignore:
     #   - 'helm/airbyte-v1/**'
   release:
