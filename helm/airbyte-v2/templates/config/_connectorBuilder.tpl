@@ -24,10 +24,30 @@ Renders the connectorBuilder.aiAssistUrlBase environment variable
 {{- end }}
 
 {{/*
+Renders the connectorBuilder.manifestServerApi.basePath value (URL of connector-builder-server for ManifestServerApiClient).
+Required by server: airbyte.manifest-server-api.base-path must match pattern .+
+*/}}
+{{- define "airbyte.connectorBuilder.manifestServerApi.basePath" }}
+    {{- .Values.connectorBuilderServer.manifestServerApi.basePath | default (include "airbyte.common.connectorBuilderServer.apiHost" .) }}
+{{- end }}
+
+{{/*
+Renders the connectorBuilder.manifestServerApi.basePath environment variable
+*/}}
+{{- define "airbyte.connectorBuilder.manifestServerApi.basePath.env" }}
+- name: AIRBYTE_MANIFEST_SERVER_API_BASE_PATH
+  valueFrom:
+    configMapKeyRef:
+      name: {{ .Release.Name }}-airbyte-env
+      key: AIRBYTE_MANIFEST_SERVER_API_BASE_PATH
+{{- end }}
+
+{{/*
 Renders the set of all connectorBuilder environment variables
 */}}
 {{- define "airbyte.connectorBuilder.envs" }}
 {{- include "airbyte.connectorBuilder.aiAssistUrlBase.env" . }}
+{{- include "airbyte.connectorBuilder.manifestServerApi.basePath.env" . }}
 {{- end }}
 
 {{/*
@@ -35,4 +55,5 @@ Renders the set of all connectorBuilder config map variables
 */}}
 {{- define "airbyte.connectorBuilder.configVars" }}
 AI_ASSIST_URL_BASE: {{ include "airbyte.connectorBuilder.aiAssistUrlBase" . | quote }}
+AIRBYTE_MANIFEST_SERVER_API_BASE_PATH: {{ include "airbyte.connectorBuilder.manifestServerApi.basePath" . | quote }}
 {{- end }}

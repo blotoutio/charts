@@ -2281,6 +2281,10 @@ connectorBuilderServer:
   # -- Number of connector-builder-server replicas
   replicaCount: 1
 
+  # -- Base URL for ManifestServerApiClient (airbyte.manifest-server-api.base-path). Defaults to connector-builder-server service URL.
+  manifestServerApi:
+    basePath: ""
+
   serviceAccountName:
 
   image:

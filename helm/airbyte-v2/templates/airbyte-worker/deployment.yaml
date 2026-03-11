@@ -86,6 +86,10 @@ spec:
         {{- include "airbyte.worker.envs" . | nindent 8 }}
         {{- include "airbyte.workloads.resources.envs" . | nindent 8 }}
         {{- include "airbyte.workloadApiServer.envs" . | nindent 8 }}
+        {{- /* AB_JWT_SIGNATURE_SECRET required for WorkloadClient internal auth (signatureSecret) */}}
+        {{- if or (eq .Values.global.edition "community") (eq .Values.global.edition "enterprise") }}
+        {{- include "airbyte.auth.jwt.envs" . | nindent 8 }}
+        {{- end }}
 
         {{- if .Values.global.datadog.enabled }}
         {{- if (eq .Values.global.edition "cloud") }}

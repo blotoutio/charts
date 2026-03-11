@@ -80,6 +80,8 @@ spec:
         {{- include "airbyte.micronaut.envs" . | nindent 8 }}
         {{- include "airbyte.temporal.envs" . | nindent 8 }}
         {{- include "airbyte.workloadApiServer.envs" . | nindent 8 }}
+        {{- /* DATAPLANE_CLIENT_ID/SECRET required for AirbyteInternalApiClientConfig (DataplaneIdentityService) */}}
+        {{- include "airbyte.workloadLauncher.dataPlane.envs" . | nindent 8 }}
 
         {{- if .Values.global.datadog.enabled }}
         - name: DD_SERVICE 
