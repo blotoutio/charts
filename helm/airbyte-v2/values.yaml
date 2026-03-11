@@ -13,7 +13,9 @@ global:
   resource_memory_limit: "4Gi"
   resource_memory_request: "1Gi"
 
-  secretName: ""
+  # -- Secret name for auth/bootstrap and other components that read from a single secret.
+  # Set to your existing secret (e.g. airbyte-v2-airbyte-secrets) so pods look up instance-admin-password etc. there.
+  secretName: "airbyte-v2-airbyte-secrets"
 
   local: false
 
@@ -33,7 +35,7 @@ global:
 
   enterprise:
     # -- Secret name where an Airbyte license key is stored
-    secretName: "airbyte-v1-airbyte-secrets"
+    secretName: "airbyte-v2-airbyte-secrets"
     # -- The key within `licenseKeySecretName` where the Airbyte license key is stored
     licenseKeySecretKey: "license-key"
 
@@ -56,11 +58,13 @@ global:
   auth:
     # -- Whether auth is enabled
     enabled: true
+    # -- Secret name the app reads for auth bootstrap (AB_KUBERNETES_SECRET_NAME). Use existing secret that has instance-admin-password key.
+    managedSecretName: "airbyte-v2-airbyte-secrets"
 
     # -- Admin user configuration
     instanceAdmin:
       # -- Secret name where the instanceAdmin configuration is stored
-      secretName: "airbyte-v1-airbyte-secrets"
+      secretName: "airbyte-v2-airbyte-secrets"
       # -- The first name of the initial user
       firstName: ""
       # -- The last name of the initial user
@@ -131,7 +135,7 @@ global:
     type: external # "external"
 
     # -- Secret name where database credentials are stored
-    secretName: "airbyte-v1-airbyte-secrets" # e.g. "airbyte-config-secrets"
+    secretName: "airbyte-v2-airbyte-secrets" # e.g. "airbyte-config-secrets"
 
     # -- The database host
     host: "airbyte-host"
@@ -162,7 +166,7 @@ global:
       minimumFlywayMigrationVersion: ""
 
   storage:
-    secretName: "airbyte-v1-airbyte-secrets"
+    secretName: "airbyte-v2-airbyte-secrets"
     # -- The storage backend type. Supports s3, gcs, azure, minio (default)
     type: s3 # default storage used
 
