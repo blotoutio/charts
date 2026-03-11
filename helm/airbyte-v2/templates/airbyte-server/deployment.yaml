@@ -69,6 +69,10 @@ spec:
 
         {{- if (or (eq .Values.global.edition "community") (eq .Values.global.edition "enterprise")) }}
         {{- include "airbyte.auth.envs" . | nindent 8 }}
+        {{- include "airbyte.auth.bootstrap.envs" . | nindent 8 }}
+        {{- /* DATAPLANE_CLIENT_ID/SECRET from same secret as launcher so token endpoint accepts launcher */}}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientId.env" . | nindent 8 }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientSecret.env" . | nindent 8 }}
         - name: AIRBYTE_API_AUTH_HEADER_VALUE
           value: "Internal server"
         {{- end}}
