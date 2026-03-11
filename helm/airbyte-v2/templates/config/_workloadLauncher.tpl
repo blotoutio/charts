@@ -121,10 +121,11 @@ Use or so empty string is treated as unset and default (UUID) is used; set expli
 {{- end }}
 
 {{/*
-Renders the workloadLauncher.dataPlane.clientId secret key
+Renders the workloadLauncher.dataPlane.clientId secret key.
+Default "dataplane-client-id" so server/launcher read the key that matches service_accounts in DB (secret may also have DATAPLANE_CLIENT_ID).
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientId.secretKey" }}
-	{{- .Values.workloadLauncher.dataPlane.clientIdSecretKey | default "DATAPLANE_CLIENT_ID" }}
+	{{- .Values.workloadLauncher.dataPlane.clientIdSecretKey | default "dataplane-client-id" }}
 {{- end }}
 
 {{/*
@@ -193,7 +194,7 @@ Use or so empty string is treated as unset; set explicitly to match the secret f
 Renders the workloadLauncher.dataPlane.clientSecret secret key
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientSecret.secretKey" }}
-	{{- .Values.workloadLauncher.dataPlane.clientSecretSecretKey | default "DATAPLANE_CLIENT_SECRET" }}
+	{{- .Values.workloadLauncher.dataPlane.clientSecretSecretKey | default "dataplane-client-secret" }}
 {{- end }}
 
 {{/*
