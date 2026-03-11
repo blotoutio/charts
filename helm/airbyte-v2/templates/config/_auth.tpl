@@ -64,10 +64,11 @@ Renders the auth.bootstrap.secretCreationEnabled environment variable
 {{- end }}
 
 {{/*
-Renders the global.auth.managedSecretName value
+Renders the global.auth.managedSecretName value (v1: auth.secretName / AB_KUBERNETES_SECRET_NAME).
+Defaults to global.secretName so bootloader writes to the same chart-created secret.
 */}}
 {{- define "airbyte.auth.bootstrap.managedSecretName" }}
-    {{- .Values.global.auth.managedSecretName | default "airbyte-auth-secrets" }}
+    {{- .Values.global.auth.managedSecretName | default .Values.global.auth.secretName | default .Values.global.secretName | default (printf "%s-airbyte-secrets" .Release.Name) }}
 {{- end }}
 
 {{/*
@@ -96,14 +97,20 @@ Renders the auth.bootstrap.instanceAdmin.password secret key
 {{- end }}
 
 {{/*
-Renders the auth.bootstrap.instanceAdmin.password environment variable
+Renders the auth.bootstrap.instanceAdmin.password environment variable.
+V1-style: when password is set in values, use literal so bootloader can write to secret; else read from secret.
 */}}
 {{- define "airbyte.auth.bootstrap.instanceAdmin.password.env" }}
+{{- if .Values.global.auth.instanceAdmin.password }}
+- name: AB_INSTANCE_ADMIN_PASSWORD
+  value: {{ .Values.global.auth.instanceAdmin.password | quote }}
+{{- else }}
 - name: AB_INSTANCE_ADMIN_PASSWORD
   valueFrom:
     secretKeyRef:
       name: {{ include "airbyte.auth.bootstrap.secretName" . }}
       key: {{ include "airbyte.auth.bootstrap.instanceAdmin.password.secretKey" . }}
+{{- end }}
 {{- end }}
 
 {{/*
@@ -305,6 +312,33 @@ Renders the set of all auth.bootstrap environment variables
 {{- include "airbyte.auth.bootstrap.security.jwtSignatureSecretKey.env" . }}
 {{- include "airbyte.auth.bootstrap.dataPlane.clientIdSecretKey.env" . }}
 {{- include "airbyte.auth.bootstrap.dataPlane.clientSecretSecretKey.env" . }}
+{{- end }}
+
+{{/*
+V1-style: bootstrap env vars as literal values (same as airbyte-v1 bootloader).
+Use when global.auth.enabled and edition community/enterprise so bootloader writes to chart-created secret.
+*/}}
+{{- define "airbyte.auth.bootstrap.envs.v1style" }}
+- name: AB_AUTH_SECRET_CREATION_ENABLED
+  value: "true"
+- name: AB_KUBERNETES_SECRET_NAME
+  value: {{ include "airbyte.auth.bootstrap.managedSecretName" . | quote }}
+- name: AB_INSTANCE_ADMIN_PASSWORD_SECRET_KEY
+  value: {{ include "airbyte.auth.bootstrap.instanceAdmin.passwordSecretKey" . | quote }}
+- name: AB_INSTANCE_ADMIN_CLIENT_ID_SECRET_KEY
+  value: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientIdSecretKey" . | quote }}
+- name: AB_INSTANCE_ADMIN_CLIENT_SECRET_SECRET_KEY
+  value: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientSecretSecretKey" . | quote }}
+- name: AB_JWT_SIGNATURE_SECRET_KEY
+  value: {{ include "airbyte.auth.bootstrap.security.jwtSignatureSecretKey" . | quote }}
+- name: AB_INSTANCE_ADMIN_PASSWORD
+  value: {{ include "airbyte.auth.bootstrap.instanceAdmin.password" . | quote }}
+- name: AB_INSTANCE_ADMIN_CLIENT_ID
+  value: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientId" . | quote }}
+- name: AB_INSTANCE_ADMIN_CLIENT_SECRET
+  value: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientSecret" . | quote }}
+- name: AB_JWT_SIGNATURE_SECRET
+  value: {{ include "airbyte.auth.bootstrap.security.jwtSignatureSecret" . | quote }}
 {{- end }}
 
 {{/*

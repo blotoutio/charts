@@ -49,7 +49,11 @@ spec:
         {{- include "airbyte.auth.identityProvider.envs" . | nindent 8 }}
         {{- end }}
 
+        {{- if and (or (eq .Values.global.edition "community") (eq .Values.global.edition "enterprise")) .Values.global.auth.enabled }}
+        {{- include "airbyte.auth.bootstrap.envs.v1style" . | nindent 8 }}
+        {{- else }}
         {{- include "airbyte.auth.bootstrap.envs" . | nindent 8 }}
+        {{- end }}
         {{- include "airbyte.common.version.env" . | nindent 8 }}
         {{- include "airbyte.connector.envs" . | nindent 8 }}
         {{- include "airbyte.database.envs" . | nindent 8 }}

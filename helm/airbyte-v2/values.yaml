@@ -54,16 +54,18 @@ global:
   imagePullSecrets:
     - name: regcred
 
-  # -- Auth configuration
+  # -- Auth configuration (same structure as airbyte-v1)
   auth:
     # -- Whether auth is enabled
     enabled: true
-    # -- Secret name the app reads for auth bootstrap (AB_KUBERNETES_SECRET_NAME). Use existing secret that has instance-admin-password key.
+    # -- Secret name for auth bootstrap (v1: auth.secretName). Bootloader writes here; server reads from here. Use chart-created secret name.
+    secretName: "airbyte-v2-airbyte-secrets"
+    # -- Same as secretName; bootloader AB_KUBERNETES_SECRET_NAME. Defaults to secretName if unset.
     managedSecretName: "airbyte-v2-airbyte-secrets"
 
     # -- Admin user configuration
     instanceAdmin:
-      # -- Secret name where the instanceAdmin configuration is stored
+      # -- Secret name where the instanceAdmin configuration is stored (v1: same as chart secret)
       secretName: "airbyte-v2-airbyte-secrets"
       # -- The first name of the initial user
       firstName: ""
