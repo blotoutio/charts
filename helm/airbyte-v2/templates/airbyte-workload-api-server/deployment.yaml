@@ -129,12 +129,8 @@ spec:
 
         {{- if .Values.workloadApiServer.livenessProbe.enabled }}
         livenessProbe:
-          httpGet:
-            path: /health/liveness
+          tcpSocket:
             port: http
-            httpHeaders:
-            - name: Authorization
-              value: {{ printf "Bearer %s" (include "airbyte.workloadApiServer.bearerToken" .) | quote }}
           initialDelaySeconds: {{ .Values.workloadApiServer.livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.workloadApiServer.livenessProbe.periodSeconds }}
           timeoutSeconds: {{ .Values.workloadApiServer.livenessProbe.timeoutSeconds }}
@@ -143,12 +139,8 @@ spec:
         {{- end }}
         {{- if .Values.workloadApiServer.readinessProbe.enabled }}
         readinessProbe:
-          httpGet:
-            path: /health/liveness
+          tcpSocket:
             port: http
-            httpHeaders:
-            - name: Authorization
-              value: {{ printf "Bearer %s" (include "airbyte.workloadApiServer.bearerToken" .) | quote }}
           initialDelaySeconds: {{ .Values.workloadApiServer.readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.workloadApiServer.readinessProbe.periodSeconds }}
           timeoutSeconds: {{ .Values.workloadApiServer.readinessProbe.timeoutSeconds }}

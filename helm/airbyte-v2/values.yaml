@@ -1179,10 +1179,10 @@ workloadLauncher:
       type: RuntimeDefault
 
   livenessProbe:
-    # -- Enable livenessProbe on the workload launcher
+    # -- Enable livenessProbe on the workload launcher (tcpSocket on 8016 to avoid HTTP timeout/401)
     enabled: true
-    # -- Initial delay seconds for livenessProbe
-    initialDelaySeconds: 30
+    # -- Initial delay seconds for livenessProbe (increase if kube-api-access mount or startup is slow)
+    initialDelaySeconds: 60
     # -- Period seconds for livenessProbe
     periodSeconds: 10
     # -- Timeout seconds for livenessProbe
@@ -1193,10 +1193,10 @@ workloadLauncher:
     successThreshold: 1
 
   readinessProbe:
-    # -- Enable readinessProbe on the workload launcher
+    # -- Enable readinessProbe on the workload launcher (tcpSocket on 8016)
     enabled: true
     # -- Initial delay seconds for readinessProbe
-    initialDelaySeconds: 10
+    initialDelaySeconds: 30
     # -- Period seconds for readinessProbe
     periodSeconds: 10
     # -- Timeout seconds for readinessProbe

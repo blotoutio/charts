@@ -161,8 +161,7 @@ spec:
 
         {{- if .Values.workloadLauncher.livenessProbe.enabled }}
         livenessProbe:
-          httpGet:
-            path: /health/liveness
+          tcpSocket:
             port: heartbeat
           initialDelaySeconds: {{ .Values.workloadLauncher.livenessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.workloadLauncher.livenessProbe.periodSeconds }}
@@ -172,8 +171,7 @@ spec:
         {{- end }}
         {{- if .Values.workloadLauncher.readinessProbe.enabled }}
         readinessProbe:
-          httpGet:
-            path: /health/readiness
+          tcpSocket:
             port: heartbeat
           initialDelaySeconds: {{ .Values.workloadLauncher.readinessProbe.initialDelaySeconds }}
           periodSeconds: {{ .Values.workloadLauncher.readinessProbe.periodSeconds }}
