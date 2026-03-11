@@ -83,10 +83,12 @@ Renders the auth.bootstrap.managedSecretName environment variable
 {{- end }}
 
 {{/*
-Renders the global.auth.instanceAdmin.password value
+Renders the global.auth.instanceAdmin.password value.
+Uses a non-empty default so the secret always has a value (app requires Optional: false).
+Set global.auth.instanceAdmin.password in values or --set for production.
 */}}
 {{- define "airbyte.auth.bootstrap.instanceAdmin.password" }}
-    {{- .Values.global.auth.instanceAdmin.password }}
+    {{- .Values.global.auth.instanceAdmin.password | default "changeme" }}
 {{- end }}
 
 {{/*
