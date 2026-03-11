@@ -71,6 +71,10 @@ spec:
           value: "Internal worker"
         {{- end }}
 
+        {{- /* v1-style: DATA_PLANE_ID=local for same-cluster/hybrid launcher */}}
+        - name: DATA_PLANE_ID
+          value: {{ .Values.workloadLauncher.dataPlaneId | default "local" | quote }}
+
         {{- include "airbyte.cluster.envs" . | nindent 8 }}
         {{- include "airbyte.common.envs" . | nindent 8 }}
         {{- include "airbyte.database.envs" . | nindent 8 }}
@@ -95,6 +99,24 @@ spec:
         {{- include "airbyte.workloadLauncher.envs" . | nindent 8 }}
         {{- include "airbyte.workloadLauncher.dataPlane.envs" . | nindent 8 }}
         {{- include "airbyte.workloadLauncher.images.envs" . | nindent 8 }}
+
+        {{- /* v1-style: literal AIRBYTE_API_AUTH_HEADER_NAME (overrides configmap so launcher has same as v1) */}}
+        {{- if (or (eq .Values.global.edition "community") (eq .Values.global.edition "enterprise")) }}
+        - name: AIRBYTE_API_AUTH_HEADER_NAME
+          value: {{ include "airbyte.common.api.authHeaderName" . | quote }}
+        {{- end }}
+
+        {{- /* v1-style: literal WORKLOAD_API_BEARER_TOKEN_SECRET_NAME and _KEY so launcher never sees null */}}
+        - name: WORKLOAD_API_BEARER_TOKEN_SECRET_NAME
+          value: {{ include "airbyte.workloadApiServer.secretName" . | quote }}
+        - name: WORKLOAD_API_BEARER_TOKEN_SECRET_KEY
+          value: {{ include "airbyte.workloadApiServer.bearerToken.secretKey" . | quote }}
+
+        {{- /* v1-style: JOB_KUBE_SERVICEACCOUNT and WORKSPACE_DOCKER_MOUNT (v1: airbyte-admin, workspace) */}}
+        - name: JOB_KUBE_SERVICEACCOUNT
+          value: {{ default .Values.global.serviceAccountName .Values.workloadLauncher.serviceAccountName | default "airbyte-admin" | quote }}
+        - name: WORKSPACE_DOCKER_MOUNT
+          value: {{ .Values.workloadLauncher.workspaceDockerMount | default "workspace" | quote }}
 
         {{- if .Values.global.datadog.enabled }}
         - name: DD_SERVICE 

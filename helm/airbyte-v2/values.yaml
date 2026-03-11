@@ -1134,7 +1134,13 @@ workloadLauncher:
 
   controlPlane:
     tokenEndpoint: ""
-  
+
+  # -- Data plane ID (v1: DATA_PLANE_ID=local for same-cluster launcher). Default "local".
+  dataPlaneId: ""
+
+  # -- Workspace docker mount (v1: WORKSPACE_DOCKER_MOUNT=workspace). Default "workspace".
+  workspaceDockerMount: ""
+
   dataPlane:
     secretName: ""
     clientId: ""
