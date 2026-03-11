@@ -4,6 +4,15 @@ global:
   # -- Edition; "community" or "enterprise"
   edition: community
 
+  # --AWS keys
+  aws_access_key: ""
+  aws_secret_key: ""
+  # -- Blotout required configuration
+  resource_cpu_limit: "4"
+  resource_cpu_request: "0.5"
+  resource_memory_limit: "4Gi"
+  resource_memory_request: "1Gi"
+
   secretName: ""
 
   local: false
