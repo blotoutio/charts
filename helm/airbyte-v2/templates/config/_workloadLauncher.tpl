@@ -82,14 +82,24 @@ WORKLOAD_LAUNCHER_PARALLELISM: {{ include "airbyte.workloadLauncher.parallelism"
 {{- end }}
 
 {{/*
-Renders the workloadLauncher.dataPlane secret name
+Renders the workloadLauncher.dataPlane secret name (where to read DATAPLANE_CLIENT_ID/SECRET).
+When existingSecretName is set, use it so credentials come from that secret (no hardcoding in values).
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.secretName" }}
-{{- if .Values.workloadLauncher.dataPlane.secretName }}
+{{- if .Values.workloadLauncher.dataPlane.existingSecretName }}
+    {{- .Values.workloadLauncher.dataPlane.existingSecretName }}
+{{- else if .Values.workloadLauncher.dataPlane.secretName }}
     {{- .Values.workloadLauncher.dataPlane.secretName }}
 {{- else }}
     {{- .Values.global.secretName | default (printf "%s-airbyte-secrets" .Release.Name) }}
 {{- end }}
+{{- end }}
+
+{{/*
+True when dataplane credentials are read from an existing secret (don't write them into the chart secret).
+*/}}
+{{- define "airbyte.workloadLauncher.dataPlane.useExistingSecret" }}
+    {{- .Values.workloadLauncher.dataPlane.existingSecretName }}
 {{- end }}
 
 {{/*
@@ -103,10 +113,11 @@ Server DataplaneTokenServiceDataImpl expects a valid UUID; format 32 hex chars a
 {{- end }}
 
 {{/*
-Renders the workloadLauncher.dataPlane.clientId value
+Renders the workloadLauncher.dataPlane.clientId value.
+Use or so empty string is treated as unset and default (UUID) is used; set explicitly to match service_accounts.id in DB.
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientId" }}
-    {{- .Values.workloadLauncher.dataPlane.clientId | default (include "airbyte.workloadLauncher.dataPlane.clientId.default" .) }}
+    {{- or .Values.workloadLauncher.dataPlane.clientId (include "airbyte.workloadLauncher.dataPlane.clientId.default" .) }}
 {{- end }}
 
 {{/*
@@ -123,15 +134,15 @@ Renders the workloadLauncher.dataPlane.clientId environment variable
 - name: DATAPLANE_CLIENT_ID
   valueFrom:
     secretKeyRef:
-      name: {{ (ternary (include "airbyte.auth.bootstrap.managedSecretName" .) (include "airbyte.workloadLauncher.dataPlane.secretName" .) (eq (include "airbyte.common.cluster.type" .) "hybrid")) }}
+      name: {{ include "airbyte.workloadLauncher.dataPlane.secretName" . }}
       key: {{ include "airbyte.workloadLauncher.dataPlane.clientId.secretKey" . }}
 {{- end }}
 
 {{/*
-Renders the workloadLauncher.dataPlane.clientIdSecretName value
+Renders the workloadLauncher.dataPlane.clientIdSecretName value (secret that holds DATAPLANE_CLIENT_ID).
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientIdSecretName" }}
-    {{- .Values.workloadLauncher.dataPlane.clientIdSecretName | default (include "airbyte.auth.bootstrap.managedSecretName" .) }}
+    {{- .Values.workloadLauncher.dataPlane.clientIdSecretName | default (include "airbyte.workloadLauncher.dataPlane.secretName" .) }}
 {{- end }}
 
 {{/*
@@ -171,10 +182,11 @@ Release-unique default dataplane clientSecret (stable across upgrades).
 {{- end }}
 
 {{/*
-Renders the workloadLauncher.dataPlane.clientSecret value
+Renders the workloadLauncher.dataPlane.clientSecret value.
+Use or so empty string is treated as unset; set explicitly to match the secret for the service account in DB.
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientSecret" }}
-    {{- .Values.workloadLauncher.dataPlane.clientSecret | default (include "airbyte.workloadLauncher.dataPlane.clientSecret.default" .) }}
+    {{- or .Values.workloadLauncher.dataPlane.clientSecret (include "airbyte.workloadLauncher.dataPlane.clientSecret.default" .) }}
 {{- end }}
 
 {{/*
@@ -191,15 +203,15 @@ Renders the workloadLauncher.dataPlane.clientSecret environment variable
 - name: DATAPLANE_CLIENT_SECRET
   valueFrom:
     secretKeyRef:
-      name: {{ (ternary (include "airbyte.auth.bootstrap.managedSecretName" .) (include "airbyte.workloadLauncher.dataPlane.secretName" .) (eq (include "airbyte.common.cluster.type" .) "hybrid")) }}
+      name: {{ include "airbyte.workloadLauncher.dataPlane.secretName" . }}
       key: {{ include "airbyte.workloadLauncher.dataPlane.clientSecret.secretKey" . }}
 {{- end }}
 
 {{/*
-Renders the workloadLauncher.dataPlane.clientSecretSecretName value
+Renders the workloadLauncher.dataPlane.clientSecretSecretName value (secret that holds DATAPLANE_CLIENT_SECRET).
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientSecretSecretName" }}
-    {{- .Values.workloadLauncher.dataPlane.clientSecretSecretName | default (include "airbyte.auth.bootstrap.managedSecretName" .) }}
+    {{- .Values.workloadLauncher.dataPlane.clientSecretSecretName | default (include "airbyte.workloadLauncher.dataPlane.secretName" .) }}
 {{- end }}
 
 {{/*

@@ -1141,7 +1141,9 @@ workloadLauncher:
   # -- Workspace docker mount (v1: WORKSPACE_DOCKER_MOUNT=workspace). Default "workspace".
   workspaceDockerMount: ""
 
+  # Set existingSecretName to read dataplane creds from that secret (no hardcoding in values). Keys: DATAPLANE_CLIENT_ID, DATAPLANE_CLIENT_SECRET.
   dataPlane:
+    existingSecretName: ""  # e.g. "airbyte-dataplane-creds" – create this secret with id/secret matching service_accounts in DB
     secretName: ""
     clientId: ""
     clientIdSecretName: ""
