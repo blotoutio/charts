@@ -94,9 +94,12 @@ Renders the workloadLauncher.dataPlane secret name
 
 {{/*
 Release-unique default dataplane clientId (stable across upgrades).
+Server DataplaneTokenServiceDataImpl expects a valid UUID; format 32 hex chars as 8-4-4-4-12.
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientId.default" }}
-    {{- printf "dataplane-%s" (printf "id-%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 20) }}
+    {{- $h := (printf "id-%s-%s" .Release.Name .Release.Namespace | sha256sum | nospace | trunc 32) }}
+    {{- $p1 := trunc 8 $h }}{{ $r1 := trimPrefix $p1 $h }}{{ $p2 := trunc 4 $r1 }}{{ $r2 := trimPrefix $p2 $r1 }}{{ $p3 := trunc 4 $r2 }}{{ $r3 := trimPrefix $p3 $r2 }}{{ $p4 := trunc 4 $r3 }}{{ $r4 := trimPrefix $p4 $r3 }}{{ $p5 := trunc 12 $r4 }}
+    {{- $p1 }}-{{ $p2 }}-{{ $p3 }}-{{ $p4 }}-{{ $p5 }}
 {{- end }}
 
 {{/*
