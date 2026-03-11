@@ -223,10 +223,10 @@ Renders the auth.bootstrap.instanceAdmin.clientSecretSecretKey environment varia
 
 {{/*
 Renders the global.auth.security.jwtSignatureSecret value.
-Uses non-empty default so secret has a value; set in values for production.
+Uses non-empty default (min 32 chars for HS256 signer). Set in values for production.
 */}}
 {{- define "airbyte.auth.bootstrap.security.jwtSignatureSecret" }}
-    {{- .Values.global.auth.security.jwtSignatureSecret | default "airbyte-jwt-signature-secret" }}
+    {{- .Values.global.auth.security.jwtSignatureSecret | default "airbyte-jwt-signature-secret-min32bytes" }}
 {{- end }}
 
 {{/*
