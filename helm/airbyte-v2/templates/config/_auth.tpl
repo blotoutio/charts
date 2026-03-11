@@ -83,12 +83,19 @@ Renders the auth.bootstrap.managedSecretName environment variable
 {{- end }}
 
 {{/*
+Release-unique default password (deterministic from release+namespace, stable across upgrades).
+Used when global.auth.instanceAdmin.password is not set.
+*/}}
+{{- define "airbyte.auth.bootstrap.instanceAdmin.password.default" }}
+    {{- printf "%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 24 }}
+{{- end }}
+
+{{/*
 Renders the global.auth.instanceAdmin.password value.
-Uses a non-empty default so the secret always has a value (app requires Optional: false).
-Set global.auth.instanceAdmin.password in values or --set for production.
+When not set, uses a release-unique default (not "changeme"). Set in values for production.
 */}}
 {{- define "airbyte.auth.bootstrap.instanceAdmin.password" }}
-    {{- .Values.global.auth.instanceAdmin.password | default "changeme" }}
+    {{- .Values.global.auth.instanceAdmin.password | default (include "airbyte.auth.bootstrap.instanceAdmin.password.default" .) }}
 {{- end }}
 
 {{/*
@@ -222,11 +229,18 @@ Renders the auth.bootstrap.instanceAdmin.clientSecretSecretKey environment varia
 {{- end }}
 
 {{/*
+Release-unique default JWT secret (min 32 chars for HS256). Stable across upgrades.
+*/}}
+{{- define "airbyte.auth.bootstrap.security.jwtSignatureSecret.default" }}
+    {{- printf "airbyte-jwt-%s" (printf "%s-%s" .Release.Name .Release.Namespace | sha256sum) }}
+{{- end }}
+
+{{/*
 Renders the global.auth.security.jwtSignatureSecret value.
-Uses non-empty default (min 32 chars for HS256 signer). Set in values for production.
+When not set, uses a release-unique default (32+ chars). Set in values for production.
 */}}
 {{- define "airbyte.auth.bootstrap.security.jwtSignatureSecret" }}
-    {{- .Values.global.auth.security.jwtSignatureSecret | default "airbyte-jwt-signature-secret-min32bytes" }}
+    {{- .Values.global.auth.security.jwtSignatureSecret | default (include "airbyte.auth.bootstrap.security.jwtSignatureSecret.default" .) }}
 {{- end }}
 
 {{/*

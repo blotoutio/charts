@@ -93,10 +93,17 @@ Renders the workloadLauncher.dataPlane secret name
 {{- end }}
 
 {{/*
+Release-unique default dataplane clientId (stable across upgrades).
+*/}}
+{{- define "airbyte.workloadLauncher.dataPlane.clientId.default" }}
+    {{- printf "dataplane-%s" (printf "id-%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 20) }}
+{{- end }}
+
+{{/*
 Renders the workloadLauncher.dataPlane.clientId value
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientId" }}
-    {{- .Values.workloadLauncher.dataPlane.clientId | default "airbyte-dataplane-client" }}
+    {{- .Values.workloadLauncher.dataPlane.clientId | default (include "airbyte.workloadLauncher.dataPlane.clientId.default" .) }}
 {{- end }}
 
 {{/*
@@ -154,10 +161,17 @@ Renders the workloadLauncher.dataPlane.clientIdSecretKey environment variable
 {{- end }}
 
 {{/*
+Release-unique default dataplane clientSecret (stable across upgrades).
+*/}}
+{{- define "airbyte.workloadLauncher.dataPlane.clientSecret.default" }}
+    {{- printf "dataplane-%s" (printf "secret-%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 32) }}
+{{- end }}
+
+{{/*
 Renders the workloadLauncher.dataPlane.clientSecret value
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientSecret" }}
-    {{- .Values.workloadLauncher.dataPlane.clientSecret | default "airbyte-dataplane-secret" }}
+    {{- .Values.workloadLauncher.dataPlane.clientSecret | default (include "airbyte.workloadLauncher.dataPlane.clientSecret.default" .) }}
 {{- end }}
 
 {{/*
