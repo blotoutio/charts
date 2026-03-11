@@ -108,10 +108,10 @@ Renders the metrics.statsd.enabled environment variable
 {{- end }}
 
 {{/*
-Renders the global.metrics.otlp.collectorEndpoint value
+Renders the global.metrics.otlp.collectorEndpoint value (non-empty default to avoid "Unsetting empty" OTEL_COLLECTOR_ENDPOINT).
 */}}
 {{- define "airbyte.metrics.otlp.collectorEndpoint" }}
-    {{- .Values.global.metrics.otlp.collectorEndpoint }}
+    {{- .Values.global.metrics.otlp.collectorEndpoint | default "http://localhost:4317" }}
 {{- end }}
 
 {{/*

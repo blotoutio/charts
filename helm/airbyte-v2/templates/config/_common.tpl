@@ -24,10 +24,10 @@ Renders the common.edition environment variable
 {{- end }}
 
 {{/*
-Renders the global.version value
+Renders the global.version value (non-empty default to avoid "Unsetting empty" VERSION in workload-api-server).
 */}}
 {{- define "airbyte.common.version" }}
-    {{- .Values.global.version | default .Chart.AppVersion }}
+    {{- .Values.global.version | default .Chart.AppVersion | default "2.0.0" }}
 {{- end }}
 
 {{/*

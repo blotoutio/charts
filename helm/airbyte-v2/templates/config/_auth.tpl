@@ -141,11 +141,18 @@ Renders the auth.bootstrap.instanceAdmin.passwordSecretKey environment variable
 {{- end }}
 
 {{/*
+Release-unique default instance admin clientId (stable across upgrades).
+*/}}
+{{- define "airbyte.auth.bootstrap.instanceAdmin.clientId.default" }}
+    {{- printf "admin-%s" (printf "clientid-%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 16) }}
+{{- end }}
+
+{{/*
 Renders the global.auth.instanceAdmin.clientId value.
 Uses non-empty default so secret has a value; set in values for production.
 */}}
 {{- define "airbyte.auth.bootstrap.instanceAdmin.clientId" }}
-    {{- .Values.global.auth.instanceAdmin.clientId | default "airbyte-admin" }}
+    {{- .Values.global.auth.instanceAdmin.clientId | default (include "airbyte.auth.bootstrap.instanceAdmin.clientId.default" .) }}
 {{- end }}
 
 {{/*
@@ -185,11 +192,18 @@ Renders the auth.bootstrap.instanceAdmin.clientIdSecretKey environment variable
 {{- end }}
 
 {{/*
+Release-unique default instance admin clientSecret (stable across upgrades).
+*/}}
+{{- define "airbyte.auth.bootstrap.instanceAdmin.clientSecret.default" }}
+    {{- printf "admin-%s" (printf "clientsecret-%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 32) }}
+{{- end }}
+
+{{/*
 Renders the global.auth.instanceAdmin.clientSecret value.
 Uses non-empty default so secret has a value; set in values for production.
 */}}
 {{- define "airbyte.auth.bootstrap.instanceAdmin.clientSecret" }}
-    {{- .Values.global.auth.instanceAdmin.clientSecret | default "airbyte-admin-secret" }}
+    {{- .Values.global.auth.instanceAdmin.clientSecret | default (include "airbyte.auth.bootstrap.instanceAdmin.clientSecret.default" .) }}
 {{- end }}
 
 {{/*

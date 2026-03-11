@@ -358,6 +358,14 @@ Renders the global.storage.minio.s3PathStyleAccess value
 {{- end }}
 
 {{/*
+Renders S3_PATH_STYLE_ACCESS value for configmap (non-empty for all storage types to avoid "Unsetting empty").
+*/}}
+{{- define "airbyte.storage.s3PathStyleAccess.value" }}
+{{- $opt := (include "airbyte.storage.type" .) }}
+{{- if eq $opt "minio" }}{{ include "airbyte.storage.minio.s3PathStyleAccess" . }}{{- else }}{{ "false" }}{{- end }}
+{{- end }}
+
+{{/*
 Renders the storage.minio.s3PathStyleAccess environment variable
 */}}
 {{- define "airbyte.storage.minio.s3PathStyleAccess.env" }}
@@ -403,6 +411,8 @@ Renders the set of all storage environment variables
 {{- include "airbyte.storage.s3.secretAccessKey.env" . }}
 {{- end }}
 
+{{- /* S3_PATH_STYLE_ACCESS always in configmap; include env ref so all components get it (avoids "Unsetting empty") */}}
+{{- include "airbyte.storage.minio.s3PathStyleAccess.env" . }}
 {{- end }}
 
 {{/*
@@ -426,15 +436,15 @@ GOOGLE_APPLICATION_CREDENTIALS: {{ include "airbyte.storage.gcs.credentialsJsonP
 
 {{- if eq $opt "minio" }}
 MINIO_ENDPOINT: {{ include "airbyte.storage.minio.endpoint" . | quote }}
-S3_PATH_STYLE_ACCESS: {{ include "airbyte.storage.minio.s3PathStyleAccess" . | quote }}
 {{- end }}
 
 {{- if eq $opt "s3" }}
 AWS_DEFAULT_REGION: {{ include "airbyte.storage.s3.region" . | quote }}
 AWS_AUTHENTICATION_TYPE: {{ include "airbyte.storage.s3.authenticationType" . | quote }}
-S3_PATH_STYLE_ACCESS: {{ "false" | quote }}
 {{- end }}
 
+{{- /* Always set S3_PATH_STYLE_ACCESS so workload-api-server never sees empty (avoids "Unsetting empty") */}}
+S3_PATH_STYLE_ACCESS: {{ include "airbyte.storage.s3PathStyleAccess.value" . | quote }}
 {{- end }}
 
 {{/*
