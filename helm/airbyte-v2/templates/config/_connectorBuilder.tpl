@@ -32,14 +32,12 @@ Required by server: airbyte.manifest-server-api.base-path must match pattern .+
 {{- end }}
 
 {{/*
-Renders the connectorBuilder.manifestServerApi.basePath environment variable
+Renders the connectorBuilder.manifestServerApi.basePath environment variable.
+V1-style: use literal value (same as CONNECTOR_BUILDER_SERVER_API_HOST) so server always has non-empty base-path.
 */}}
 {{- define "airbyte.connectorBuilder.manifestServerApi.basePath.env" }}
 - name: AIRBYTE_MANIFEST_SERVER_API_BASE_PATH
-  valueFrom:
-    configMapKeyRef:
-      name: {{ .Release.Name }}-airbyte-env
-      key: AIRBYTE_MANIFEST_SERVER_API_BASE_PATH
+  value: {{ include "airbyte.connectorBuilder.manifestServerApi.basePath" . | quote }}
 {{- end }}
 
 {{/*
