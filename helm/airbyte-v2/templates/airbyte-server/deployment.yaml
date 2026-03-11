@@ -147,6 +147,12 @@ spec:
         {{- end }}
         {{- end }}
 
+        {{- /* Dataplane credentials last so they are not overwritten by env_vars (token endpoint needs these) */}}
+        {{- if (or (eq .Values.global.edition "community") (eq .Values.global.edition "enterprise")) }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientId.env" . | nindent 8 }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientSecret.env" . | nindent 8 }}
+        {{- end }}
+
         # Values from extraEnv for more compability(if you want to use external secret source or other stuff)
         {{- if .Values.server.extraEnv }}
         {{- toYaml .Values.server.extraEnv | nindent 8 }}

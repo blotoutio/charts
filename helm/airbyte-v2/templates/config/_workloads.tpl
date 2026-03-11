@@ -42,10 +42,11 @@ Renders the workloads.containerOrchestrator.dataPlane.secretMountPath environmen
 {{- end }}
 
 {{/*
-Renders the global.workloads.containerOrchestrator.dataPlane.secretName value
+Renders the global.workloads.containerOrchestrator.dataPlane.secretName value.
+When unset or empty, defaults to chart secret so launcher has a non-empty value (avoids "Unsetting empty" and job pods can mount creds).
 */}}
 {{- define "airbyte.workloads.containerOrchestrator.dataPlane.secretName" }}
-    {{- .Values.global.workloads.containerOrchestrator.dataPlane.secretName }}
+    {{- or .Values.global.workloads.containerOrchestrator.dataPlane.secretName (include "airbyte.auth.bootstrap.managedSecretName" .) }}
 {{- end }}
 
 {{/*
