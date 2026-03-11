@@ -184,6 +184,8 @@ global:
       state: b-multitenantdev-dev-airbyte-v1-logs
       workloadOutput: b-multitenantdev-dev-airbyte-v1-logs
       activityPayload: b-multitenantdev-dev-airbyte-v1-logs
+      # Required by AirbyteStorageConfig (STORAGE_BUCKET_AUDIT_LOGGING)
+      auditLogging: b-multitenantdev-dev-airbyte-v1-logs
     
     # S3
     s3:

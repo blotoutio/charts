@@ -107,6 +107,24 @@ Renders the storage.bucket.workloadOutput environment variable
 {{- end }}
 
 {{/*
+Renders the global.storage.bucket.auditLogging value
+*/}}
+{{- define "airbyte.storage.bucket.auditLogging" }}
+    {{- .Values.global.storage.bucket.auditLogging | default "airbyte-storage" }}
+{{- end }}
+
+{{/*
+Renders the storage.bucket.auditLogging environment variable
+*/}}
+{{- define "airbyte.storage.bucket.auditLogging.env" }}
+- name: STORAGE_BUCKET_AUDIT_LOGGING
+  valueFrom:
+    configMapKeyRef:
+      name: {{ .Release.Name }}-airbyte-env
+      key: STORAGE_BUCKET_AUDIT_LOGGING
+{{- end }}
+
+{{/*
 Renders the global.storage.s3.region value
 */}}
 {{- define "airbyte.storage.s3.region" }}
@@ -359,6 +377,7 @@ Renders the set of all storage environment variables
 {{- include "airbyte.storage.bucket.log.env" . }}
 {{- include "airbyte.storage.bucket.state.env" . }}
 {{- include "airbyte.storage.bucket.workloadOutput.env" . }}
+{{- include "airbyte.storage.bucket.auditLogging.env" . }}
 {{- $opt := (include "airbyte.storage.type" .) }}
 
 {{- if eq $opt "azure" }}
@@ -395,6 +414,7 @@ STORAGE_BUCKET_ACTIVITY_PAYLOAD: {{ include "airbyte.storage.bucket.activityPayl
 STORAGE_BUCKET_LOG: {{ include "airbyte.storage.bucket.log" . | quote }}
 STORAGE_BUCKET_STATE: {{ include "airbyte.storage.bucket.state" . | quote }}
 STORAGE_BUCKET_WORKLOAD_OUTPUT: {{ include "airbyte.storage.bucket.workloadOutput" . | quote }}
+STORAGE_BUCKET_AUDIT_LOGGING: {{ include "airbyte.storage.bucket.auditLogging" . | quote }}
 {{- $opt := (include "airbyte.storage.type" .) }}
 
 {{- if eq $opt "azure" }}

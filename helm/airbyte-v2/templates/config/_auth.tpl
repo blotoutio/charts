@@ -134,10 +134,11 @@ Renders the auth.bootstrap.instanceAdmin.passwordSecretKey environment variable
 {{- end }}
 
 {{/*
-Renders the global.auth.instanceAdmin.clientId value
+Renders the global.auth.instanceAdmin.clientId value.
+Uses non-empty default so secret has a value; set in values for production.
 */}}
 {{- define "airbyte.auth.bootstrap.instanceAdmin.clientId" }}
-    {{- .Values.global.auth.instanceAdmin.clientId }}
+    {{- .Values.global.auth.instanceAdmin.clientId | default "airbyte-admin" }}
 {{- end }}
 
 {{/*
@@ -177,10 +178,11 @@ Renders the auth.bootstrap.instanceAdmin.clientIdSecretKey environment variable
 {{- end }}
 
 {{/*
-Renders the global.auth.instanceAdmin.clientSecret value
+Renders the global.auth.instanceAdmin.clientSecret value.
+Uses non-empty default so secret has a value; set in values for production.
 */}}
 {{- define "airbyte.auth.bootstrap.instanceAdmin.clientSecret" }}
-    {{- .Values.global.auth.instanceAdmin.clientSecret }}
+    {{- .Values.global.auth.instanceAdmin.clientSecret | default "airbyte-admin-secret" }}
 {{- end }}
 
 {{/*
@@ -220,10 +222,11 @@ Renders the auth.bootstrap.instanceAdmin.clientSecretSecretKey environment varia
 {{- end }}
 
 {{/*
-Renders the global.auth.security.jwtSignatureSecret value
+Renders the global.auth.security.jwtSignatureSecret value.
+Uses non-empty default so secret has a value; set in values for production.
 */}}
 {{- define "airbyte.auth.bootstrap.security.jwtSignatureSecret" }}
-    {{- .Values.global.auth.security.jwtSignatureSecret }}
+    {{- .Values.global.auth.security.jwtSignatureSecret | default "airbyte-jwt-signature-secret" }}
 {{- end }}
 
 {{/*
@@ -364,8 +367,11 @@ Renders the set of all auth.bootstrap secret variables
 AB_INSTANCE_ADMIN_PASSWORD: {{ include "airbyte.auth.bootstrap.instanceAdmin.password" . | quote }}
 {{ include "airbyte.auth.instanceAdmin.password.secretKey" . }}: {{ include "airbyte.auth.bootstrap.instanceAdmin.password" . | quote }}
 AB_INSTANCE_ADMIN_CLIENT_ID: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientId" . | quote }}
+{{ include "airbyte.auth.bootstrap.instanceAdmin.clientIdSecretKey" . }}: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientId" . | quote }}
 AB_INSTANCE_ADMIN_CLIENT_SECRET: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientSecret" . | quote }}
+{{ include "airbyte.auth.bootstrap.instanceAdmin.clientSecretSecretKey" . }}: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientSecret" . | quote }}
 AB_JWT_SIGNATURE_SECRET: {{ include "airbyte.auth.bootstrap.security.jwtSignatureSecret" . | quote }}
+{{ include "airbyte.auth.bootstrap.security.jwtSignatureSecretKey" . }}: {{ include "airbyte.auth.bootstrap.security.jwtSignatureSecret" . | quote }}
 {{- end }}
 
 {{/*
