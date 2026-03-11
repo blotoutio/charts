@@ -42,6 +42,17 @@ Renders the common.version environment variable
 {{- end }}
 
 {{/*
+Renders the VERSION environment variable (same value as AIRBYTE_VERSION; avoids "Unsetting empty" in workload-api-server).
+*/}}
+{{- define "airbyte.common.version.env.asVERSION" }}
+- name: VERSION
+  valueFrom:
+    configMapKeyRef:
+      name: {{ .Release.Name }}-airbyte-env
+      key: VERSION
+{{- end }}
+
+{{/*
 Renders the global.cluster.type value
 */}}
 {{- define "airbyte.common.cluster.type" }}
@@ -271,6 +282,7 @@ Renders the set of all common environment variables
 {{- define "airbyte.common.envs" }}
 {{- include "airbyte.common.edition.env" . }}
 {{- include "airbyte.common.version.env" . }}
+{{- include "airbyte.common.version.env.asVERSION" . }}
 {{- include "airbyte.common.cluster.type.env" . }}
 {{- include "airbyte.common.cluster.name.env" . }}
 {{- include "airbyte.common.airbyteUrl.env" . }}
