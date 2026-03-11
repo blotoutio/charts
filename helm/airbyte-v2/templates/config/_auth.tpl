@@ -326,6 +326,7 @@ Renders the set of all auth.bootstrap secret variables
 */}}
 {{- define "airbyte.auth.bootstrap.secrets" }}
 AB_INSTANCE_ADMIN_PASSWORD: {{ include "airbyte.auth.bootstrap.instanceAdmin.password" . | quote }}
+{{ include "airbyte.auth.instanceAdmin.password.secretKey" . }}: {{ include "airbyte.auth.bootstrap.instanceAdmin.password" . | quote }}
 AB_INSTANCE_ADMIN_CLIENT_ID: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientId" . | quote }}
 AB_INSTANCE_ADMIN_CLIENT_SECRET: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientSecret" . | quote }}
 AB_JWT_SIGNATURE_SECRET: {{ include "airbyte.auth.bootstrap.security.jwtSignatureSecret" . | quote }}

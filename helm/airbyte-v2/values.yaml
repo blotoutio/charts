@@ -73,6 +73,8 @@ global:
       emailSecretKey: "instance-admin-email"
       # -- The key within `passwordSecretName` where the initial user's password is stored
       passwordSecretKey: "instance-admin-password"
+      # -- Instance admin password (written into Release.Name-airbyte-secrets under instance-admin-password). Prefer setting via --set global.auth.instanceAdmin.password='...' or a secrets manager.
+      password: ""
     
     # -- SSO Identify Provider configuration; (requires Enterprise)
     identityProvider:
