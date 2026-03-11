@@ -60,10 +60,10 @@ Renders the common.cluster.type environment variable
 {{- end }}
 
 {{/*
-Renders the global.cluster.name value
+Renders the global.cluster.name value (v1-style: non-empty default to avoid "Unsetting empty" in workload-api-server).
 */}}
 {{- define "airbyte.common.cluster.name" }}
-    {{- .Values.global.cluster.name }}
+    {{- .Values.global.cluster.name | default "default" }}
 {{- end }}
 
 {{/*
@@ -190,10 +190,10 @@ Renders the common.connectorBuilderServer.apiHost environment variable
 {{- end }}
 
 {{/*
-Renders the global.deploymentEnv value
+Renders the global.deploymentEnv value (v1: deploymentMode "oss"; non-empty default to avoid "Unsetting empty").
 */}}
 {{- define "airbyte.common.deploymentEnv" }}
-    {{- .Values.global.deploymentEnv }}
+    {{- .Values.global.deploymentEnv | default "oss" }}
 {{- end }}
 
 {{/*
@@ -291,6 +291,7 @@ Renders the set of all common config map variables
 {{- define "airbyte.common.configVars" }}
 AIRBYTE_EDITION: {{ include "airbyte.common.edition" . | quote }}
 AIRBYTE_VERSION: {{ include "airbyte.common.version" . | quote }}
+VERSION: {{ include "airbyte.common.version" . | quote }}
 AIRBYTE_CLUSTER_TYPE: {{ include "airbyte.common.cluster.type" . | quote }}
 AIRBYTE_CLUSTER_NAME: {{ include "airbyte.common.cluster.name" . | quote }}
 AIRBYTE_URL: {{ include "airbyte.common.airbyteUrl" . | quote }}

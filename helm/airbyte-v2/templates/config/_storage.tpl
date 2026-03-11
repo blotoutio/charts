@@ -432,6 +432,7 @@ S3_PATH_STYLE_ACCESS: {{ include "airbyte.storage.minio.s3PathStyleAccess" . | q
 {{- if eq $opt "s3" }}
 AWS_DEFAULT_REGION: {{ include "airbyte.storage.s3.region" . | quote }}
 AWS_AUTHENTICATION_TYPE: {{ include "airbyte.storage.s3.authenticationType" . | quote }}
+S3_PATH_STYLE_ACCESS: {{ "false" | quote }}
 {{- end }}
 
 {{- end }}

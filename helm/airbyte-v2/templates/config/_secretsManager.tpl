@@ -17,10 +17,10 @@ Renders the secretsManager secret name
 {{- end }}
 
 {{/*
-Renders the global.secretsManager.type value
+Renders the global.secretsManager.type value (non-empty default to avoid "Unsetting empty" SECRET_PERSISTENCE).
 */}}
 {{- define "airbyte.secretsManager.type" }}
-    {{- .Values.global.secretsManager.type }}
+    {{- .Values.global.secretsManager.type | default "kubernetes" }}
 {{- end }}
 
 {{/*

@@ -119,9 +119,11 @@ global:
 
       jwtSignatureSecretKey: ""
 
+    # Dataplane auth: server validates workload-launcher token using these keys from the chart secret.
+    # Defaults match workloadLauncher.dataPlane.secrets (DATAPLANE_CLIENT_ID / DATAPLANE_CLIENT_SECRET).
     dataPlane:
-      clientIdSecretKey: ""
-      clientSecretSecretKey: ""
+      clientIdSecretKey: ""   # default DATAPLANE_CLIENT_ID
+      clientSecretSecretKey: ""   # default DATAPLANE_CLIENT_SECRET
 
   api:
     authHeaderName: X-Airbyte-Auth

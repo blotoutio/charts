@@ -266,10 +266,11 @@ Renders the auth.bootstrap.security.jwtSignatureSecretKey environment variable
 {{- end }}
 
 {{/*
-Renders the global.auth.dataPlane.clientIdSecretKey value
+Renders the global.auth.dataPlane.clientIdSecretKey value.
+Default "DATAPLANE_CLIENT_ID" so server reads the same key written by workloadLauncher.dataPlane.secrets (avoids 500 on /api/v1/dataplanes/token).
 */}}
 {{- define "airbyte.auth.bootstrap.dataPlane.clientIdSecretKey" }}
-    {{- .Values.global.auth.dataPlane.clientIdSecretKey | default "dataplane-client-id" }}
+    {{- .Values.global.auth.dataPlane.clientIdSecretKey | default "DATAPLANE_CLIENT_ID" }}
 {{- end }}
 
 {{/*
@@ -284,10 +285,11 @@ Renders the auth.bootstrap.dataPlane.clientIdSecretKey environment variable
 {{- end }}
 
 {{/*
-Renders the global.auth.dataPlane.clientSecretSecretKey value
+Renders the global.auth.dataPlane.clientSecretSecretKey value.
+Default "DATAPLANE_CLIENT_SECRET" so server reads the same key written by workloadLauncher.dataPlane.secrets (avoids 500 on /api/v1/dataplanes/token).
 */}}
 {{- define "airbyte.auth.bootstrap.dataPlane.clientSecretSecretKey" }}
-    {{- .Values.global.auth.dataPlane.clientSecretSecretKey | default "dataplane-client-secret" }}
+    {{- .Values.global.auth.dataPlane.clientSecretSecretKey | default "DATAPLANE_CLIENT_SECRET" }}
 {{- end }}
 
 {{/*
