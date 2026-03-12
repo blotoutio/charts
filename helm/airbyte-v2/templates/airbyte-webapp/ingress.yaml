@@ -38,10 +38,26 @@ spec:
     {{- end }}
   {{- end }}
   rules:
+    {{- $serverPort := int (.Values.server.service.port | default 8001) -}}
     {{- range .Values.webapp.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
+          # Route /api to the Airbyte server so API requests (e.g. create pipeline) reach the backend
+          - path: /api
+            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
+            pathType: Prefix
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $.Release.Name }}-airbyte-server-svc
+                port:
+                  number: {{ $serverPort }}
+              {{- else }}
+              serviceName: {{ $.Release.Name }}-airbyte-server-svc
+              servicePort: {{ $serverPort }}
+              {{- end }}
           {{- range .paths }}
           - path: {{ .path }}
             {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
