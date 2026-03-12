@@ -17,6 +17,10 @@ global:
   # Set to your existing secret (e.g. airbyte-v2-airbyte-secrets) so pods look up instance-admin-password etc. there.
   secretName: "airbyte-v2-airbyte-secrets"
 
+  # -- Optional seed (e.g. cluster name or infra ID) so chart-generated default secrets differ per infrastructure.
+  # When set, same release name + namespace on two clusters will get different dynamic values (instance admin, dataplane client id/secret, JWT, workload API bearer token). Leave empty for deterministic defaults per release+namespace.
+  secretSeed: ""
+
   local: false
 
   cluster:
@@ -707,6 +711,11 @@ webapp:
   #         readOnly: true
   # -- Additional container for server pods
   extraContainers: []
+
+  # -- When using in-cluster Temporal (temporal.enabled and not Temporal Cloud), the server runs an init container
+  # that waits for Temporal to be reachable before starting. Override the image if busybox is not suitable.
+  temporalWaitInitContainer:
+    image: "busybox:1.36"
 
   ## Example:
   # extraInitContainers:

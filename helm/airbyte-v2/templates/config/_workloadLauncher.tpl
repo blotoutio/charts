@@ -107,7 +107,7 @@ Release-unique default dataplane clientId (stable across upgrades).
 Server DataplaneTokenServiceDataImpl expects a valid UUID; format 32 hex chars as 8-4-4-4-12.
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientId.default" }}
-    {{- $h := (printf "id-%s-%s" .Release.Name .Release.Namespace | sha256sum | nospace | trunc 32) }}
+    {{- $h := (printf "id-%s" (include "airbyte.secretSeed.hashBase" .) | sha256sum | nospace | trunc 32) }}
     {{- $p1 := trunc 8 $h }}{{ $r1 := trimPrefix $p1 $h }}{{ $p2 := trunc 4 $r1 }}{{ $r2 := trimPrefix $p2 $r1 }}{{ $p3 := trunc 4 $r2 }}{{ $r3 := trimPrefix $p3 $r2 }}{{ $p4 := trunc 4 $r3 }}{{ $r4 := trimPrefix $p4 $r3 }}{{ $p5 := trunc 12 $r4 }}
     {{- $p1 }}-{{ $p2 }}-{{ $p3 }}-{{ $p4 }}-{{ $p5 }}
 {{- end }}
@@ -179,7 +179,7 @@ Renders the workloadLauncher.dataPlane.clientIdSecretKey environment variable
 Release-unique default dataplane clientSecret (stable across upgrades).
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientSecret.default" }}
-    {{- printf "dataplane-%s" (printf "secret-%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 32) }}
+    {{- printf "dataplane-%s" (printf "secret-%s" (include "airbyte.secretSeed.hashBase" .) | sha256sum | trunc 32) }}
 {{- end }}
 
 {{/*
@@ -267,11 +267,14 @@ DATAPLANE_CLIENT_SECRET_SECRET_KEY: {{ include "airbyte.workloadLauncher.dataPla
 {{- end }}
 
 {{/*
-Renders the set of all workloadLauncher.dataPlane secret variables
+Renders the set of all workloadLauncher.dataPlane secret variables.
+Includes both DATAPLANE_* and dataplane-client-id / dataplane-client-secret so all keys differ per env when global.secretSeed is set.
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.secrets" }}
 DATAPLANE_CLIENT_ID: {{ include "airbyte.workloadLauncher.dataPlane.clientId" . | quote }}
 DATAPLANE_CLIENT_SECRET: {{ include "airbyte.workloadLauncher.dataPlane.clientSecret" . | quote }}
+dataplane-client-id: {{ include "airbyte.workloadLauncher.dataPlane.clientId" . | quote }}
+dataplane-client-secret: {{ include "airbyte.workloadLauncher.dataPlane.clientSecret" . | quote }}
 {{- end }}
 
 {{/*

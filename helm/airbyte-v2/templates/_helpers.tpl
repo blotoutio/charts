@@ -48,6 +48,19 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
+Base string used for generating default secrets (passwords, client ids, etc.).
+When global.secretSeed is set (e.g. cluster name), include it so the same release+namespace
+on different infrastructures gets different dynamic secret values (v1-like behavior).
+*/}}
+{{- define "airbyte.secretSeed.hashBase" -}}
+{{- if .Values.global.secretSeed -}}
+{{- printf "%s-%s-%s" .Release.Name .Release.Namespace .Values.global.secretSeed -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name .Release.Namespace -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Common labels
 */}}
 {{- define "airbyte.labels" -}}

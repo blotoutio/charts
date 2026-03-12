@@ -281,10 +281,11 @@ Renders the keycloak.admin.user secret name
 {{- end }}
 
 {{/*
-Renders the keycloak.auth.adminUsername value
+Renders the keycloak.auth.adminUsername value.
+When global.secretSeed is set, default is env-specific; else no default (must set in values for enterprise).
 */}}
 {{- define "airbyte.keycloak.admin.user.auth.adminUsername" }}
-    {{- .Values.keycloak.auth.adminUsername }}
+    {{- .Values.keycloak.auth.adminUsername | default (ternary (printf "keycloak-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum | nospace | trunc 12)) "" (ne (toString .Values.global.secretSeed) "")) }}
 {{- end }}
 
 {{/*
@@ -306,10 +307,11 @@ Renders the keycloak.admin.user.auth.adminUsername environment variable
 {{- end }}
 
 {{/*
-Renders the keycloak.auth.adminPassword value
+Renders the keycloak.auth.adminPassword value.
+When global.secretSeed is set, default is env-specific; else no default.
 */}}
 {{- define "airbyte.keycloak.admin.user.auth.adminPassword" }}
-    {{- .Values.keycloak.auth.adminPassword }}
+    {{- .Values.keycloak.auth.adminPassword | default (ternary (printf "kc-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum | nospace | trunc 24)) "" (ne (toString .Values.global.secretSeed) "")) }}
 {{- end }}
 
 {{/*
@@ -444,10 +446,11 @@ Renders the keycloak.database.port environment variable
 {{- end }}
 
 {{/*
-Renders the keycloak.database.user value
+Renders the keycloak.database.user value.
+When global.secretSeed is set, default is env-specific; else "airbyte".
 */}}
 {{- define "airbyte.keycloak.database.user" }}
-    {{- .Values.keycloak.database.user | default "airbyte" }}
+    {{- .Values.keycloak.database.user | default (ternary (printf "kcdb-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum | nospace | trunc 12)) "airbyte" (ne (toString .Values.global.secretSeed) "")) }}
 {{- end }}
 
 {{/*
@@ -469,10 +472,11 @@ Renders the keycloak.database.user environment variable
 {{- end }}
 
 {{/*
-Renders the keycloak.database.password value
+Renders the keycloak.database.password value.
+When global.secretSeed is set, default is env-specific; else "airbyte".
 */}}
 {{- define "airbyte.keycloak.database.password" }}
-    {{- .Values.keycloak.database.password | default "airbyte" }}
+    {{- .Values.keycloak.database.password | default (ternary (printf "kcdb-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum | nospace | trunc 24)) "airbyte" (ne (toString .Values.global.secretSeed) "")) }}
 {{- end }}
 
 {{/*

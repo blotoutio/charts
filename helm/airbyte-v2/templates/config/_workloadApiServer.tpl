@@ -60,7 +60,7 @@ Renders the workloadApiServer.host environment variable
 Release-unique default workload API bearer token (stable across upgrades).
 */}}
 {{- define "airbyte.workloadApiServer.bearerToken.default" }}
-    {{- printf "workload-api-%s" (printf "%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 32) }}
+    {{- printf "workload-api-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum | trunc 32) }}
 {{- end }}
 
 {{/*

@@ -71,10 +71,11 @@ Renders the database.url environment variable
 {{- end }}
 
 {{/*
-Renders the global.database.user value
+Renders the global.database.user value.
+When global.secretSeed is set, default is env-specific (dbuser-<hash>); else "airbyte".
 */}}
 {{- define "airbyte.database.user" }}
-    {{- .Values.global.database.user | default "airbyte" }}
+    {{- .Values.global.database.user | default (ternary (printf "dbuser-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum | nospace | trunc 12)) "airbyte" (ne (toString .Values.global.secretSeed) "")) }}
 {{- end }}
 
 {{/*
@@ -96,10 +97,11 @@ Renders the database.user environment variable
 {{- end }}
 
 {{/*
-Renders the global.database.password value
+Renders the global.database.password value.
+When global.secretSeed is set, default is env-specific; else "airbyte".
 */}}
 {{- define "airbyte.database.password" }}
-    {{- .Values.global.database.password | default "airbyte" }}
+    {{- .Values.global.database.password | default (ternary (printf "db-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum | nospace | trunc 24)) "airbyte" (ne (toString .Values.global.secretSeed) "")) }}
 {{- end }}
 
 {{/*

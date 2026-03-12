@@ -279,10 +279,11 @@ Renders the storage.gcs.credentialsJsonPath environment variable
 {{- end }}
 
 {{/*
-Renders the global.storage.minio.accessKeyId value
+Renders the global.storage.minio.accessKeyId value.
+When global.secretSeed is set, default is env-specific; else "minio".
 */}}
 {{- define "airbyte.storage.minio.accessKeyId" }}
-    {{- .Values.global.storage.minio.accessKeyId | default "minio" }}
+    {{- .Values.global.storage.minio.accessKeyId | default (ternary (printf "minio-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum | nospace | trunc 12)) "minio" (ne (toString .Values.global.secretSeed) "")) }}
 {{- end }}
 
 {{/*
@@ -304,10 +305,11 @@ Renders the storage.minio.accessKeyId environment variable
 {{- end }}
 
 {{/*
-Renders the global.storage.minio.secretAccessKey value
+Renders the global.storage.minio.secretAccessKey value.
+When global.secretSeed is set, default is env-specific; else "minio123".
 */}}
 {{- define "airbyte.storage.minio.secretAccessKey" }}
-    {{- .Values.global.storage.minio.secretAccessKey | default "minio123" }}
+    {{- .Values.global.storage.minio.secretAccessKey | default (ternary (printf "minio-secret-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum | nospace | trunc 24)) "minio123" (ne (toString .Values.global.secretSeed) "")) }}
 {{- end }}
 
 {{/*

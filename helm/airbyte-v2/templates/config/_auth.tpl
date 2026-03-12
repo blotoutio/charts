@@ -87,7 +87,7 @@ Release-unique default password (deterministic from release+namespace, stable ac
 Used when global.auth.instanceAdmin.password is not set.
 */}}
 {{- define "airbyte.auth.bootstrap.instanceAdmin.password.default" }}
-    {{- printf "%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 24 }}
+    {{- include "airbyte.secretSeed.hashBase" . | sha256sum | trunc 24 }}
 {{- end }}
 
 {{/*
@@ -144,7 +144,7 @@ Renders the auth.bootstrap.instanceAdmin.passwordSecretKey environment variable
 Release-unique default instance admin clientId (stable across upgrades).
 */}}
 {{- define "airbyte.auth.bootstrap.instanceAdmin.clientId.default" }}
-    {{- printf "admin-%s" (printf "clientid-%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 16) }}
+    {{- printf "admin-%s" (printf "clientid-%s" (include "airbyte.secretSeed.hashBase" .) | sha256sum | trunc 16) }}
 {{- end }}
 
 {{/*
@@ -193,9 +193,10 @@ Renders the auth.bootstrap.instanceAdmin.clientIdSecretKey environment variable
 
 {{/*
 Release-unique default instance admin clientSecret (stable across upgrades).
+Uses secretSeed.hashBase so different clusters get different values when global.secretSeed is set.
 */}}
 {{- define "airbyte.auth.bootstrap.instanceAdmin.clientSecret.default" }}
-    {{- printf "admin-%s" (printf "clientsecret-%s-%s" .Release.Name .Release.Namespace | sha256sum | trunc 32) }}
+    {{- printf "admin-%s" (printf "clientsecret-%s" (include "airbyte.secretSeed.hashBase" .) | sha256sum | trunc 32) }}
 {{- end }}
 
 {{/*
@@ -246,7 +247,7 @@ Renders the auth.bootstrap.instanceAdmin.clientSecretSecretKey environment varia
 Release-unique default JWT secret (min 32 chars for HS256). Stable across upgrades.
 */}}
 {{- define "airbyte.auth.bootstrap.security.jwtSignatureSecret.default" }}
-    {{- printf "airbyte-jwt-%s" (printf "%s-%s" .Release.Name .Release.Namespace | sha256sum) }}
+    {{- printf "airbyte-jwt-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum) }}
 {{- end }}
 
 {{/*
@@ -850,7 +851,7 @@ Renders the auth.instanceAdmin.enterprise.lastName environment variable
 Renders the global.auth.instanceAdmin.password value
 */}}
 {{- define "airbyte.auth.instanceAdmin.enterprise.password" }}
-    {{- .Values.global.auth.instanceAdmin.password }}
+    {{- .Values.global.auth.instanceAdmin.password | default (ternary (printf "initial-%s" (include "airbyte.secretSeed.hashBase" . | sha256sum | nospace | trunc 24)) "" (ne (toString .Values.global.secretSeed) "")) }}
 {{- end }}
 
 {{/*
