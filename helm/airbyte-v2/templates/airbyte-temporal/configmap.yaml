@@ -8,6 +8,10 @@ metadata:
 data:
   "development.yaml": |
     # when modifying, remember to update the docker-compose version of this file in temporal/dynamicconfig/development.yaml
+    # Disable Nexus to avoid "unknown method ListNexusEndpoints" when matching service does not implement it (version skew).
+    system.enableNexus:
+      - value: false
+        constraints: {}
     frontend.enableClientVersionCheck:
       - value: true
         constraints: {}
