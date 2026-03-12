@@ -39,6 +39,8 @@ spec:
   {{- end }}
   rules:
     {{- $serverPort := int (.Values.server.service.port | default 8001) -}}
+    {{- $connectorBuilderPath := trimSuffix "/" ((index .Values.webapp "connectorBuilderServer" | default dict).url | default "") -}}
+    {{- $connectorBuilderPort := int (.Values.connectorBuilderServer.service.port | default 80) -}}
     {{- range .Values.webapp.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
@@ -58,10 +60,28 @@ spec:
               serviceName: {{ $.Release.Name }}-airbyte-server-svc
               servicePort: {{ $serverPort }}
               {{- end }}
+          {{- if $connectorBuilderPath }}
+          # Route connector-builder path to connector-builder-server when webapp.connectorBuilderServer.url is set
+          - path: {{ $connectorBuilderPath }}
+            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
+            pathType: Prefix
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $.Release.Name }}-airbyte-connector-builder-server-svc
+                port:
+                  number: {{ $connectorBuilderPort }}
+              {{- else }}
+              serviceName: {{ $.Release.Name }}-airbyte-connector-builder-server-svc
+              servicePort: {{ $connectorBuilderPort }}
+              {{- end }}
+          {{- end }}
           {{- range .paths }}
           - path: {{ .path }}
-            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-            pathType: {{ .pathType }}
+            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
+            {{- /* Use Prefix for "/" so SPA deep links (e.g. /workspaces/.../source) match and are served by webapp */}}
+            pathType: {{ if (eq .path "/") }}Prefix{{ else }}{{ .pathType | default "Prefix" }}{{ end }}
             {{- end }}
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}

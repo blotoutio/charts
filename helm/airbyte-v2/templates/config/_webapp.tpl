@@ -24,10 +24,14 @@ Renders the webapp.api.url environment variable
 {{- end }}
 
 {{/*
-Renders the webapp.connectorBuilderServer.host value
+Renders the webapp connector-builder API value: path (e.g. /connector-builder-api) when webapp.connectorBuilderServer.url is set, otherwise internal service host for in-cluster access.
 */}}
 {{- define "airbyte.webapp.connectorBuilderServer.host" }}
+    {{- if and .Values.webapp.connectorBuilderServer .Values.webapp.connectorBuilderServer.url }}
+    {{- .Values.webapp.connectorBuilderServer.url | trimSuffix "/" }}
+    {{- else }}
     {{- (printf "%s-airbyte-connector-builder-server-svc.%s:%d" .Release.Name .Release.Namespace (int .Values.connectorBuilderServer.service.port)) }}
+    {{- end }}
 {{- end }}
 
 {{/*

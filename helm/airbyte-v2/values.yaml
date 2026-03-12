@@ -653,8 +653,9 @@ webapp:
     hosts:
       - host: 
         paths:
+          # pathType Prefix required so SPA deep links (e.g. /workspaces/.../source) are served by webapp
           - path: /
-            pathType: ImplementationSpecific
+            pathType: Prefix
     # - host: chart-example.local
     #   paths:
     #   - path: /
@@ -668,6 +669,10 @@ webapp:
   api:
     # -- The webapp API url
     url: /api/v1/
+
+  # -- Connector Builder Server URL path (same as v1). When set (e.g. /connector-builder-api), webapp uses this path on the same origin and ingress routes it to connector-builder-server. Leave empty to use internal service host.
+  connectorBuilderServer:
+    url: ""
 
   fullstory:
     # -- Whether or not to enable fullstory
