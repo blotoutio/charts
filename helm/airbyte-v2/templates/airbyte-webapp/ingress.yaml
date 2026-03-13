@@ -80,8 +80,8 @@ spec:
           {{- range .paths }}
           - path: {{ .path }}
             {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
-            {{- /* Use Prefix for "/" so SPA deep links (e.g. /workspaces/.../source) match and are served by webapp */}}
-            pathType: {{ if (eq .path "/") }}Prefix{{ else }}{{ .pathType | default "Prefix" }}{{ end }}
+            {{- /* Default ImplementationSpecific to  */}}
+            pathType: {{ .pathType | default "ImplementationSpecific" }}
             {{- end }}
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}

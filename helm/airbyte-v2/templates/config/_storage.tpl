@@ -17,10 +17,10 @@ Renders the storage secret name
 {{- end }}
 
 {{/*
-Renders the global.storage.type value
+Renders the global.storage.type value. Default "s3" to align with airbyte-v1 deployment.
 */}}
 {{- define "airbyte.storage.type" }}
-    {{- .Values.global.storage.type | default "minio" }}
+    {{- .Values.global.storage.type | default "s3" }}
 {{- end }}
 
 {{/*

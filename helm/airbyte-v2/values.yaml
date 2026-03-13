@@ -175,8 +175,8 @@ global:
 
   storage:
     secretName: "airbyte-v2-airbyte-secrets"
-    # -- The storage backend type. Supports s3, gcs, azure, minio (default)
-    type: s3 # default storage used
+    # -- The storage backend type. Supports s3 (default, same as airbyte-v1), gcs, azure, minio
+    type: s3
 
     # Minio
     minio:
@@ -653,9 +653,9 @@ webapp:
     hosts:
       - host: 
         paths:
-          # pathType Prefix required so SPA deep links (e.g. /workspaces/.../source) are served by webapp
+          # pathType ImplementationSpecific to match airbyte-v1
           - path: /
-            pathType: Prefix
+            pathType: ImplementationSpecific
     # - host: chart-example.local
     #   paths:
     #   - path: /
@@ -670,9 +670,9 @@ webapp:
     # -- The webapp API url
     url: /api/v1/
 
-  # -- Connector Builder Server URL path (same as v1). When set (e.g. /connector-builder-api), webapp uses this path on the same origin and ingress routes it to connector-builder-server. Leave empty to use internal service host.
+  # -- Connector Builder Server URL path (same as v1). When set (e.g. /connector-builder-api), webapp uses this path on the same origin and ingress routes it to connector-builder-server. Default matches airbyte-v1.
   connectorBuilderServer:
-    url: ""
+    url: "/connector-builder-api"
 
   fullstory:
     # -- Whether or not to enable fullstory
