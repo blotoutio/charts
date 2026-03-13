@@ -498,7 +498,8 @@ global:
   tracking:
     enabled: true
     secretName: ""
-    strategy: segment # one of: logging, segment
+    # Use "logging" to avoid loading Segment from cdn.segment.com (fails in restricted networks and can cause UI errors). Set to "segment" only if your environment can reach cdn.segment.com.
+    strategy: logging # one of: logging, segment
 
     segment:
       writeKey: ""
