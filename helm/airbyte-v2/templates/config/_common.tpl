@@ -71,7 +71,7 @@ Renders the common.cluster.type environment variable
 {{- end }}
 
 {{/*
-Renders the global.cluster.name value (v1-style: non-empty default to avoid "Unsetting empty" in workload-api-server).
+Renders the global.cluster.name value ( non-empty default to avoid "Unsetting empty" in workload-api-server).
 */}}
 {{- define "airbyte.common.cluster.name" }}
     {{- .Values.global.cluster.name | default "default" }}
@@ -107,10 +107,16 @@ Renders the common.airbyteUrl environment variable
 {{- end }}
 
 {{/*
-Renders the global.api.host value
+Renders the global.api.host value (AIRBYTE_API_HOST).  when global.airbyteUrl is set (e.g. ingress), use it so the server uses the public URL for cookies/redirects; otherwise default to http://localhost:8001/api/public .
 */}}
 {{- define "airbyte.common.api.host" }}
-    {{- ternary (printf "http://localhost:%d/api/public" (int .Values.server.service.port)) (printf "%s/api/public" .Values.global.airbyteUrl) (eq .Values.global.edition "community") }}
+    {{- if .Values.global.api.host }}
+    {{- .Values.global.api.host }}
+    {{- else if .Values.global.airbyteUrl }}
+    {{- printf "%s/api/public" (trimSuffix "/" .Values.global.airbyteUrl) }}
+    {{- else }}
+    {{- "http://localhost:8001/api/public" }}
+    {{- end }}
 {{- end }}
 
 {{/*
@@ -201,7 +207,7 @@ Renders the common.connectorBuilderServer.apiHost environment variable
 {{- end }}
 
 {{/*
-Renders the global.deploymentEnv value (v1: deploymentMode "oss"; non-empty default to avoid "Unsetting empty").
+Renders the global.deploymentEnv value  deploymentMode "oss"; non-empty default to avoid "Unsetting empty").
 */}}
 {{- define "airbyte.common.deploymentEnv" }}
     {{- .Values.global.deploymentEnv | default "oss" }}

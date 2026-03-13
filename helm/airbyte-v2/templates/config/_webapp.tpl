@@ -6,10 +6,10 @@
 */}}
 
 {{/*
-Renders the webapp.api.url value
+Renders the webapp.api.url value ( relative path with trailing slash).
 */}}
 {{- define "airbyte.webapp.api.url" }}
-    {{- "/api/v1" }}
+    {{- "/api/v1/" }}
 {{- end }}
 
 {{/*

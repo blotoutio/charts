@@ -17,7 +17,7 @@ Renders the storage secret name
 {{- end }}
 
 {{/*
-Renders the global.storage.type value. Default "s3" to align with airbyte-v1 deployment.
+Renders the global.storage.type value. Default "s3" deployment.
 */}}
 {{- define "airbyte.storage.type" }}
     {{- .Values.global.storage.type | default "s3" }}
@@ -334,7 +334,7 @@ Renders the storage.minio.secretAccessKey environment variable
 Renders the global.storage.minio.endpoint value
 */}}
 {{- define "airbyte.storage.minio.endpoint" }}
-    {{- .Values.global.storage.minio.endpoint | default (printf "http://airbyte-minio-svc.%s:9000" .Release.Namespace) }}
+    {{- .Values.global.storage.minio.endpoint | default "http://airbyte-minio-svc:9000" }}
 {{- end }}
 
 {{/*
@@ -360,11 +360,10 @@ Renders the global.storage.minio.s3PathStyleAccess value
 {{- end }}
 
 {{/*
-Renders S3_PATH_STYLE_ACCESS value for configmap (non-empty for all storage types to avoid "Unsetting empty").
+Renders S3_PATH_STYLE_ACCESS value for configmap (always "true").
 */}}
 {{- define "airbyte.storage.s3PathStyleAccess.value" }}
-{{- $opt := (include "airbyte.storage.type" .) }}
-{{- if eq $opt "minio" }}{{ include "airbyte.storage.minio.s3PathStyleAccess" . }}{{- else }}{{ "false" }}{{- end }}
+{{- "true" }}
 {{- end }}
 
 {{/*
@@ -440,7 +439,9 @@ GOOGLE_APPLICATION_CREDENTIALS: {{ include "airbyte.storage.gcs.credentialsJsonP
 MINIO_ENDPOINT: {{ include "airbyte.storage.minio.endpoint" . | quote }}
 {{- end }}
 
+{{- /* When s3, MinIO is still deployed (create-bucket job); include MINIO_ENDPOINT for that pod */}}
 {{- if eq $opt "s3" }}
+MINIO_ENDPOINT: {{ include "airbyte.storage.minio.endpoint" . | quote }}
 AWS_DEFAULT_REGION: {{ include "airbyte.storage.s3.region" . | quote }}
 AWS_AUTHENTICATION_TYPE: {{ include "airbyte.storage.s3.authenticationType" . | quote }}
 {{- end }}

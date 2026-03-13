@@ -130,6 +130,8 @@ global:
       clientSecretSecretKey: ""   # default DATAPLANE_CLIENT_SECRET
 
   api:
+    # -- AIRBYTE_API_HOST default (same as airbyte-v1)
+    host: "http://localhost:8001/api/public"
     authHeaderName: X-Airbyte-Auth
     
   # -- Environment variables (avoid setting SECRET_PERSISTENCE/S3_PATH_STYLE_ACCESS to "" or they override configmap and trigger "Unsetting empty")

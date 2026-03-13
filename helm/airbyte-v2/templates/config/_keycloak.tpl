@@ -392,10 +392,10 @@ Renders the keycloak.database secret name
 {{- end }}
 
 {{/*
-Renders the keycloak.database.name value
+Renders the keycloak.database.name value.  default to global.database.name so Keycloak uses the same DB.
 */}}
 {{- define "airbyte.keycloak.database.name" }}
-    {{- .Values.keycloak.database.name | default "db-airbyte" }}
+    {{- .Values.keycloak.database.name | default (include "airbyte.database.name" .) }}
 {{- end }}
 
 {{/*
@@ -410,10 +410,10 @@ Renders the keycloak.database.name environment variable
 {{- end }}
 
 {{/*
-Renders the keycloak.database.host value
+Renders the keycloak.database.host value.  default to global.database.host so Keycloak uses the same DB.
 */}}
 {{- define "airbyte.keycloak.database.host" }}
-    {{- .Values.keycloak.database.host | default (printf "airbyte-db-svc.%s.svc.cluster.local" .Release.Namespace) }}
+    {{- .Values.keycloak.database.host | default (include "airbyte.database.host" .) }}
 {{- end }}
 
 {{/*
@@ -428,10 +428,10 @@ Renders the keycloak.database.host environment variable
 {{- end }}
 
 {{/*
-Renders the keycloak.database.port value
+Renders the keycloak.database.port value.  default to global.database.port.
 */}}
 {{- define "airbyte.keycloak.database.port" }}
-    {{- .Values.keycloak.database.port | default 5432 }}
+    {{- .Values.keycloak.database.port | default (include "airbyte.database.port" .) }}
 {{- end }}
 
 {{/*
@@ -498,10 +498,10 @@ Renders the keycloak.database.password environment variable
 {{- end }}
 
 {{/*
-Renders the keycloak.database.url value
+Renders the keycloak.database.url value.use global.database (host, port, name) so Keycloak uses the same DB as Airbyte with schema keycloak.
 */}}
 {{- define "airbyte.keycloak.database.url" }}
-    {{- (printf "jdbc:postgresql://%s:%d/%s?currentSchema=keycloak" (include "airbyte.keycloak.database.host" .) (int (include "airbyte.keycloak.database.port" .)) (include "airbyte.keycloak.database.name" .)) }}
+    {{- (printf "jdbc:postgresql://%s:%s/%s?currentSchema=keycloak" (include "airbyte.database.host" .) (include "airbyte.database.port" .) (include "airbyte.database.name" .)) }}
 {{- end }}
 
 {{/*
