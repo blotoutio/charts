@@ -25,3 +25,10 @@ Get the application URL by running these commands:
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl -n {{ .Release.Namespace }} port-forward deployment/{{ .Release.Name }}-webapp 8080:8080
 {{- end }}
+
+Auth: By default server.blotoutAuthEnabled is false, so only Airbyte built-in auth is used. Set server.blotoutAuthEnabled to true and set server.env_vars BLOTOUT_AUTH_ENDPOINT and BLOTOUT_BASE_URL to enable Blotout authorization.
+
+Troubleshooting:
+- 401 on /api/v1/auth/validation: Expected when there is no valid session (e.g. opening the URL in a new tab without logging in). The UI should redirect to Blotout login. If you get 401 after logging in, verify: (1) BLOTOUT_BASE_URL — if the server calls Blotout to validate tokens, this may need to be the Blotout auth service URL (e.g. https://auth.blotout.io), not the Airbyte URL; (2) cookies are sent (same domain; check Application → Cookies for your host).
+- 403 on /api/v1: When BLOTOUT_AUTH_ENDPOINT and BLOTOUT_BASE_URL are set, the API requires Blotout auth. Open the app from the root URL (e.g. https://your-host/), log in via Blotout if prompted, then use the UI; do not call /api/v1 directly in the browser without a session.
+- Sources or connections not loading / "Could not find configuration for STANDARD_SYNC: <id>": The UI may have a stale connection or workspace ID (e.g. after a DB recreate). Clear site data for this host: DevTools → Application → Storage → Clear site data for the Airbyte origin, then reload and open the app from the root URL.

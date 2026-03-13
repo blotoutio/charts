@@ -155,9 +155,14 @@ spec:
         {{- end }}
         {{- end }}
 
-        # Values from env
+        # Values from env (when server.blotoutAuthEnabled is false, BLOTOUT_* are forced to "" so only Airbyte auth is used)
         {{- if or .Values.server.env_vars .Values.global.env_vars }}
-        {{- range $k, $v := mergeOverwrite .Values.server.env_vars .Values.global.env_vars }}
+        {{- $serverEnv := mergeOverwrite .Values.server.env_vars .Values.global.env_vars }}
+        {{- if not (index .Values.server "blotoutAuthEnabled" | default false) }}
+        {{- $_ := set $serverEnv "BLOTOUT_AUTH_ENDPOINT" "" }}
+        {{- $_ := set $serverEnv "BLOTOUT_BASE_URL" "" }}
+        {{- end }}
+        {{- range $k, $v := $serverEnv }}
         - name: {{ $k }}
           value: {{ $v | quote }}
         {{- end }}

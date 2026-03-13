@@ -70,6 +70,8 @@ spec:
             {{- include "airbyte.temporal.envs" . | nindent 12 }}
             {{- include "airbyte.tracking.envs" . | nindent 12 }}
             {{- include "airbyte.worker.envs" . | nindent 12 }}
+            {{- /* AB_JWT_SIGNATURE_SECRET required for WorkloadApiClient internal auth (signatureSecret) when calling workload API */}}
+            {{- include "airbyte.auth.jwt.envs" . | nindent 12 }}
             {{- include "airbyte.workloadApiServer.envs" . | nindent 12 }}
 
             {{- if .Values.global.datadog.enabled }}
