@@ -130,8 +130,8 @@ global:
       clientSecretSecretKey: ""   # default DATAPLANE_CLIENT_SECRET
 
   api:
-    # -- AIRBYTE_API_HOST default (same as airbyte-v1)
-    host: "http://localhost:8001/api/public"
+    # -- AIRBYTE_API_HOST. Leave empty so it is derived from global.airbyteUrl when set (e.g. https://airbytev2.blotout.io/api/public); otherwise defaults to http://localhost:8001/api/public in the template.
+    host: ""
     authHeaderName: X-Airbyte-Auth
     
   # -- Environment variables (avoid setting SECRET_PERSISTENCE/S3_PATH_STYLE_ACCESS to "" or they override configmap and trigger "Unsetting empty")
