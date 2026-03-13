@@ -1,5 +1,7 @@
+{{- /* Deploy MinIO (and PVC) when minio.enabled and storage type is s3 or minio, same as airbyte-v1 */}}
 {{- if .Values.minio.enabled }}
-{{- if (eq (lower (default "" .Values.global.storage.type)) "minio")}}
+{{- $storageType := lower (default "s3" .Values.global.storage.type) }}
+{{- if or (eq $storageType "minio") (eq $storageType "s3") }}
 apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: StatefulSet
 metadata:

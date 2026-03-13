@@ -2072,7 +2072,8 @@ postgresql:
   affinity: {}
 
 minio:
-  enabled: false
+  # Deploy MinIO (and PVC) for both s3 and minio storage types when true, same as airbyte-v1
+  enabled: true
   secretName: ""
 
   image:
