@@ -6,10 +6,10 @@
 */}}
 
 {{/*
-Renders the webapp.api.url value ( relative path with trailing slash).
+Renders the webapp.api.url value. Airbyte v2 unified server exposes the public API at /api/public/v1/ (not /api/v1/); wrong path causes 404 or unexpected responses and UI errors like "Cannot read properties of undefined (reading 'sort')".
 */}}
 {{- define "airbyte.webapp.api.url" }}
-    {{- "/api/v1/" }}
+    {{- .Values.webapp.api.url | default "/api/public/v1/" }}
 {{- end }}
 
 {{/*

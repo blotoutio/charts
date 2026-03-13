@@ -670,8 +670,8 @@ webapp:
     #   - chart-example.local
 
   api:
-    # -- The webapp API url
-    url: /api/v1/
+    # -- The webapp API url. Airbyte v2 unified server uses /api/public/v1/ (default). Do not use /api/v1/ or the UI may get wrong responses and throw e.g. "Cannot read properties of undefined (reading 'sort')".
+    url: /api/public/v1/
 
   # -- Connector Builder Server URL path (same as v1). When set (e.g. /connector-builder-api), webapp uses this path on the same origin and ingress routes it to connector-builder-server. Default matches airbyte-v1.
   connectorBuilderServer:
