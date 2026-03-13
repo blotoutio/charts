@@ -7,7 +7,7 @@ global:
   # --AWS keys
   aws_access_key: ""
   aws_secret_key: ""
-  # -- Blotout required configuration
+  # -- Resource limits and requests for workloads
   resource_cpu_limit: "4"
   resource_cpu_request: "0.5"
   resource_memory_limit: "4Gi"
@@ -970,12 +970,8 @@ server:
   ## env_vars:
   ##   DATABASE_HOST: airbyte-db
   ##   DATABASE_PORT: 5432
-  # -- When false (default), Blotout auth is disabled and only Airbyte built-in auth is used. Set to true and set env_vars BLOTOUT_AUTH_ENDPOINT and BLOTOUT_BASE_URL to enable Blotout authorization.
-  blotoutAuthEnabled: false
   # -- Supply extra env variables to main container using simplified notation
-  env_vars:
-    BLOTOUT_AUTH_ENDPOINT: ""
-    BLOTOUT_BASE_URL: ""
+  env_vars: {}
 
   debug:
     enabled: false
