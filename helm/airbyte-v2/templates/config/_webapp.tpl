@@ -24,13 +24,15 @@ Renders the webapp.api.url environment variable
 {{- end }}
 
 {{/*
-Renders the webapp connector-builder API value: path (e.g. /connector-builder-api) when webapp.connectorBuilderServer.url is set, otherwise internal service host for in-cluster access.
+Renders the webapp CONNECTOR_BUILDER_API_HOST: must be a host:port for nginx upstream. When webapp.connectorBuilderServer.url is a path (e.g. /connector-builder-api), use internal service host so nginx is valid; when url is a full host/URL use it; otherwise internal service host.
 */}}
 {{- define "airbyte.webapp.connectorBuilderServer.host" }}
-    {{- if and .Values.webapp.connectorBuilderServer .Values.webapp.connectorBuilderServer.url }}
-    {{- .Values.webapp.connectorBuilderServer.url | trimSuffix "/" }}
+    {{- $url := trimSuffix "/" (index (index .Values.webapp "connectorBuilderServer" | default dict) "url" | default "") }}
+    {{- $internalHost := printf "%s-airbyte-connector-builder-server-svc.%s:%d" .Release.Name .Release.Namespace (int .Values.connectorBuilderServer.service.port) }}
+    {{- if and $url (not (hasPrefix "/" $url)) }}
+    {{- $url }}
     {{- else }}
-    {{- (printf "%s-airbyte-connector-builder-server-svc.%s:%d" .Release.Name .Release.Namespace (int .Values.connectorBuilderServer.service.port)) }}
+    {{- $internalHost }}
     {{- end }}
 {{- end }}
 
