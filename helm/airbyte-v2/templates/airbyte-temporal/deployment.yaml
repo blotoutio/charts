@@ -61,9 +61,12 @@ spec:
         env:
           {{- include "airbyte.temporal.envs" . | nindent 10 }}
           {{- include "airbyte.temporal.database.envs" . | nindent 10 }}
-          {{- /* STORAGE_TYPE so any Java/Micronaut process in this pod can resolve ${STORAGE_TYPE} (literal value, not ConfigMap ref) */}}
+          {{- /* STORAGE_TYPE so any Java/Micronaut process in this pod can resolve ${STORAGE_TYPE} */}}
           - name: STORAGE_TYPE
             value: {{ include "airbyte.storage.type" . | quote }}
+          {{- /* WORKSPACE_ROOT for airbyte.workspace.root when this pod runs the Airbyte workers app */}}
+          - name: WORKSPACE_ROOT
+            value: {{ include "airbyte.worker.workspaceRoot" . | quote }}
 
         {{- if .Values.temporal.extraEnv }}
         {{ .Values.temporal.extraEnv | toYaml | nindent 10 }}
