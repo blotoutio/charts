@@ -119,7 +119,8 @@ global:
       secretName: ""
 
       cookieSecureSetting: true
-      cookieSameSiteSetting: Strict
+      # Lax: cookie sent on same-site and top-level navigations; avoids 401 on API calls after login when Strict blocks in some cases.
+      cookieSameSiteSetting: Lax
 
       jwtSignatureSecretKey: ""
 
@@ -648,8 +649,10 @@ webapp:
     enabled: true
     # -- Specifies ingressClassName for clusters >= 1.18+
     className: "nginx"
-    # -- Ingress annotations done as key:value pairs
-    annotations: {}
+    # -- Ingress annotations. Default rewrites /api/v1 -> /api/public/v1 so webapp images that call /api/v1 still work (server expects /api/public/v1).
+    annotations:
+      nginx.ingress.kubernetes.io/server-snippet: |
+        if ($request_uri ~ ^/api/v1/(.*)$) { rewrite ^/api/v1/(.*)$ /api/public/v1/$1 break; }
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     # -- The list of hostnames to be covered with this ingress record.
