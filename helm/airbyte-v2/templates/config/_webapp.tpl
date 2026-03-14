@@ -24,6 +24,13 @@ Renders the webapp.api.url environment variable
 {{- end }}
 
 {{/*
+Renders the webapp.connectorBuilderServer.url value  required by webapp or it may throw e.g. "Cannot read properties of undefined (reading 'sort')".
+*/}}
+{{- define "airbyte.webapp.connectorBuilderServer.url" }}
+    {{- trimSuffix "/" (index (index .Values.webapp "connectorBuilderServer" | default dict) "url" | default "/connector-builder-api") }}
+{{- end }}
+
+{{/*
 Renders the webapp CONNECTOR_BUILDER_API_HOST: must be a host:port for nginx upstream. When webapp.connectorBuilderServer.url is a path (e.g. /connector-builder-api), use internal service host so nginx is valid; when url is a full host/URL use it; otherwise internal service host.
 */}}
 {{- define "airbyte.webapp.connectorBuilderServer.host" }}
@@ -48,11 +55,23 @@ Renders the webapp.connectorBuilderServer.host environment variable
 {{- end }}
 
 {{/*
+Renders the webapp.connectorBuilderServer.url environment variable (CONNECTOR_BUILDER_API_URL, same as airbyte-v1).
+*/}}
+{{- define "airbyte.webapp.connectorBuilderServer.url.env" }}
+- name: CONNECTOR_BUILDER_API_URL
+  valueFrom:
+    configMapKeyRef:
+      name: {{ .Release.Name }}-airbyte-env
+      key: CONNECTOR_BUILDER_API_URL
+{{- end }}
+
+{{/*
 Renders the set of all webapp environment variables
 */}}
 {{- define "airbyte.webapp.envs" }}
 {{- include "airbyte.webapp.api.url.env" . }}
 {{- include "airbyte.webapp.connectorBuilderServer.host.env" . }}
+{{- include "airbyte.webapp.connectorBuilderServer.url.env" . }}
 {{- end }}
 
 {{/*
@@ -61,4 +80,5 @@ Renders the set of all webapp config map variables
 {{- define "airbyte.webapp.configVars" }}
 API_URL: {{ include "airbyte.webapp.api.url" . | quote }}
 CONNECTOR_BUILDER_API_HOST: {{ include "airbyte.webapp.connectorBuilderServer.host" . | quote }}
+CONNECTOR_BUILDER_API_URL: {{ include "airbyte.webapp.connectorBuilderServer.url" . | quote }}
 {{- end }}
