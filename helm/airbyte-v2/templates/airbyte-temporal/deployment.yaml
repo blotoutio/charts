@@ -58,16 +58,18 @@ spec:
       - name: airbyte-temporal
         image: {{ include "imageUrl" (list .Values.temporal.image $) }}
         imagePullPolicy: {{ .Values.temporal.image.pullPolicy }}
+        {{- /* When this pod runs the Airbyte workers app, load full airbyte-env so all Micronaut properties resolve (same source as worker) */}}
+        envFrom:
+        - configMapRef:
+            name: {{ .Release.Name }}-airbyte-env
         env:
           {{- include "airbyte.temporal.envs" . | nindent 10 }}
           {{- include "airbyte.temporal.database.envs" . | nindent 10 }}
-          {{- /* STORAGE_TYPE so any Java/Micronaut process in this pod can resolve ${STORAGE_TYPE} */}}
+          {{- /* Literal overrides so these are set even if ConfigMap is missing a key */}}
           - name: STORAGE_TYPE
             value: {{ include "airbyte.storage.type" . | quote }}
-          {{- /* WORKSPACE_ROOT for airbyte.workspace.root when this pod runs the Airbyte workers app */}}
           - name: WORKSPACE_ROOT
             value: {{ include "airbyte.worker.workspaceRoot" . | quote }}
-          {{- /* AIRBYTE_INTERNAL_API_BASE_PATH for airbyte.internal-api.base-path (AirbyteApiClient) */}}
           - name: AIRBYTE_INTERNAL_API_BASE_PATH
             value: {{ include "airbyte.common.api.internalHost" . | quote }}
 

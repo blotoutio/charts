@@ -426,6 +426,13 @@ STORAGE_BUCKET_LOG: {{ include "airbyte.storage.bucket.log" . | quote }}
 STORAGE_BUCKET_STATE: {{ include "airbyte.storage.bucket.state" . | quote }}
 STORAGE_BUCKET_WORKLOAD_OUTPUT: {{ include "airbyte.storage.bucket.workloadOutput" . | quote }}
 STORAGE_BUCKET_AUDIT_LOGGING: {{ include "airbyte.storage.bucket.auditLogging" . | quote }}
+{{- /* airbyte.cloud.storage.bucket.* (StorageBucketConfig) - same values as STORAGE_BUCKET_* */}}
+AIRBYTE_CLOUD_STORAGE_BUCKET_LOG: {{ include "airbyte.storage.bucket.log" . | quote }}
+AIRBYTE_CLOUD_STORAGE_BUCKET_STATE: {{ include "airbyte.storage.bucket.state" . | quote }}
+AIRBYTE_CLOUD_STORAGE_BUCKET_WORKLOAD_OUTPUT: {{ include "airbyte.storage.bucket.workloadOutput" . | quote }}
+AIRBYTE_CLOUD_STORAGE_BUCKET_ACTIVITY_PAYLOAD: {{ include "airbyte.storage.bucket.activityPayload" . | quote }}
+AIRBYTE_CLOUD_STORAGE_BUCKET_AUDIT_LOGGING: {{ include "airbyte.storage.bucket.auditLogging" . | quote }}
+AIRBYTE_CLOUD_STORAGE_BUCKET_PROFILER_OUTPUT: {{ include "airbyte.storage.bucket.log" . | quote }}
 {{- $opt := (include "airbyte.storage.type" .) }}
 
 {{- if eq $opt "azure" }}
