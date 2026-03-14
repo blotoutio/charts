@@ -649,11 +649,11 @@ webapp:
     enabled: true
     # -- Specifies ingressClassName for clusters >= 1.18+
     className: "nginx"
-    # -- Ingress annotations. Stub GET /api/v1/instance_configuration with 200 so the webapp can load (server returns 401 without cookie); rewrite other /api/v1 -> /api/public/v1.
-    annotations:
-      nginx.ingress.kubernetes.io/server-snippet: |
-        if ($request_uri = /api/v1/instance_configuration) { add_header Content-Type application/json; return 200 '{"_links":{"self":{"href":"/api/public/v1/instance_configuration"}},"initialSetupComplete":true}'; }
-        if ($request_uri ~ ^/api/v1/(.*)$) { rewrite ^/api/v1/(.*)$ /api/public/v1/$1 break; }
+    # -- Ingress annotations. Use higher proxy timeouts to avoid 504 when creating sources (discovery can be slow; intermittent 504 = timeout too low). Example (10 min):
+    #   nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    #   nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    #   nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
+    annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     # -- The list of hostnames to be covered with this ingress record.
