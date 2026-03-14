@@ -160,6 +160,8 @@ DATABASE_HOST: {{ include "airbyte.database.host" . | quote }}
 DATABASE_PORT: {{ include "airbyte.database.port" . | quote }}
 DATABASE_URL: {{ include "airbyte.database.url" . | quote }}
 DATABASE_DB: {{ include "airbyte.database.name" . | quote }}
+DATABASE_USER: {{ include "airbyte.database.user" . | quote }}
+DATABASE_PASSWORD: {{ include "airbyte.database.password" . | quote }}
 {{- end }}
 
 {{/*
