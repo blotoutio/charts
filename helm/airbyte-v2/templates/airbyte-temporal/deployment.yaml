@@ -67,6 +67,9 @@ spec:
           {{- /* WORKSPACE_ROOT for airbyte.workspace.root when this pod runs the Airbyte workers app */}}
           - name: WORKSPACE_ROOT
             value: {{ include "airbyte.worker.workspaceRoot" . | quote }}
+          {{- /* AIRBYTE_INTERNAL_API_BASE_PATH for airbyte.internal-api.base-path (AirbyteApiClient) */}}
+          - name: AIRBYTE_INTERNAL_API_BASE_PATH
+            value: {{ include "airbyte.common.api.internalHost" . | quote }}
 
         {{- if .Values.temporal.extraEnv }}
         {{ .Values.temporal.extraEnv | toYaml | nindent 10 }}
