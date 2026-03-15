@@ -1748,6 +1748,13 @@ temporal:
     # -- The temporal image tag to use
     tag: "1.27.2"
 
+  # -- Override container command (e.g. when using airbyte/temporal image which has CMD as single string). Uncomment and set to fix "entrypoint.sh autosetup: no such file or directory".
+  # command: ["/bin/sh", "-c", "exec ./entrypoint.sh autosetup"]
+  command: ["/bin/sh", "-c", "exec ./entrypoint.sh autosetup"]
+
+  # -- Override container args (used when command is set; leave empty to use image default).
+  args: []
+
   secretName: ""
 
   autoSetup: true

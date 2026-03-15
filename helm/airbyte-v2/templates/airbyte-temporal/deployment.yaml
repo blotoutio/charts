@@ -58,6 +58,12 @@ spec:
       - name: airbyte-temporal
         image: {{ include "imageUrl" (list .Values.temporal.image $) }}
         imagePullPolicy: {{ .Values.temporal.image.pullPolicy }}
+        {{- if .Values.temporal.command }}
+        command: {{ toYaml .Values.temporal.command | nindent 8 }}
+        {{- end }}
+        {{- if .Values.temporal.args }}
+        args: {{ toYaml .Values.temporal.args | nindent 8 }}
+        {{- end }}
         {{- /* When this pod runs the Airbyte workers app, load full airbyte-env so all Micronaut properties resolve (same source as worker) */}}
         envFrom:
         - configMapRef:
