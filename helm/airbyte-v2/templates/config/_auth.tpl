@@ -375,6 +375,14 @@ Use when global.auth.enabled and edition community/enterprise so bootloader writ
   value: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientSecret" . | quote }}
 - name: AB_JWT_SIGNATURE_SECRET
   value: {{ include "airbyte.auth.bootstrap.security.jwtSignatureSecret" . | quote }}
+- name: DATAPLANE_CLIENT_ID_SECRET_KEY
+  value: {{ include "airbyte.auth.bootstrap.dataPlane.clientIdSecretKey" . | quote }}
+- name: DATAPLANE_CLIENT_SECRET_SECRET_KEY
+  value: {{ include "airbyte.auth.bootstrap.dataPlane.clientSecretSecretKey" . | quote }}
+- name: DATAPLANE_CLIENT_ID
+  value: {{ include "airbyte.workloadLauncher.dataPlane.clientId" . | quote }}
+- name: DATAPLANE_CLIENT_SECRET
+  value: {{ include "airbyte.workloadLauncher.dataPlane.clientSecret" . | quote }}
 {{- end }}
 
 {{/*
@@ -403,6 +411,8 @@ AB_INSTANCE_ADMIN_CLIENT_SECRET: {{ include "airbyte.auth.bootstrap.instanceAdmi
 {{ include "airbyte.auth.bootstrap.instanceAdmin.clientSecretSecretKey" . }}: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientSecret" . | quote }}
 AB_JWT_SIGNATURE_SECRET: {{ include "airbyte.auth.bootstrap.security.jwtSignatureSecret" . | quote }}
 {{ include "airbyte.auth.bootstrap.security.jwtSignatureSecretKey" . }}: {{ include "airbyte.auth.bootstrap.security.jwtSignatureSecret" . | quote }}
+{{ include "airbyte.auth.bootstrap.dataPlane.clientIdSecretKey" . }}: {{ include "airbyte.workloadLauncher.dataPlane.clientId" . | quote }}
+{{ include "airbyte.auth.bootstrap.dataPlane.clientSecretSecretKey" . }}: {{ include "airbyte.workloadLauncher.dataPlane.clientSecret" . | quote }}
 {{- end }}
 
 {{/*
