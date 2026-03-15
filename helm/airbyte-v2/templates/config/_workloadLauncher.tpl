@@ -94,7 +94,7 @@ WORKLOAD_LAUNCHER_PARALLELISM: {{ include "airbyte.workloadLauncher.parallelism"
 {{- end }}
 
 {{/*
-Renders the workloadLauncher.dataPlane secret name (where to read DATAPLANE_CLIENT_ID/SECRET).
+Renders the workloadLauncher.dataPlane secret name (where to read dataplane-client-id and dataplane-client-secret).
 When existingSecretName is set, use it so credentials come from that secret (no hardcoding in values).
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.secretName" }}
@@ -134,7 +134,7 @@ Use or so empty string is treated as unset and default (UUID) is used; set expli
 
 {{/*
 Renders the workloadLauncher.dataPlane.clientId secret key.
-Default "dataplane-client-id" so server/launcher read the key that matches service_accounts in DB (secret may also have DATAPLANE_CLIENT_ID).
+Default "dataplane-client-id" so server/launcher read the key that matches service_accounts in DB (secret may also use key dataplane-client-id).
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientId.secretKey" }}
 	{{- .Values.workloadLauncher.dataPlane.clientIdSecretKey | default "dataplane-client-id" }}
@@ -152,7 +152,7 @@ Renders the workloadLauncher.dataPlane.clientId environment variable
 {{- end }}
 
 {{/*
-Renders the workloadLauncher.dataPlane.clientIdSecretName value (secret that holds DATAPLANE_CLIENT_ID).
+Renders the workloadLauncher.dataPlane.clientIdSecretName value (secret that holds dataplane-client-id).
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientIdSecretName" }}
     {{- .Values.workloadLauncher.dataPlane.clientIdSecretName | default (include "airbyte.workloadLauncher.dataPlane.secretName" .) }}
@@ -221,7 +221,7 @@ Renders the workloadLauncher.dataPlane.clientSecret environment variable
 {{- end }}
 
 {{/*
-Renders the workloadLauncher.dataPlane.clientSecretSecretName value (secret that holds DATAPLANE_CLIENT_SECRET).
+Renders the workloadLauncher.dataPlane.clientSecretSecretName value (secret that holds dataplane-client-secret).
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.clientSecretSecretName" }}
     {{- .Values.workloadLauncher.dataPlane.clientSecretSecretName | default (include "airbyte.workloadLauncher.dataPlane.secretName" .) }}
@@ -280,9 +280,9 @@ DATAPLANE_CLIENT_SECRET_SECRET_KEY: {{ include "airbyte.workloadLauncher.dataPla
 
 {{/*
 Renders the set of all workloadLauncher.dataPlane secret variables.
-- dataplane-client-id / dataplane-client-secret: secret keys used by default for secretKeyRef (server/launcher read these keys; matches Airbyte server token endpoint / service_accounts).
+- dataplane-client-id / dataplane-client-secret: secret keys used by default for secretKeyRef; launcher calls token endpoint with these credentials (matches Airbyte server token endpoint / service_accounts).
 - DATAPLANE_CLIENT_ID / DATAPLANE_CLIENT_SECRET: same values under env-style keys so existing secrets or tools that use these key names also work.
-Pods get env vars named DATAPLANE_CLIENT_ID and DATAPLANE_CLIENT_SECRET; the value is read from the secret key (default: dataplane-client-id / dataplane-client-secret).
+Pods get env vars DATAPLANE_CLIENT_ID and DATAPLANE_CLIENT_SECRET whose values are read from secret keys dataplane-client-id and dataplane-client-secret.
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.secrets" }}
 DATAPLANE_CLIENT_ID: {{ include "airbyte.workloadLauncher.dataPlane.clientId" . | quote }}

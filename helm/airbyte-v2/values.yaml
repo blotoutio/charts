@@ -18,7 +18,7 @@ global:
   secretName: "airbyte-v2-airbyte-secrets"
 
   # -- Optional seed (e.g. cluster name or infra ID) so chart-generated default secrets differ per infrastructure.
-  # When set, same release name + namespace on two clusters will get different dynamic values (instance admin, dataplane client id/secret, JWT, workload API bearer token). Leave empty for deterministic defaults per release+namespace.
+  # When set, same release name + namespace on two clusters will get different dynamic values (instance admin, dataplane-client-id / dataplane-client-secret, JWT, workload API bearer token). Leave empty for deterministic defaults per release+namespace.
   secretSeed: ""
 
   local: false
@@ -125,10 +125,10 @@ global:
       jwtSignatureSecretKey: ""
 
     # Dataplane auth: server validates workload-launcher token using these keys from the chart secret.
-    # Defaults match workloadLauncher.dataPlane.secrets (DATAPLANE_CLIENT_ID / DATAPLANE_CLIENT_SECRET).
+    # Defaults match workloadLauncher.dataPlane: secret keys dataplane-client-id, dataplane-client-secret.
     dataPlane:
-      clientIdSecretKey: ""   # default DATAPLANE_CLIENT_ID
-      clientSecretSecretKey: ""   # default DATAPLANE_CLIENT_SECRET
+      clientIdSecretKey: ""   # default: dataplane-client-id
+      clientSecretSecretKey: ""   # default: dataplane-client-secret
 
   api:
     # -- AIRBYTE_API_HOST. Leave empty so it is derived from global.airbyteUrl when set (e.g. https://airbytev2.blotout.io/api/public); otherwise defaults to http://localhost:8001/api/public in the template.
@@ -1165,16 +1165,17 @@ workloadLauncher:
   # -- Workspace docker mount (v1: WORKSPACE_DOCKER_MOUNT=workspace). Default "workspace".
   workspaceDockerMount: ""
 
-  # Set existingSecretName to read dataplane creds from that secret (no hardcoding in values). Keys: DATAPLANE_CLIENT_ID, DATAPLANE_CLIENT_SECRET.
+  # Set existingSecretName to read dataplane creds from that secret (no hardcoding in values). Keys: dataplane-client-id, dataplane-client-secret.
+  # Launcher uses these secret key names to create token; use lowercase keys so it reads dataplane-client-id / dataplane-client-secret (not DATAPLANE_CLIENT_ID / DATAPLANE_CLIENT_SECRET).
   dataPlane:
     existingSecretName: ""  # e.g. "airbyte-dataplane-creds" – create this secret with id/secret matching service_accounts in DB
     secretName: ""
     clientId: ""
     clientIdSecretName: ""
-    clientIdSecretKey: ""
+    clientIdSecretKey: "dataplane-client-id"   # secret key to read for token; keep lowercase so launcher uses same key as server
     clientSecret: ""
     clientSecretSecretName: ""
-    clientSecretSecretKey: ""
+    clientSecretSecretKey: "dataplane-client-secret"   # secret key to read for token; keep lowercase so launcher uses same key as server
 
   env_vars: {}
 
