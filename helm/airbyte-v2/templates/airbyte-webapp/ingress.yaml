@@ -31,21 +31,21 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-
+        {{- $serverPort := int ($.Values.server.service.port | default 8001) }}
         - path: /api
           pathType: Prefix
           backend:
             service:
-              name: {{ $.Release.Name }}-workload-api-server-svc
+              name: {{ $.Release.Name }}-airbyte-server-svc
               port:
-                number: {{ $.Values.workloadApiServer.service.port | default 8001 }}
+                number: {{ $serverPort }}
         - path: /auth
           pathType: Prefix
           backend:
             service:
-              name: {{ $.Release.Name }}-workload-api-server-svc
+              name: {{ $.Release.Name }}-airbyte-server-svc
               port:
-                number: {{ $.Values.workloadApiServer.service.port | default 8001 }}
+                number: {{ $serverPort }}
         - path: /connector-builder-api
           pathType: Prefix
           backend:
