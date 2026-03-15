@@ -134,8 +134,8 @@ global:
     # -- AIRBYTE_API_HOST. Leave empty so it is derived from global.airbyteUrl when set (e.g. https://airbytev2.blotout.io/api/public); otherwise defaults to http://localhost:8001/api/public in the template.
     host: ""
     authHeaderName: X-Airbyte-Auth
-    # -- AIRBYTE_API_AUTH_HEADER_VALUE for server and workload-launcher (internal API auth). Must match so the dataplane token endpoint accepts launcher. Default "Internal server".
-    internalAuthHeaderValue: ""
+    # -- AIRBYTE_API_AUTH_HEADER_VALUE for server and workload-launcher (internal API auth). Must match so the dataplane token endpoint accepts launcher.
+    internalAuthHeaderValue: "Internal server"
     
   # -- Environment variables (avoid setting SECRET_PERSISTENCE/S3_PATH_STYLE_ACCESS to "" or they override configmap and trigger "Unsetting empty")
   env_vars: {}
