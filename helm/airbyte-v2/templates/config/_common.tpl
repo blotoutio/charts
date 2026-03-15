@@ -107,7 +107,7 @@ Renders the common.airbyteUrl environment variable
 {{- end }}
 
 {{/*
-Renders the global.api.host value (AIRBYTE_API_HOST).  when global.airbyteUrl is set (e.g. ingress), use it so the server uses the public URL for cookies/redirects; otherwise default to http://localhost:8001/api/public .
+Renders the global.api.host value (AIRBYTE_API_HOST). When global.api.host or global.airbyteUrl is set, use it; otherwise default to internal server URL so in-cluster components (e.g. workload-launcher) can reach the API.
 */}}
 {{- define "airbyte.common.api.host" }}
     {{- if .Values.global.api.host }}
@@ -115,7 +115,7 @@ Renders the global.api.host value (AIRBYTE_API_HOST).  when global.airbyteUrl is
     {{- else if .Values.global.airbyteUrl }}
     {{- printf "%s/api/public" (trimSuffix "/" .Values.global.airbyteUrl) }}
     {{- else }}
-    {{- "http://localhost:8001/api/public" }}
+    {{- printf "http://%s" (include "airbyte.common.server.host" .) }}
     {{- end }}
 {{- end }}
 

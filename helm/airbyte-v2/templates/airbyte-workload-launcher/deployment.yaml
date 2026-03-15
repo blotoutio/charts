@@ -195,6 +195,10 @@ spec:
         securityContext: {{- toYaml .Values.workloadLauncher.containerSecurityContext | nindent 10 }}
         {{- end }}
         volumeMounts:
+          {{- /* Workload API bearer token mounted at /secrets for launcher */}}
+          - name: workload-token
+            mountPath: /secrets
+            readOnly: true
           {{- if eq (include "airbyte.storage.type" .) "gcs" }}
           - name: gcs-log-creds-volume
             mountPath: {{ include "airbyte.storage.gcs.credentialsJsonPath" . | dir }}
@@ -219,6 +223,13 @@ spec:
       {{- end }}
       securityContext: {{- toYaml .Values.workloadLauncher.podSecurityContext | nindent 8 }}
       volumes:
+      {{- /* Secret with WORKLOAD_API_BEARER_TOKEN at /secrets/workload_api_bearer_token */}}
+      - name: workload-token
+        secret:
+          secretName: {{ include "airbyte.workloadApiServer.secretName" . }}
+          items:
+            - key: {{ include "airbyte.workloadApiServer.bearerToken.secretKey" . }}
+              path: workload_api_bearer_token
       {{- if eq (include "airbyte.storage.type" .) "gcs" }}
       - name: gcs-log-creds-volume
         secret:

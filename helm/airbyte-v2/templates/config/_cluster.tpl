@@ -24,10 +24,16 @@ Renders the cluster.type environment variable
 {{- end }}
 
 {{/*
-Renders the global.cluster.dataPlane.controlPlaneAuthEndpoint value
+Renders the global.cluster.dataPlane.controlPlaneAuthEndpoint value.
+Defaults to internal server URL (http://RELEASE-airbyte-server-svc.NAMESPACE:8001) when empty so launcher can reach control-plane auth.
 */}}
 {{- define "airbyte.cluster.dataPlane.controlPlaneAuthEndpoint" }}
-    {{- .Values.global.cluster.dataPlane.controlPlaneAuthEndpoint | default .Values.global.airbyteUrl }}
+    {{- $explicit := .Values.global.cluster.dataPlane.controlPlaneAuthEndpoint | default .Values.global.airbyteUrl }}
+    {{- if $explicit }}
+    {{- $explicit }}
+    {{- else }}
+    {{- printf "http://%s" (include "airbyte.common.server.host" .) }}
+    {{- end }}
 {{- end }}
 
 {{/*
