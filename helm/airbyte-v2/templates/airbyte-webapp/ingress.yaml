@@ -45,20 +45,21 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          # Route /api to the Airbyte server so API requests (e.g. create pipeline) reach the backend
+          # Route /api to the workload-api-server (do not add a duplicate /api path under .paths)
           - path: /api
             {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
             pathType: Prefix
             {{- end }}
             backend:
+              {{- $workloadApiPort := int ($.Values.workloadApiServer.service.port | default 8001) }}
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $.Release.Name }}-airbyte-server-svc
+                name: {{ $.Release.Name }}-workload-api-server-svc
                 port:
-                  number: {{ $serverPort }}
+                  number: {{ $workloadApiPort }}
               {{- else }}
-              serviceName: {{ $.Release.Name }}-airbyte-server-svc
-              servicePort: {{ $serverPort }}
+              serviceName: {{ $.Release.Name }}-workload-api-server-svc
+              servicePort: {{ $workloadApiPort }}
               {{- end }}
           {{- if $connectorBuilderPath }}
           # Route connector-builder path to connector-builder-server when webapp.connectorBuilderServer.url is set
@@ -78,6 +79,9 @@ spec:
               {{- end }}
           {{- end }}
           {{- range .paths }}
+          {{- $normPath := trim (trimSuffix "/" (toString .path)) }}
+          {{- /* Skip /api so it is not duplicated; /api is routed to workload-api-server above */}}
+          {{- if and $normPath (ne $normPath "/api") }}
           - path: {{ .path }}
             {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
             {{- /* Default ImplementationSpecific to  */}}
@@ -93,6 +97,7 @@ spec:
               serviceName: {{ $fullName }}-svc
               servicePort: {{ $svcPort }}
               {{- end }}
+          {{- end }}
           {{- end }}
     {{- end }}
 {{- end }}
