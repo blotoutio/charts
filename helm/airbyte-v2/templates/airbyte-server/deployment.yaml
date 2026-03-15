@@ -86,9 +86,13 @@ spec:
         {{- if (or (eq .Values.global.edition "community") (eq .Values.global.edition "enterprise")) }}
         {{- include "airbyte.auth.envs" . | nindent 8 }}
         {{- include "airbyte.auth.bootstrap.envs" . | nindent 8 }}
-        {{- /* DATAPLANE_CLIENT_ID/SECRET from same secret as launcher so token endpoint accepts launcher */}}
+        {{- /* DATAPLANE_* from same secret as launcher so token endpoint accepts launcher; include secret name/key so server can resolve creds */}}
         {{- include "airbyte.workloadLauncher.dataPlane.clientId.env" . | nindent 8 }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientIdSecretName.env" . | nindent 8 }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientIdSecretKey.env" . | nindent 8 }}
         {{- include "airbyte.workloadLauncher.dataPlane.clientSecret.env" . | nindent 8 }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientSecretSecretName.env" . | nindent 8 }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientSecretSecretKey.env" . | nindent 8 }}
         - name: AIRBYTE_API_AUTH_HEADER_VALUE
           value: "Internal server"
         {{- end}}
@@ -166,7 +170,11 @@ spec:
         {{- /* Dataplane credentials last so they are not overwritten by env_vars (token endpoint needs these) */}}
         {{- if (or (eq .Values.global.edition "community") (eq .Values.global.edition "enterprise")) }}
         {{- include "airbyte.workloadLauncher.dataPlane.clientId.env" . | nindent 8 }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientIdSecretName.env" . | nindent 8 }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientIdSecretKey.env" . | nindent 8 }}
         {{- include "airbyte.workloadLauncher.dataPlane.clientSecret.env" . | nindent 8 }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientSecretSecretName.env" . | nindent 8 }}
+        {{- include "airbyte.workloadLauncher.dataPlane.clientSecretSecretKey.env" . | nindent 8 }}
         {{- end }}
 
         # Values from extraEnv for more compability(if you want to use external secret source or other stuff)

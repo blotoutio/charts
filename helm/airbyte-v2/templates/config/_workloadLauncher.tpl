@@ -268,7 +268,9 @@ DATAPLANE_CLIENT_SECRET_SECRET_KEY: {{ include "airbyte.workloadLauncher.dataPla
 
 {{/*
 Renders the set of all workloadLauncher.dataPlane secret variables.
-Includes both DATAPLANE_* and dataplane-client-id / dataplane-client-secret so all keys differ per env when global.secretSeed is set.
+- dataplane-client-id / dataplane-client-secret: secret keys used by default for secretKeyRef (server/launcher read these keys; matches Airbyte server token endpoint / service_accounts).
+- DATAPLANE_CLIENT_ID / DATAPLANE_CLIENT_SECRET: same values under env-style keys so existing secrets or tools that use these key names also work.
+Pods get env vars named DATAPLANE_CLIENT_ID and DATAPLANE_CLIENT_SECRET; the value is read from the secret key (default: dataplane-client-id / dataplane-client-secret).
 */}}
 {{- define "airbyte.workloadLauncher.dataPlane.secrets" }}
 DATAPLANE_CLIENT_ID: {{ include "airbyte.workloadLauncher.dataPlane.clientId" . | quote }}
