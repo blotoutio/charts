@@ -323,6 +323,7 @@ AIRBYTE_CLUSTER_NAME: {{ include "airbyte.common.cluster.name" . | quote }}
 AIRBYTE_URL: {{ include "airbyte.common.airbyteUrl" . | quote }}
 AIRBYTE_API_HOST: {{ include "airbyte.common.api.host" . | quote }}
 AIRBYTE_API_AUTH_HEADER_NAME: {{ include "airbyte.common.api.authHeaderName" . | quote }}
+AIRBYTE_API_AUTH_HEADER_VALUE: {{ include "airbyte.common.api.internalAuthHeaderValue" . | quote }}
 AIRBYTE_SERVER_HOST: {{ include "airbyte.common.server.host" . | quote }}
 API_AUTHORIZATION_ENABLED: {{ include "airbyte.common.auth.enabled" . | quote }}
 CONNECTOR_BUILDER_SERVER_API_HOST: {{ include "airbyte.common.connectorBuilderServer.apiHost" . | quote }}
