@@ -3,7 +3,7 @@ entries:
   airbyte:
   - apiVersion: v2
     appVersion: 1.2.0
-    created: "2026-03-15T17:39:26.481593429Z"
+    created: "2026-03-15T17:55:28.255661979Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -79,9 +79,9 @@ entries:
     version: 1.2.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.4820622Z"
+    created: "2026-03-15T17:55:28.256123629Z"
     description: The open platform to manage all your data integration pipelines.
-    digest: 7f199e28556278dcc6ff594400c7655748426af0b0a471aae272b43162f90d75
+    digest: 55a6cfbe526bec250f094dec9634fd8c339310ec52c4b38778e67a185154dcf9
     keywords:
     - airbyte
     - pipelines
@@ -94,7 +94,7 @@ entries:
     version: v0.26.0-alpha.1
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.448195533Z"
+    created: "2026-03-15T17:55:28.224846152Z"
     description: The open platform to manage all your data integration pipelines.
     digest: aa5b33e732e512fb51dc9d914d03a5aaa6a96b16b308f2a3053651658e218fa2
     keywords:
@@ -109,7 +109,7 @@ entries:
     version: 0.20.4
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.447690109Z"
+    created: "2026-03-15T17:55:28.224423725Z"
     description: The open platform to manage all your data integration pipelines.
     digest: cdcfafe5e82b13922c86e2fc4cd64270ac2e4c833579fc9eb4fe7da26bf36c23
     keywords:
@@ -124,7 +124,7 @@ entries:
     version: 0.20.3
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.446766511Z"
+    created: "2026-03-15T17:55:28.223995196Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 2dde9ba5fcaedeff22802645d0bc61a1af4ba8e91c15c2695b58b448a0f5bfb3
     keywords:
@@ -139,7 +139,7 @@ entries:
     version: 0.20.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.445792331Z"
+    created: "2026-03-15T17:55:28.223054502Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 67f0f3ed13e98d92ccb713783b29f4104baef961a5078163f30d51dc7551c280
     keywords:
@@ -154,7 +154,7 @@ entries:
     version: 0.20.1
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.445408758Z"
+    created: "2026-03-15T17:55:28.222144486Z"
     description: The open platform to manage all your data integration pipelines.
     digest: de469bfa6dcc9046492df853cd33fa84bf8f7cde23caa40a9607a1372e5c2a02
     keywords:
@@ -169,7 +169,7 @@ entries:
     version: 0.20.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.445039406Z"
+    created: "2026-03-15T17:55:28.221743669Z"
     description: The open platform to manage all your data integration pipelines.
     digest: ba5d66c6aa15bd65d7d6a092053af298a45d0011ae815d478bb33a5ba051e2cd
     keywords:
@@ -184,7 +184,7 @@ entries:
     version: 0.20.0-rc.1
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.44465318Z"
+    created: "2026-03-15T17:55:28.221347792Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 5cc251f86e94fcd0440e4cd26ec377edb8ce44c69ff7a173bf6a32d8324e2724
     keywords:
@@ -199,7 +199,7 @@ entries:
     version: 0.19.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.444281154Z"
+    created: "2026-03-15T17:55:28.220948447Z"
     description: The open platform to manage all your data integration pipelines.
     digest: e9bc4455197538e3d41996d015db4b556596fe6955b7d864bbbd5a70d3f823d7
     keywords:
@@ -214,7 +214,7 @@ entries:
     version: 0.19.1
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.443931694Z"
+    created: "2026-03-15T17:55:28.220534195Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 49643b1569a711181a913fe515778e8ff59c17bf09b0f72cc766d4d60665fb32
     keywords:
@@ -229,7 +229,7 @@ entries:
     version: 0.19.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.443553734Z"
+    created: "2026-03-15T17:55:28.220116837Z"
     description: The open platform to manage all your data integration pipelines.
     digest: bd5682bfaa55e144a1279b0b467ef8c82ff42d0997e22df949dbef921a732923
     keywords:
@@ -244,7 +244,7 @@ entries:
     version: 0.18.1
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.443193701Z"
+    created: "2026-03-15T17:55:28.219649526Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 76ba843cc48b5d8afd3675aad83322de574e194116b9768e78e0a2d67ddb89f3
     keywords:
@@ -259,7 +259,7 @@ entries:
     version: 0.18.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.442771273Z"
+    created: "2026-03-15T17:55:28.219003252Z"
     description: The open platform to manage all your data integration pipelines.
     digest: adef0a786ef155a48a8e6f0c021532616de70f6fa3806eb9ee58c8ef504ce867
     keywords:
@@ -274,7 +274,7 @@ entries:
     version: 0.17.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.442321143Z"
+    created: "2026-03-15T17:55:28.218427048Z"
     description: The open platform to manage all your data integration pipelines.
     digest: e049773756b78b5fee9579eb30335f8ffa85f1d5be72e843ae9040a00b2bba84
     keywords:
@@ -289,7 +289,7 @@ entries:
     version: 0.17.1
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.441934045Z"
+    created: "2026-03-15T17:55:28.217853769Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 9b7443559e6dd96c87b7913e89a0ede5fd66c113203cc1f4b8f091dc0058e9b7
     keywords:
@@ -304,7 +304,7 @@ entries:
     version: 0.17.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.441517762Z"
+    created: "2026-03-15T17:55:28.217378523Z"
     description: The open platform to manage all your data integration pipelines.
     digest: c9ca38e2d8a07b784cd3be0372df98786fc361cc1ac3b0e8eef519d01364c45a
     keywords:
@@ -319,7 +319,7 @@ entries:
     version: 0.16.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.441088089Z"
+    created: "2026-03-15T17:55:28.216966446Z"
     description: The open platform to manage all your data integration pipelines.
     digest: ec12c26f5a650b27aa5b140248f3ba685f86544126850d01539869bfa3ff4426
     keywords:
@@ -334,7 +334,7 @@ entries:
     version: 0.15.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.440547231Z"
+    created: "2026-03-15T17:55:28.216535522Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 2ca9bc4bb32554d591d5a009f63959bb00bdbf9e676a85f46ae360d0443ae662
     keywords:
@@ -349,7 +349,7 @@ entries:
     version: 0.14.2
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.439611017Z"
+    created: "2026-03-15T17:55:28.216087217Z"
     description: The open platform to manage all your data integration pipelines.
     digest: ef42db539a440f65356960b7df1cd511450e7b21906d6a7a9bd32518aef5f67c
     keywords:
@@ -364,7 +364,7 @@ entries:
     version: 0.14.0
   - apiVersion: v2
     appVersion: 1.0.1
-    created: "2026-03-15T17:39:26.43820111Z"
+    created: "2026-03-15T17:55:28.2149729Z"
     description: The open platform to manage all your data integration pipelines.
     digest: 05e768d64320f695a119f313830c417d6804238c9998d6f104b7fda595a939be
     keywords:
@@ -380,7 +380,7 @@ entries:
   airbyte-v1:
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.712985594Z"
+    created: "2026-03-15T17:55:28.472986398Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -448,7 +448,7 @@ entries:
       repository: https://airbytehq.github.io/helm-charts/
       version: 1.3.0
     description: Helm chart to deploy airbyte
-    digest: da106b35ac0752c6177356738986acc0badbb4de0e50f89b57c80650816c00c8
+    digest: e27016ed97cd30b2fb96fa9c7dc1376e040d67621d888d314cb68ba3d78643ce
     name: airbyte-v1
     type: application
     urls:
@@ -456,7 +456,7 @@ entries:
     version: v1.3.11
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.680181988Z"
+    created: "2026-03-15T17:55:28.44192644Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -532,7 +532,7 @@ entries:
     version: v1.3.10
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.947177278Z"
+    created: "2026-03-15T17:55:28.691279475Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -608,7 +608,7 @@ entries:
     version: v1.3.9
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.914284948Z"
+    created: "2026-03-15T17:55:28.660192573Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -684,7 +684,7 @@ entries:
     version: v1.3.8
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.883045408Z"
+    created: "2026-03-15T17:55:28.62834352Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -760,7 +760,7 @@ entries:
     version: v1.3.7
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.846512096Z"
+    created: "2026-03-15T17:55:28.596313807Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -836,7 +836,7 @@ entries:
     version: v1.3.5
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.814525967Z"
+    created: "2026-03-15T17:55:28.566111847Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -912,7 +912,7 @@ entries:
     version: v1.3.4
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.781037621Z"
+    created: "2026-03-15T17:55:28.534023675Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -988,7 +988,7 @@ entries:
     version: v1.3.3
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.747610011Z"
+    created: "2026-03-15T17:55:28.504401234Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1064,7 +1064,7 @@ entries:
     version: v1.3.2
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.646854563Z"
+    created: "2026-03-15T17:55:28.409879724Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1140,7 +1140,7 @@ entries:
     version: v1.3.1
   - apiVersion: v2
     appVersion: 1.3.0
-    created: "2026-03-15T17:39:26.612828684Z"
+    created: "2026-03-15T17:55:28.380055535Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1216,7 +1216,7 @@ entries:
     version: v1.3.0
   - apiVersion: v2
     appVersion: 1.2.0
-    created: "2026-03-15T17:39:26.57787533Z"
+    created: "2026-03-15T17:55:28.348841327Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1292,7 +1292,7 @@ entries:
     version: v1.0.2
   - apiVersion: v2
     appVersion: 1.2.0
-    created: "2026-03-15T17:39:26.546533218Z"
+    created: "2026-03-15T17:55:28.317390892Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1368,7 +1368,7 @@ entries:
     version: v1.0.1
   - apiVersion: v2
     appVersion: 1.2.0
-    created: "2026-03-15T17:39:26.514127478Z"
+    created: "2026-03-15T17:55:28.286300784Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -1445,7 +1445,17 @@ entries:
   airbyte-v2:
   - apiVersion: v2
     appVersion: 2.0.0-RC-a3743e9cb62
-    created: "2026-03-15T17:39:27.270113539Z"
+    created: "2026-03-15T17:55:28.996089073Z"
+    description: Helm chart to deploy airbyte
+    digest: 62b1d297491c6b3efcf0b292c8e61636933381aed784461f53079404d89a1733
+    name: airbyte-v2
+    type: application
+    urls:
+    - https://blotoutio.github.io/charts/airbyte-v2-v2.0.55.tgz
+    version: v2.0.55
+  - apiVersion: v2
+    appVersion: 2.0.0-RC-a3743e9cb62
+    created: "2026-03-15T17:55:28.989604245Z"
     description: Helm chart to deploy airbyte
     digest: 7b17b9dc2be86757536d6d51bb3ced6a251e8541e5586d68d68bb30b209dccd6
     name: airbyte-v2
@@ -1455,7 +1465,7 @@ entries:
     version: v2.0.54
   - apiVersion: v2
     appVersion: 2.0.0-RC-a3743e9cb62
-    created: "2026-03-15T17:39:27.262982744Z"
+    created: "2026-03-15T17:55:28.983816067Z"
     description: Helm chart to deploy airbyte
     digest: dfb8134e2aae140e6d7f1874e3505d41616785cbb9d3095cbdbfaf9c8c0b31f4
     name: airbyte-v2
@@ -1465,7 +1475,7 @@ entries:
     version: v2.0.53
   - apiVersion: v2
     appVersion: 2.0.1
-    created: "2026-03-15T17:39:27.256173733Z"
+    created: "2026-03-15T17:55:28.977092138Z"
     description: Helm chart to deploy airbyte
     digest: 477f838c1d118e11f2c899bbc5648be770acbd7234a5aad404641000250ac0a2
     name: airbyte-v2
@@ -1475,7 +1485,7 @@ entries:
     version: v2.0.52
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.250212581Z"
+    created: "2026-03-15T17:55:28.970543891Z"
     description: Helm chart to deploy airbyte
     digest: ffb00be95d078c37f2cea21e170c4fa05df800da4211a320f350eefdaeb9e157
     name: airbyte-v2
@@ -1485,7 +1495,7 @@ entries:
     version: v2.0.51
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.24348049Z"
+    created: "2026-03-15T17:55:28.964959724Z"
     description: Helm chart to deploy airbyte
     digest: aad71fae36afff45a0d2517bf2b59adf9e7f792a2c190baf6ea69ce3fbedabd0
     name: airbyte-v2
@@ -1495,7 +1505,7 @@ entries:
     version: v2.0.50
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.230853521Z"
+    created: "2026-03-15T17:55:28.952227412Z"
     description: Helm chart to deploy airbyte
     digest: cf6d72b096a371062873629a02f0e080537468426c2078f135130429809447b4
     name: airbyte-v2
@@ -1505,7 +1515,7 @@ entries:
     version: v2.0.49
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.223722196Z"
+    created: "2026-03-15T17:55:28.946574356Z"
     description: Helm chart to deploy airbyte
     digest: 1747ce0e36389f7abbfb64e3a7099f8c9e536cefcd0a5c18a6684b8bdbd2b5ac
     name: airbyte-v2
@@ -1515,7 +1525,7 @@ entries:
     version: v2.0.48
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.217356792Z"
+    created: "2026-03-15T17:55:28.939804414Z"
     description: Helm chart to deploy airbyte
     digest: 0c84f927f00656684d9b2bc06f3cbad7379c3309a32785150524ce9ca58d40e9
     name: airbyte-v2
@@ -1525,7 +1535,7 @@ entries:
     version: v2.0.47
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.210429643Z"
+    created: "2026-03-15T17:55:28.933335244Z"
     description: Helm chart to deploy airbyte
     digest: 3d931aa1b408bd6a6e4b389d537fa84174924daca70a65d316714d2f654efdb2
     name: airbyte-v2
@@ -1535,7 +1545,7 @@ entries:
     version: v2.0.46
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.20320412Z"
+    created: "2026-03-15T17:55:28.927690163Z"
     description: Helm chart to deploy airbyte
     digest: 0ed9fa2dadf1b5598a6cef03c0a2db91f14e40d19502870beb8aa7aed7e2ccd0
     name: airbyte-v2
@@ -1545,7 +1555,7 @@ entries:
     version: v2.0.45
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.197163082Z"
+    created: "2026-03-15T17:55:28.920885193Z"
     description: Helm chart to deploy airbyte
     digest: 334c7345aae12df22dc9fd43430e42a4e627b2122322f398bb43199fb121d1c4
     name: airbyte-v2
@@ -1555,7 +1565,7 @@ entries:
     version: v2.0.44
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.18946412Z"
+    created: "2026-03-15T17:55:28.914844513Z"
     description: Helm chart to deploy airbyte
     digest: a7b1179d907840fa91226687ec6d9e61a9a30299564e0225453f9fc1c0001cb2
     name: airbyte-v2
@@ -1565,7 +1575,7 @@ entries:
     version: v2.0.43
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.182956917Z"
+    created: "2026-03-15T17:55:28.908934488Z"
     description: Helm chart to deploy airbyte
     digest: ff1298d67e3bd599f492abeca754669a2b8e47a2fde76e2b192480e3725e7c7e
     name: airbyte-v2
@@ -1575,7 +1585,7 @@ entries:
     version: v2.0.42
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.176876695Z"
+    created: "2026-03-15T17:55:28.902436898Z"
     description: Helm chart to deploy airbyte
     digest: cf95973c0308a7049ad686adb1bbf59442dfaa3787b96394da3ed0f0d9f7d5ac
     name: airbyte-v2
@@ -1585,7 +1595,7 @@ entries:
     version: v2.0.41
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.170032307Z"
+    created: "2026-03-15T17:55:28.896737005Z"
     description: Helm chart to deploy airbyte
     digest: d589119a310ff1414610c1767d9eee04fcbf6856b6fd94658dac761e5ace15cd
     name: airbyte-v2
@@ -1595,7 +1605,7 @@ entries:
     version: v2.0.40
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.156998035Z"
+    created: "2026-03-15T17:55:28.884262827Z"
     description: Helm chart to deploy airbyte
     digest: e9ad7caffe1d7d81fdf4a4ca31465bbfa9bc0e47ca06e368d42d4cf2b52b5cce
     name: airbyte-v2
@@ -1605,7 +1615,7 @@ entries:
     version: v2.0.39
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.150013937Z"
+    created: "2026-03-15T17:55:28.878500327Z"
     description: Helm chart to deploy airbyte
     digest: 26fb3393e89072a9fc7ac6f8aff66e1b966d5ab23690902032f595305ed2b5a3
     name: airbyte-v2
@@ -1615,7 +1625,7 @@ entries:
     version: v2.0.38
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.144167705Z"
+    created: "2026-03-15T17:55:28.872042193Z"
     description: Helm chart to deploy airbyte
     digest: b2aa5d0295d3b893136fa02f7bdb7e6d15cceeb56a1f6e7609889c50a0ed2837
     name: airbyte-v2
@@ -1625,7 +1635,7 @@ entries:
     version: v2.0.37
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.136979538Z"
+    created: "2026-03-15T17:55:28.865642897Z"
     description: Helm chart to deploy airbyte
     digest: 11065629fba7880a66165c9ccbb6dd6b7bddd032076273880e23680253b4d884
     name: airbyte-v2
@@ -1635,7 +1645,7 @@ entries:
     version: v2.0.36
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.13016586Z"
+    created: "2026-03-15T17:55:28.860061715Z"
     description: Helm chart to deploy airbyte
     digest: 03a730767198e64a856d6250497d7aec8a93f04583ea1588a46bc2ef22adc717
     name: airbyte-v2
@@ -1645,7 +1655,7 @@ entries:
     version: v2.0.35
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.124295593Z"
+    created: "2026-03-15T17:55:28.853633314Z"
     description: Helm chart to deploy airbyte
     digest: 27ba786ddf7f73164532efd1b4267e0a2fdf0740de25f5a69fd506f3652d0619
     name: airbyte-v2
@@ -1655,7 +1665,7 @@ entries:
     version: v2.0.34
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.116579793Z"
+    created: "2026-03-15T17:55:28.847229855Z"
     description: Helm chart to deploy airbyte
     digest: 68f06ba4d6694be46c06f3f770078718cba4aa3eae7a4d959d60e7d4b8ffe6cb
     name: airbyte-v2
@@ -1665,7 +1675,7 @@ entries:
     version: v2.0.33
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.110576544Z"
+    created: "2026-03-15T17:55:28.8416791Z"
     description: Helm chart to deploy airbyte
     digest: 2f8465a69223f7eaa2624c675da4bd0ac1300b96620aa8dff01e78ebdc5a2cde
     name: airbyte-v2
@@ -1675,7 +1685,7 @@ entries:
     version: v2.0.32
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.103537683Z"
+    created: "2026-03-15T17:55:28.835336463Z"
     description: Helm chart to deploy airbyte
     digest: ec6adc245ffb4c9643f4123d7627c0e766e6cd027c7175e2feee253021e0310c
     name: airbyte-v2
@@ -1685,7 +1695,7 @@ entries:
     version: v2.0.31
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.096709945Z"
+    created: "2026-03-15T17:55:28.828889844Z"
     description: Helm chart to deploy airbyte
     digest: e0b7d477854330611d30bf26e4bfa6e49b3236937edca4017fed3e368ea7984d
     name: airbyte-v2
@@ -1695,7 +1705,7 @@ entries:
     version: v2.0.30
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.08444396Z"
+    created: "2026-03-15T17:55:28.816957087Z"
     description: Helm chart to deploy airbyte
     digest: 24ac99150ef448e292e1c0e9e09c5d8f88e5be7d211169f991c482ac3b368ed6
     name: airbyte-v2
@@ -1705,7 +1715,7 @@ entries:
     version: v2.0.29
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.077397223Z"
+    created: "2026-03-15T17:55:28.810718307Z"
     description: Helm chart to deploy airbyte
     digest: 544820da4fa1046e45e50c0cd8767bfe99b370830e685d259ba37a260603f509
     name: airbyte-v2
@@ -1715,7 +1725,7 @@ entries:
     version: v2.0.28
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.070857209Z"
+    created: "2026-03-15T17:55:28.80425819Z"
     description: Helm chart to deploy airbyte
     digest: 9d839c233ccbca9c25a802d21113bc74562528129c7a25f7263c003e878dffd7
     name: airbyte-v2
@@ -1725,7 +1735,7 @@ entries:
     version: v2.0.27
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.065033243Z"
+    created: "2026-03-15T17:55:28.798808172Z"
     description: Helm chart to deploy airbyte
     digest: cdd9171586483bd9490028296495b4d9d1ea18d60037482e51e9b19f34ede370
     name: airbyte-v2
@@ -1735,7 +1745,7 @@ entries:
     version: v2.0.26
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.057504788Z"
+    created: "2026-03-15T17:55:28.792447229Z"
     description: Helm chart to deploy airbyte
     digest: 0feed8c86cd871723f27c82cc899e21e094f38a56341adcf2446679015251933
     name: airbyte-v2
@@ -1745,7 +1755,7 @@ entries:
     version: v2.0.25
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.050980715Z"
+    created: "2026-03-15T17:55:28.786970873Z"
     description: Helm chart to deploy airbyte
     digest: bf933f5145eff96a0ca45752531e7c0569faaa74f5f9f5fe5e41d5ec8470f73d
     name: airbyte-v2
@@ -1755,7 +1765,7 @@ entries:
     version: v2.0.24
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.045225117Z"
+    created: "2026-03-15T17:55:28.780355842Z"
     description: Helm chart to deploy airbyte
     digest: 82700bf6d47a4f3477998a845812b4fabdc1fdd2e60fd09b50c8293207547a3e
     name: airbyte-v2
@@ -1765,7 +1775,7 @@ entries:
     version: v2.0.23
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.038344243Z"
+    created: "2026-03-15T17:55:28.774137936Z"
     description: Helm chart to deploy airbyte
     digest: 0389dfbc89e8e562fc28b25da5b8a2d396bbdcce89c40e0b56d664a608e89375
     name: airbyte-v2
@@ -1775,7 +1785,7 @@ entries:
     version: v2.0.22
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.032554827Z"
+    created: "2026-03-15T17:55:28.767631517Z"
     description: Helm chart to deploy airbyte
     digest: 02ed0a133f1f8d9c08060c496eab2cf1c871d56ad0800d47331db57269caadbe
     name: airbyte-v2
@@ -1785,7 +1795,7 @@ entries:
     version: v2.0.21
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.025628094Z"
+    created: "2026-03-15T17:55:28.762273792Z"
     description: Helm chart to deploy airbyte
     digest: f9c8df57647feee7be94e87b8b8bfafa55838efbb8c9cd253be13e77a81ef458
     name: airbyte-v2
@@ -1795,7 +1805,7 @@ entries:
     version: v2.0.20
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.012973958Z"
+    created: "2026-03-15T17:55:28.749896261Z"
     description: Helm chart to deploy airbyte
     digest: f017a320a50ab2110f0e365ec09bd973db91a26fd48ae9b95b92604d8ffeaadc
     name: airbyte-v2
@@ -1805,7 +1815,7 @@ entries:
     version: v2.0.19
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.006436284Z"
+    created: "2026-03-15T17:55:28.744538376Z"
     description: Helm chart to deploy airbyte
     digest: 655e0a807a9d76c51640da0388ee52fea6ba2909fa0f3393b12a6e75a365d7ab
     name: airbyte-v2
@@ -1815,7 +1825,7 @@ entries:
     version: v2.0.17
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.000500526Z"
+    created: "2026-03-15T17:55:28.73811146Z"
     description: Helm chart to deploy airbyte
     digest: 79b8ea768905a6b5a93b86fe6130d2068939c8dbd5818303e72def2ee83e44cb
     name: airbyte-v2
@@ -1825,7 +1835,7 @@ entries:
     version: v2.0.16
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:26.993428906Z"
+    created: "2026-03-15T17:55:28.731886416Z"
     description: Helm chart to deploy airbyte
     digest: e735f905153c8aa70fa6b228e5528cf1b333c8c687780cbc5edf0cd69150043c
     name: airbyte-v2
@@ -1835,7 +1845,7 @@ entries:
     version: v2.0.15
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:26.98695238Z"
+    created: "2026-03-15T17:55:28.726401754Z"
     description: Helm chart to deploy airbyte
     digest: 03c41e2a4b4969cd0cc7af70c991401a87b0a4826022b65726c5f70a867d8168
     name: airbyte-v2
@@ -1845,7 +1855,7 @@ entries:
     version: v2.0.14
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:26.981320247Z"
+    created: "2026-03-15T17:55:28.719893609Z"
     description: Helm chart to deploy airbyte
     digest: e5995e6e37cd61912b1832dfb21e2ecbd9ae3cf2b1bc93cc1ee7552f60c7be8c
     name: airbyte-v2
@@ -1855,7 +1865,7 @@ entries:
     version: v2.0.13
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:26.97425061Z"
+    created: "2026-03-15T17:55:28.714079361Z"
     description: Helm chart to deploy airbyte
     digest: 021f6d4f571c6cc0e6715cbdd128fc647c6edd88e836a707b9ed29b83211885f
     name: airbyte-v2
@@ -1865,7 +1875,7 @@ entries:
     version: v2.0.12
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:26.967900943Z"
+    created: "2026-03-15T17:55:28.708205133Z"
     description: Helm chart to deploy airbyte
     digest: ca204129e65971a20fb57090da705f6a72b1fe6625dcbe8a9b2dd73957716eac
     name: airbyte-v2
@@ -1875,7 +1885,7 @@ entries:
     version: v2.0.11
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.29444709Z"
+    created: "2026-03-15T17:55:29.020247243Z"
     description: Helm chart to deploy airbyte
     digest: f4d59cd1aa8ae9413f133a220ec77b33f7742238bfe614d4d9ce1a88fb6cd86e
     name: airbyte-v2
@@ -1885,7 +1895,7 @@ entries:
     version: v2.0.9
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.288941737Z"
+    created: "2026-03-15T17:55:29.013814569Z"
     description: Helm chart to deploy airbyte
     digest: fce9faceb839dd99c71dd52bddf75ff13301373bc519961029eb9ce9852a44be
     name: airbyte-v2
@@ -1895,7 +1905,7 @@ entries:
     version: v2.0.8
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.282075144Z"
+    created: "2026-03-15T17:55:29.007607956Z"
     description: Helm chart to deploy airbyte
     digest: e93f2e07a1b9a8de2cd75130c305c9a8b944677f23d29e7c90412b4c45aee887
     name: airbyte-v2
@@ -1905,7 +1915,7 @@ entries:
     version: v2.0.7
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.275880002Z"
+    created: "2026-03-15T17:55:29.002351159Z"
     description: Helm chart to deploy airbyte
     digest: 4c58f7718641722653c30b967740b0334f77aeaf664021cce59d04c7146eee45
     name: airbyte-v2
@@ -1915,7 +1925,7 @@ entries:
     version: v2.0.6
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.236420541Z"
+    created: "2026-03-15T17:55:28.95830265Z"
     description: Helm chart to deploy airbyte
     digest: 02957eb69d0f69dd3f29efd91fbb8248fb14ad158e85098b15daf1539f7c9701
     name: airbyte-v2
@@ -1925,7 +1935,7 @@ entries:
     version: v2.0.5
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.164119622Z"
+    created: "2026-03-15T17:55:28.890329291Z"
     description: Helm chart to deploy airbyte
     digest: 420da01ef145ff70e6c7a52e7f9aee6bef82f4e1768d4bdd66d851806735fdc6
     name: airbyte-v2
@@ -1935,7 +1945,7 @@ entries:
     version: v2.0.4
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.090531138Z"
+    created: "2026-03-15T17:55:28.823451308Z"
     description: Helm chart to deploy airbyte
     digest: b60afb6b2ce7e029d3c5405f978857ca4598a7749fd056f3ebfa35a4afe5e945
     name: airbyte-v2
@@ -1945,7 +1955,7 @@ entries:
     version: v2.0.3
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:27.01897914Z"
+    created: "2026-03-15T17:55:28.755949555Z"
     description: Helm chart to deploy airbyte
     digest: 781939e1db22c68c7966fb55ba8f1ad420eadf6f55356d668b6ecb99b491cbfe
     name: airbyte-v2
@@ -1955,7 +1965,7 @@ entries:
     version: v2.0.2
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:26.961693733Z"
+    created: "2026-03-15T17:55:28.701832614Z"
     description: Helm chart to deploy airbyte
     digest: 198b03ec168594087913ce95c641244201cb1f63e2273894d7ff2fc0d1bbfcab
     name: airbyte-v2
@@ -1965,7 +1975,7 @@ entries:
     version: v2.0.1
   - apiVersion: v2
     appVersion: 1.6.1
-    created: "2026-03-15T17:39:26.954717946Z"
+    created: "2026-03-15T17:55:28.696514622Z"
     description: Helm chart to deploy airbyte
     digest: d33794f1d2ad89ca65af83c1c577e8fc94fe278878fcfb6196fbae6166274675
     name: airbyte-v2
@@ -1976,9 +1986,9 @@ entries:
   backend-sdk:
   - apiVersion: v2
     appVersion: v0.23.0
-    created: "2026-03-15T17:39:27.303981797Z"
+    created: "2026-03-15T17:55:29.029904967Z"
     description: A Helm chart for Kubernetes
-    digest: ff68fadaa87ffb47a15063bde78689cb87044953e62b6c926ea1fd51bbc51711
+    digest: 13886ccefa0d05e9afd278c47edd1acdcc396459d21e1cab3f7335e1f2a7f36b
     name: backend-sdk
     type: application
     urls:
@@ -1986,7 +1996,7 @@ entries:
     version: v0.27.0
   - apiVersion: v2
     appVersion: v0.23.0
-    created: "2026-03-15T17:39:27.303613354Z"
+    created: "2026-03-15T17:55:29.029507937Z"
     description: A Helm chart for Kubernetes
     digest: 41b2c0f802d8ff49d4638ae7dc8dc56231057995f31a0d4a791f6326eda677b0
     name: backend-sdk
@@ -1996,7 +2006,7 @@ entries:
     version: v0.26.0-alpha.4
   - apiVersion: v2
     appVersion: v0.23.0
-    created: "2026-03-15T17:39:27.303195206Z"
+    created: "2026-03-15T17:55:29.029108873Z"
     description: A Helm chart for Kubernetes
     digest: b68794b9da479153ce41ae188c7b3ec8fde70836a0f58f9bc6fe17b5347de077
     name: backend-sdk
@@ -2006,7 +2016,7 @@ entries:
     version: v0.26.0-alpha.3
   - apiVersion: v2
     appVersion: v0.23.0
-    created: "2026-03-15T17:39:27.302838653Z"
+    created: "2026-03-15T17:55:29.028715119Z"
     description: A Helm chart for Kubernetes
     digest: dadd4dd7115a78c9a1fcfe4caafd8d29be3f4d811fae835be4489532ccd56b78
     name: backend-sdk
@@ -2016,7 +2026,7 @@ entries:
     version: v0.26.0-alpha.2
   - apiVersion: v2
     appVersion: v0.23.0
-    created: "2026-03-15T17:39:27.302457022Z"
+    created: "2026-03-15T17:55:29.028340822Z"
     description: A Helm chart for Kubernetes
     digest: 5dd675496d9f19d116276ff10d34bb18c16d9e3976667783734dfdfc9ee05932
     name: backend-sdk
@@ -2026,7 +2036,7 @@ entries:
     version: v0.26.0-alpha.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.302086881Z"
+    created: "2026-03-15T17:55:29.027902545Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: cb20606f0275d8d1984b78a4b1e5309b55f7cdfb2087d67c0c7c5e23f0f4fd96
@@ -2041,7 +2051,7 @@ entries:
     version: 0.20.4
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.301797011Z"
+    created: "2026-03-15T17:55:29.027554406Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 26a5bae5bb1af86fb70205f9e27bd80e17921c3d5cf1b8383aa1ecb71c6775f9
@@ -2056,7 +2066,7 @@ entries:
     version: 0.20.3
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.301488396Z"
+    created: "2026-03-15T17:55:29.026792531Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 06250fccb99a0e2c697aa4972ad70514448bb91695a33b45624e578918f6ed66
@@ -2071,7 +2081,7 @@ entries:
     version: 0.20.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.301199361Z"
+    created: "2026-03-15T17:55:29.02590133Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 99268b0737168213fff2f409aa921d99d9ddda88e3e65a03a73bdb7043bda2a5
@@ -2086,7 +2096,7 @@ entries:
     version: 0.20.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.300913011Z"
+    created: "2026-03-15T17:55:29.025576114Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 389855831478fae18c9005b8c4a80ca6417f8f871e9b7925b3b22bd004ce4490
@@ -2101,7 +2111,7 @@ entries:
     version: 0.20.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.300614535Z"
+    created: "2026-03-15T17:55:29.025231923Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 34e22e6e423bacdcd0a69b9f08caded872f564d8e62dae99a56346fa9f5c3ec7
@@ -2116,7 +2126,7 @@ entries:
     version: 0.20.0-rc.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.300297843Z"
+    created: "2026-03-15T17:55:29.024895546Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 2d351f1e421deb9029867b473a6951165ba99acd9a30ccce5ee718bacf925027
@@ -2131,7 +2141,7 @@ entries:
     version: 0.19.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.30000342Z"
+    created: "2026-03-15T17:55:29.024569759Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 874aca8a75fe2f8a15dbeef0cbedde3c457b999cd6398c80abdddb9954992cf9
@@ -2146,7 +2156,7 @@ entries:
     version: 0.19.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.299703667Z"
+    created: "2026-03-15T17:55:29.024257286Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 72f3d0d29ff03bdf03c703359f3d3b32d0b42e97bd113f42a6fc75ab35f7aa21
@@ -2161,7 +2171,7 @@ entries:
     version: 0.19.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.299394102Z"
+    created: "2026-03-15T17:55:29.023930457Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: ddfeef213ea033e69822beec41cb82a8b032f503435aa314a636fe3f097a9904
@@ -2176,7 +2186,7 @@ entries:
     version: 0.18.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.299048851Z"
+    created: "2026-03-15T17:55:29.023607876Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 0fc4db1e69545f9af445d1da5e133e68b37be17f348a035a706923f7250ab0bc
@@ -2191,7 +2201,7 @@ entries:
     version: 0.18.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.298639603Z"
+    created: "2026-03-15T17:55:29.023299241Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: e16a3ba833d73b730818c4ef4a12280eec51fa58e8e2324c1a50a4c39167d283
@@ -2206,7 +2216,7 @@ entries:
     version: 0.17.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.298110244Z"
+    created: "2026-03-15T17:55:29.022986798Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: b02e927a9346c35d41f22fd46ea9911d245c97908f5be9a69ccd437e7c29539a
@@ -2221,7 +2231,7 @@ entries:
     version: 0.17.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.297190243Z"
+    created: "2026-03-15T17:55:29.022655762Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: a54bcca6a8dba4de44e5abb140b8b6f38029f73a3fa71c87a0d6a1b9d96fa83b
@@ -2236,7 +2246,7 @@ entries:
     version: 0.17.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.296380058Z"
+    created: "2026-03-15T17:55:29.022312913Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 2ce57df5bf48755ce9f2d230c19f2e8326206778f709bb8eec8aefc434e649c1
@@ -2251,7 +2261,7 @@ entries:
     version: 0.16.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.296091826Z"
+    created: "2026-03-15T17:55:29.021990953Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 9977c37ec6b54841c0b11fcd6c0b929bcc9d87f3e4a4db9661ef29238cad4523
@@ -2266,7 +2276,7 @@ entries:
     version: 0.15.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.295802045Z"
+    created: "2026-03-15T17:55:29.021652482Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 3d2f97e883a71030790e402f114cf82a66324bb3cfb472e9e5077c6bd9cb5a3c
@@ -2281,7 +2291,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.295488272Z"
+    created: "2026-03-15T17:55:29.021331854Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 362dd9939c05eed29eed51b23297a7b4daf7a0d4e14ca488a95cfeb978ed3a81
@@ -2296,7 +2306,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.295191145Z"
+    created: "2026-03-15T17:55:29.021009283Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 92c8b021354c568e4f164d156ddd2e9f3a6a44aa7462bde4fb0c01c9825c5711
@@ -2311,7 +2321,7 @@ entries:
     version: 0.13.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2026-03-15T17:39:27.29487474Z"
+    created: "2026-03-15T17:55:29.020652829Z"
     description: A Helm chart for Kubernetes
     digest: aba8cc7492fa333fa669273f9231185d58f767d8327fb92e6a0680e85e2b07e3
     name: backend-sdk
@@ -2322,10 +2332,10 @@ entries:
   complii:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.304289931Z"
+    created: "2026-03-15T17:55:29.03027675Z"
     description: A Helm chart for complii, a declarative, GitOps continuous delivery
       helm chart for Kubernetes.
-    digest: 45544592d0d8beac5897a317f758a886281887632076c56e263330df7d1fdaf2
+    digest: 5b3d2b5185961f2a6f541d25184b4ed63cff0aa40063e2bb16b453ebe358c38c
     keywords:
     - frontend
     maintainers:
@@ -2338,9 +2348,9 @@ entries:
   complii-backend:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-03-15T17:39:27.304637376Z"
+    created: "2026-03-15T17:55:29.030575707Z"
     description: A Helm chart for complii
-    digest: a52c2b0c31c1a92127809adcc157d5a0b787b5ff192734141d0ab6ff51d37ad4
+    digest: 12b332ffd3f6ff97a56d9cb0cd75c1a774955b332205fde5a6539dce56a843fb
     keywords:
     - complii-backend
     maintainers:
@@ -2354,9 +2364,9 @@ entries:
   dashboard-backend:
   - apiVersion: v2
     appVersion: v0.24.0
-    created: "2026-03-15T17:39:27.317409242Z"
+    created: "2026-03-15T17:55:29.041727035Z"
     description: A Helm chart for Kubernetes
-    digest: bc78f45b4580c61aefd1ebfdaabd21de8f8205c93bf578575283bfa562c3d040
+    digest: e06e6107fee5f1e525cc8c9599fbd076dbe938b75cd3d28d6316565897d2e75f
     name: dashboard-backend
     type: application
     urls:
@@ -2364,7 +2374,7 @@ entries:
     version: v0.27.2
   - apiVersion: v2
     appVersion: v0.24.0
-    created: "2026-03-15T17:39:27.316922407Z"
+    created: "2026-03-15T17:55:29.041314927Z"
     description: A Helm chart for Kubernetes
     digest: dca97648bbf8952dac62de27385887efe3cd7acf597ae18269c1f0d690ed2758
     name: dashboard-backend
@@ -2374,7 +2384,7 @@ entries:
     version: v0.27.1
   - apiVersion: v2
     appVersion: v0.24.0
-    created: "2026-03-15T17:39:27.31640666Z"
+    created: "2026-03-15T17:55:29.040876891Z"
     description: A Helm chart for Kubernetes
     digest: 58556a724155924961af0dfd3713c5f5f1886b5de4454db96f7de04e4decc6db
     name: dashboard-backend
@@ -2384,7 +2394,7 @@ entries:
     version: v0.27.0
   - apiVersion: v2
     appVersion: v0.24.0
-    created: "2026-03-15T17:39:27.315917294Z"
+    created: "2026-03-15T17:55:29.040448863Z"
     description: A Helm chart for Kubernetes
     digest: 422c732fa59a9fadfc2f8606241ee2af830c903fe87778e069d5dca8ff4a3517
     name: dashboard-backend
@@ -2394,7 +2404,7 @@ entries:
     version: v0.26.0-alpha.4
   - apiVersion: v2
     appVersion: v0.24.0
-    created: "2026-03-15T17:39:27.315350711Z"
+    created: "2026-03-15T17:55:29.040043658Z"
     description: A Helm chart for Kubernetes
     digest: a6612709740d8641c00bac8acb16222ae414743c8e013172d9b67241d080dbc6
     name: dashboard-backend
@@ -2404,7 +2414,7 @@ entries:
     version: v0.26.0-alpha.3
   - apiVersion: v2
     appVersion: v0.24.0
-    created: "2026-03-15T17:39:27.314661022Z"
+    created: "2026-03-15T17:55:29.039615159Z"
     description: A Helm chart for Kubernetes
     digest: 585203d84985b95e079cee2c7c5a353cca76fa0f35144e4579addbfd6da9889b
     name: dashboard-backend
@@ -2414,7 +2424,7 @@ entries:
     version: v0.26.0-alpha.2
   - apiVersion: v2
     appVersion: v0.24.0
-    created: "2026-03-15T17:39:27.313370478Z"
+    created: "2026-03-15T17:55:29.039192181Z"
     description: A Helm chart for Kubernetes
     digest: 8fa249ad099deb9edeaf3cb53f3448fa5b65b6b6fa6ecfea8a6709899689fbd0
     name: dashboard-backend
@@ -2424,7 +2434,7 @@ entries:
     version: v0.26.0-alpha.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.312654728Z"
+    created: "2026-03-15T17:55:29.038736071Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 4a84fe839b71ac2c0fb1ffa8a774326bf3cf260dce4a76656a5c00ae4a02b6f9
@@ -2439,7 +2449,7 @@ entries:
     version: 0.20.5
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.312315793Z"
+    created: "2026-03-15T17:55:29.038393963Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: a03ace7ef35d66c0de14ad1b1733fde769ff0b5681da5eec61c142905ced3668
@@ -2454,7 +2464,7 @@ entries:
     version: 0.20.4
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.311989455Z"
+    created: "2026-03-15T17:55:29.038039202Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 35a761ccacb0b8664b96c9322915f077b16e113aeaaba1efae473b7d096e60ac
@@ -2469,7 +2479,7 @@ entries:
     version: 0.20.3
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.311658105Z"
+    created: "2026-03-15T17:55:29.037666798Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 48de562a5639bb84a20983584efc1b5a429507f295c5ebbca5aff5edcd375f89
@@ -2484,7 +2494,7 @@ entries:
     version: 0.20.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.311323573Z"
+    created: "2026-03-15T17:55:29.037305755Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 21b14b9d0a49c86d89e6cc7216151ec6e89328c9bb007475dd1e6919c112f44f
@@ -2499,7 +2509,7 @@ entries:
     version: 0.20.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.310999339Z"
+    created: "2026-03-15T17:55:29.036957767Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: c50a48352318e0815be5705c56cdff5bb48a99550b32ea5c765b888ed030e40f
@@ -2514,7 +2524,7 @@ entries:
     version: 0.20.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.310662024Z"
+    created: "2026-03-15T17:55:29.036590502Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: c0a659f0f8d81cbf32a8fe9dc7bef23badfd88eb1407d4902d4a3071dfd95c54
@@ -2529,7 +2539,7 @@ entries:
     version: 0.20.0-rc.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.310290776Z"
+    created: "2026-03-15T17:55:29.036238606Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: c9c3e211f1cbd10297402256eb796e4f383efe0ee265c4f483855239eae85434
@@ -2544,7 +2554,7 @@ entries:
     version: 0.19.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.309972538Z"
+    created: "2026-03-15T17:55:29.035842749Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 17ef39d4aa0ae45c9a9b92456e7301e04352c03e44ac4687677d53f9135349e4
@@ -2559,7 +2569,7 @@ entries:
     version: 0.19.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.30964965Z"
+    created: "2026-03-15T17:55:29.035185078Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 1df861684d26ddd7fc4b650ce0f07eac9efddf0ff9996c78db2dbd9694ff8984
@@ -2574,7 +2584,7 @@ entries:
     version: 0.19.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.309300687Z"
+    created: "2026-03-15T17:55:29.034204851Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: a6e7b0fd8a59495abfe6d5ce28ae34e6e3eb01067b817b301df717ce257a22f4
@@ -2589,7 +2599,7 @@ entries:
     version: 0.18.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.308971628Z"
+    created: "2026-03-15T17:55:29.033837346Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: e36f2276363d1f881824ad5712d1c5879dac18286726cf607ee63d3479b4515a
@@ -2604,7 +2614,7 @@ entries:
     version: 0.18.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.30860252Z"
+    created: "2026-03-15T17:55:29.033502311Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 71a05c08b2c9f0a9d8c12c3ada6c93273f8026141ddf9bd7ee71ebd454c0df5a
@@ -2619,7 +2629,7 @@ entries:
     version: 0.17.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.308258092Z"
+    created: "2026-03-15T17:55:29.033161045Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 29ea3f5737264087fc737d40b588df68faf1615dc1cd8068a1476d8919304c45
@@ -2634,7 +2644,7 @@ entries:
     version: 0.17.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.307935359Z"
+    created: "2026-03-15T17:55:29.032795564Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 05f0b7996f3a7ba1ee373a59827938a2393cefd833ee0f897221def6effc16c6
@@ -2649,7 +2659,7 @@ entries:
     version: 0.17.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.307593869Z"
+    created: "2026-03-15T17:55:29.032426536Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: d8c1866b4c10a1e7f4d4e862eacb754243acb7cecf4b266fb02bd27674321bb1
@@ -2664,7 +2674,7 @@ entries:
     version: 0.16.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.30719789Z"
+    created: "2026-03-15T17:55:29.032084669Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 9f4b6721b86da177ef921e828a5d10b5097f4fe3b1407394d36f6a9c814749c3
@@ -2679,7 +2689,7 @@ entries:
     version: 0.15.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.306845917Z"
+    created: "2026-03-15T17:55:29.031713137Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 6defa56f78aa4c1539f205df58e3bcf74b3487aa218b7af38a2eb05d0290528e
@@ -2694,7 +2704,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.306364187Z"
+    created: "2026-03-15T17:55:29.031337276Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: a53e06e4c5d118456b425fede09caf0bed5230e62b0627a2bc74cce6384294ea
@@ -2709,7 +2719,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.305443516Z"
+    created: "2026-03-15T17:55:29.030958581Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: bef96faeef330481198cbe3f79cbbee5fdc13b38f77bab9b1554de39f04c9bf1
@@ -2725,9 +2735,9 @@ entries:
   dashboard-frontend:
   - apiVersion: v2
     appVersion: v0.23.0
-    created: "2026-03-15T17:39:27.326265979Z"
+    created: "2026-03-15T17:55:29.050611395Z"
     description: A Helm chart for Kubernetes
-    digest: 11e03bb190734f27374b30f4d602738416b8a9dd6609cdbcab9cbe7f8941ff04
+    digest: 5708b6c3a27321821810d49981f3ea2a4ccd6bffc7d4b49c244d5557220e0cf1
     name: dashboard-frontend
     type: application
     urls:
@@ -2735,7 +2745,7 @@ entries:
     version: v0.27.0
   - apiVersion: v2
     appVersion: v0.23.0
-    created: "2026-03-15T17:39:27.325866498Z"
+    created: "2026-03-15T17:55:29.050232409Z"
     description: A Helm chart for Kubernetes
     digest: 6f897f1a3e73c4c4964e3ff56d524665d5d61d679a611991a50272f7c20228a6
     name: dashboard-frontend
@@ -2745,7 +2755,7 @@ entries:
     version: v0.26.0-alpha.3
   - apiVersion: v2
     appVersion: v0.23.0
-    created: "2026-03-15T17:39:27.325303147Z"
+    created: "2026-03-15T17:55:29.04980385Z"
     description: A Helm chart for Kubernetes
     digest: fe7c3dcf615947668c9a804bc5e5718043f255eb6678eb4bd2aff22b088e364e
     name: dashboard-frontend
@@ -2755,7 +2765,7 @@ entries:
     version: v0.26.0-alpha.2
   - apiVersion: v2
     appVersion: v0.23.0
-    created: "2026-03-15T17:39:27.324738344Z"
+    created: "2026-03-15T17:55:29.049419674Z"
     description: A Helm chart for Kubernetes
     digest: 4b64cdf51018c7ac6be5a6104480e8f4d5f19691f74d0222b6b14e8e42a3b316
     name: dashboard-frontend
@@ -2765,7 +2775,7 @@ entries:
     version: v0.26.0-alpha.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.324326598Z"
+    created: "2026-03-15T17:55:29.049029057Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: ceb2a44e707d15fb94b338367511459816c43cbf62009dd529fa3360ffd9b2e7
@@ -2780,7 +2790,7 @@ entries:
     version: 0.20.4
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.324027883Z"
+    created: "2026-03-15T17:55:29.04869305Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 29e7cee3d2004de0178a7cc64a7feea9883ed6eb21a4364d133118cc363610ef
@@ -2795,7 +2805,7 @@ entries:
     version: 0.20.3
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.323715934Z"
+    created: "2026-03-15T17:55:29.048375358Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 2a0f369571d88b75ac5f0deb8e17a66c4f50adb3da78ac8aec4839c7be9a37e2
@@ -2810,7 +2820,7 @@ entries:
     version: 0.20.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.323330203Z"
+    created: "2026-03-15T17:55:29.048051855Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 57c2e7e0f19a06f518f2b07bfbf3939e0dbd9ad15d8e22afea0a2c07cbacbdd2
@@ -2825,7 +2835,7 @@ entries:
     version: 0.20.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.322605371Z"
+    created: "2026-03-15T17:55:29.047715799Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: ace7a22585a1a69213bc5dbd10d99cce8c3ef3d136a22b8c2309c45112d4ba23
@@ -2840,7 +2850,7 @@ entries:
     version: 0.20.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.321663555Z"
+    created: "2026-03-15T17:55:29.047392827Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 54adf019ca4c610c8d9cd0ea5656d55b53d1dd03d784e4e8661a1a3aff1226fe
@@ -2855,7 +2865,7 @@ entries:
     version: 0.20.0-rc.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.321353042Z"
+    created: "2026-03-15T17:55:29.047063143Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 88054074de65d071a3155b046c3aa743f444df06263b095a13c1b1cb70484345
@@ -2870,7 +2880,7 @@ entries:
     version: 0.19.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.32105624Z"
+    created: "2026-03-15T17:55:29.046728168Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: dd5f8f98e43f5fd2f2d851a87af0859ab15365538d52e704cb09626ec53bb4a1
@@ -2885,7 +2895,7 @@ entries:
     version: 0.19.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.320773939Z"
+    created: "2026-03-15T17:55:29.046406098Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 8ea5aa61a67f37b2e6a816d0d740d15cc1cb93b1b132181eea40ef25d8ef23af
@@ -2900,7 +2910,7 @@ entries:
     version: 0.19.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.320462095Z"
+    created: "2026-03-15T17:55:29.04608532Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: aa798f90ef9854920567b79590f059b2993ec77d3f2b03b84fe15108e34ffb8f
@@ -2915,7 +2925,7 @@ entries:
     version: 0.18.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.320180875Z"
+    created: "2026-03-15T17:55:29.045732202Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 3a67be10f002984b5a42fa7996419e39171c2207e800d3f4969528b148adfa1f
@@ -2930,7 +2940,7 @@ entries:
     version: 0.18.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.319896628Z"
+    created: "2026-03-15T17:55:29.045397569Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 4d990c8ffaffef1093f2a4e5c4141279d08ab90fc5316a80c72b909c417db90b
@@ -2945,7 +2955,7 @@ entries:
     version: 0.17.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.319605133Z"
+    created: "2026-03-15T17:55:29.045071621Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 69e3641ea7141ada4b8fb0dbfe7ff20117acd90fd223bbb04f521845172eae94
@@ -2960,7 +2970,7 @@ entries:
     version: 0.17.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.319311464Z"
+    created: "2026-03-15T17:55:29.044709025Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: a36180c7d3bbdd4ef64695e9478d768de168fe0f526454b4a43fe5e9c2edac6f
@@ -2975,7 +2985,7 @@ entries:
     version: 0.17.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.319030624Z"
+    created: "2026-03-15T17:55:29.044373289Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: e5a17e5776792c920c9a3752e55fe1e73e9dcd9f521b3a965e633dc4295c399f
@@ -2990,7 +3000,7 @@ entries:
     version: 0.16.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.318741409Z"
+    created: "2026-03-15T17:55:29.044013208Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: d4f221882143aa60de22f3352a4d1af5e1c008baa0d268e5c8a014307b2dc227
@@ -3005,7 +3015,7 @@ entries:
     version: 0.15.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.318437392Z"
+    created: "2026-03-15T17:55:29.043202535Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: eddc922d18e90e3ae6611279dd6c336aafde8426444e70566ffea804d9d1eed7
@@ -3020,7 +3030,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.318147424Z"
+    created: "2026-03-15T17:55:29.042380794Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 6da46ec60abbc2b411ce226d72b1fba218f75fe96e73d271a130153d5c1fbc31
@@ -3035,7 +3045,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.317803054Z"
+    created: "2026-03-15T17:55:29.042062591Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 840018882c4a936087a736e2301af8a7b606353decc757d54af7485c06b804d4
@@ -3051,7 +3061,7 @@ entries:
   data-lineage:
   - apiVersion: v2
     appVersion: 0.0.2
-    created: "2026-03-15T17:39:27.32746244Z"
+    created: "2026-03-15T17:55:29.052756934Z"
     description: A Helm chart for Kubernetes
     digest: 29d3d41e4264f64556aabec61b6bf3c311b33867100528b5fe43bbdbe69f8b3c
     name: data-lineage
@@ -3061,7 +3071,7 @@ entries:
     version: v0.26.0
   - apiVersion: v2
     appVersion: 0.0.2
-    created: "2026-03-15T17:39:27.327173938Z"
+    created: "2026-03-15T17:55:29.052423283Z"
     description: A Helm chart for Kubernetes
     digest: f68d6e9577606cc07f3903f4138eab88891b9669f411be7fdad72807be167202
     name: data-lineage
@@ -3071,7 +3081,7 @@ entries:
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.0.2
-    created: "2026-03-15T17:39:27.32687049Z"
+    created: "2026-03-15T17:55:29.051709342Z"
     description: A Helm chart for Kubernetes
     digest: a0f17e542f38eb5b7773fae05657d20594f5d4d2401814ca98ec00ef3e66f2e6
     name: data-lineage
@@ -3081,7 +3091,7 @@ entries:
     version: 0.0.2
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.326533259Z"
+    created: "2026-03-15T17:55:29.050889644Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 027c28c926749067c956ca009934b04bac4c7eae8f1d3882a283f200c58dc52c
@@ -3096,10 +3106,10 @@ entries:
   edgetag-reporting:
   - apiVersion: v1
     appVersion: 0.1.1
-    created: "2026-03-15T17:39:27.328160801Z"
+    created: "2026-03-15T17:55:29.053531818Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
-    digest: 024841e96f52004685e93a33d87966ec0a29ebb085ddab576f94d6ea8a4b2b2c
+    digest: a0e0f167a78117ac2776e346a8b908a7d0f1acac7c39c68812199c8d947646c5
     keywords:
     - edgetag-reporting
     maintainers:
@@ -3111,7 +3121,7 @@ entries:
     version: 0.1.1
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2026-03-15T17:39:27.327827424Z"
+    created: "2026-03-15T17:55:29.053153644Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: f04fa7ca2520775a7ee7cce4355864db149008ff9a063dff8215c2f51e2be802
@@ -3127,10 +3137,10 @@ entries:
   health-check:
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.328527495Z"
+    created: "2026-03-15T17:55:29.05396206Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
-    digest: e95dcb70efa6ae59f1a9ceabe825022ee03a5585beb13f4b4373c109bb8fb8f0
+    digest: b6ea3b5a012bcf89bc5d1b8135f068a25391648c1e211f95669e9836640bd009
     keywords:
     - health-check
     maintainers:
@@ -3141,7 +3151,7 @@ entries:
     version: 0.13.1
   - apiVersion: v1
     appVersion: 0.0.1
-    created: "2026-03-15T17:39:27.328350957Z"
+    created: "2026-03-15T17:55:29.053744485Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 4f860dc6ca99f226e10f732572672972e6098b4d6301b8274b6b89c0dfd7f101
@@ -3156,7 +3166,7 @@ entries:
   mcp-backend:
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2026-03-15T17:39:27.329672739Z"
+    created: "2026-03-15T17:55:29.055132572Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: ad1806dd274b7db6597d3bb9824d54f018429aa6f596e50f6c6a4e493a9a09f3
@@ -3168,7 +3178,7 @@ entries:
     version: v0.0.3
   - apiVersion: v2
     appVersion: 0.2.0
-    created: "2026-03-15T17:39:27.329311935Z"
+    created: "2026-03-15T17:55:29.054746883Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 06db53d10cce15bd497509371a9c277b6624a884f373a4a327fa6b188a546f8c
@@ -3180,7 +3190,7 @@ entries:
     version: v0.0.2
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2026-03-15T17:39:27.328941331Z"
+    created: "2026-03-15T17:55:29.054341017Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 40f368063ed884f981642d3b24f711ec2497efc3ec4ef32f2449756890908c81
@@ -3193,16 +3203,16 @@ entries:
   nlb-loadbalancer:
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2026-03-15T17:39:27.330439781Z"
+    created: "2026-03-15T17:55:29.05566295Z"
     description: The for creating nlb loadbalancer
-    digest: 6f0da12cdd67edb206720c5f8668ddd685ac899dfc99de42f56e7be94229e6fe
+    digest: c8e25741241642b99b7675297ef0540abfb6df779612af7b4724e7b352f32933
     name: nlb-loadbalancer
     urls:
     - https://blotoutio.github.io/charts/nlb-loadbalancer-0.13.1.tgz
     version: 0.13.1
   - apiVersion: v1
     appVersion: 0.1.0
-    created: "2026-03-15T17:39:27.32991635Z"
+    created: "2026-03-15T17:55:29.055412654Z"
     description: The for creating nlb loadbalancer
     digest: c5d5952f2f77ae93ef5b363459fc96a40754df215f841bee06156ae0d14ddf93
     name: nlb-loadbalancer
@@ -3212,7 +3222,7 @@ entries:
   shopgpt-backend:
   - apiVersion: v2
     appVersion: 0.1.4
-    created: "2026-03-15T17:39:27.335492584Z"
+    created: "2026-03-15T17:55:29.060893091Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 2b216397eb311f500d5630bd386e772397719f9d079d50a6cafa21712cee0bfd
@@ -3224,7 +3234,7 @@ entries:
     version: v0.2.2
   - apiVersion: v2
     appVersion: 0.1.4
-    created: "2026-03-15T17:39:27.335135257Z"
+    created: "2026-03-15T17:55:29.060506209Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 870fa4fa413395c660c28b6852e427be3d6ef49a3ebaf8291f988562f2b99ebf
@@ -3236,7 +3246,7 @@ entries:
     version: v0.2.1
   - apiVersion: v2
     appVersion: 0.1.4
-    created: "2026-03-15T17:39:27.334787291Z"
+    created: "2026-03-15T17:55:29.059890852Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 677d5d065f50561c90faf5d4cd618b09882122e56ed6299e45797b4e91a78f13
@@ -3248,7 +3258,7 @@ entries:
     version: v0.2.0
   - apiVersion: v2
     appVersion: 0.1.3
-    created: "2026-03-15T17:39:27.334403762Z"
+    created: "2026-03-15T17:55:29.058807451Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 8aef4240d194b1189267069a419b22c6a32dc17b56aea25bf2bfbe86f13989fa
@@ -3260,7 +3270,7 @@ entries:
     version: v0.1.9
   - apiVersion: v2
     appVersion: 0.1.3
-    created: "2026-03-15T17:39:27.334101174Z"
+    created: "2026-03-15T17:55:29.058488527Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 13ee5775d63d3c505bf6f8947a2a1b18be613dd70170499705eec315443f9547
@@ -3272,7 +3282,7 @@ entries:
     version: v0.1.8
   - apiVersion: v2
     appVersion: 0.1.3
-    created: "2026-03-15T17:39:27.333752048Z"
+    created: "2026-03-15T17:55:29.058123937Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 05ee31f454023fc374eeddf74b3f83b40fd543d3aace64232c68ffdc7812ebc1
@@ -3284,7 +3294,7 @@ entries:
     version: v0.1.7
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2026-03-15T17:39:27.333385243Z"
+    created: "2026-03-15T17:55:29.057734461Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 7cdbbf91f45e5b0ba6cf9782dd0e69e48e29352bc5fa53b4f7fa88a65162992d
@@ -3296,7 +3306,7 @@ entries:
     version: v0.1.6
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2026-03-15T17:39:27.333031452Z"
+    created: "2026-03-15T17:55:29.057353892Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: ffedba595a5e4a77a7f24417026a7308df4f1bc150ff4e4bc5b5e0a665f885e5
@@ -3308,7 +3318,7 @@ entries:
     version: v0.1.5
   - apiVersion: v2
     appVersion: 0.1.2
-    created: "2026-03-15T17:39:27.332662228Z"
+    created: "2026-03-15T17:55:29.056988791Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: b5e46b009235a117c5138de0dc683fa9f2d653a1e472fb8e1ff9d23d5293e0fd
@@ -3320,7 +3330,7 @@ entries:
     version: v0.1.4
   - apiVersion: v1
     appVersion: 0.1.1
-    created: "2026-03-15T17:39:27.332245844Z"
+    created: "2026-03-15T17:55:29.056605918Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: da6e539cf7af67f68acad965e1a703ececc8c77b5f7c47c62d3f322de468f1eb
@@ -3332,7 +3342,7 @@ entries:
     version: v0.1.3
   - apiVersion: v1
     appVersion: 0.1.1
-    created: "2026-03-15T17:39:27.331252593Z"
+    created: "2026-03-15T17:55:29.055993566Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: c2cbe15f902340a0bd6ea135f50afb3b3a3fb7b6adc7f915fce4b937a23a6906
@@ -3344,7 +3354,7 @@ entries:
     version: 0.1.2
   - apiVersion: v1
     appVersion: 0.1.1
-    created: "2026-03-15T17:39:27.331912861Z"
+    created: "2026-03-15T17:55:29.056302342Z"
     description: A Helm chart for App, a declarative, GitOps continuous delivery helm
       chart for Kubernetes.
     digest: 2a32175f804379459ff9e8f496dfc4c34a7159380501ddcb23ddd72abf44fd81
@@ -3357,10 +3367,10 @@ entries:
   superset:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.364368974Z"
+    created: "2026-03-15T17:55:29.087439922Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
-    digest: f5edd04ddb61e45991122cbf285577a115839caf6fc86b21f67c49fce2bbbca6
+    digest: bf8fba0fb85e3e7a00e9932b806bd55f20c43063febd01f3c2f64c27f22743cb
     maintainers:
     - email: craig@craigrueda.com
       name: craig-rueda
@@ -3371,7 +3381,7 @@ entries:
     version: 0.24.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.363208265Z"
+    created: "2026-03-15T17:55:29.085991392Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 582bf223b5f9079ebc01b9e4fe39753c6b07afbf65da2e198b4944bbef25798e
@@ -3385,7 +3395,7 @@ entries:
     version: 0.24.1-alpha.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.361980522Z"
+    created: "2026-03-15T17:55:29.084842621Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 54c9a7adf0b32835a2ab25c8220ccfb15d1a721e8d5eb0900c0fd3a38c04fc4c
@@ -3399,7 +3409,7 @@ entries:
     version: 0.24.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.359789582Z"
+    created: "2026-03-15T17:55:29.083699481Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 2a7ee93c72c07af01eb6463d4abde9879516cfaaaa859758b5f6a0f388766d21
@@ -3413,7 +3423,7 @@ entries:
     version: 0.20.4
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.358529289Z"
+    created: "2026-03-15T17:55:29.082647931Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 5f849ab3c52474d3788b212bd6c5c401473aa2e6030c6095905659f15db1d498
@@ -3427,7 +3437,7 @@ entries:
     version: 0.20.3
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.357412059Z"
+    created: "2026-03-15T17:55:29.081595549Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 1b16a39f384a9600d26eeaf2a8b15aef6d42e2c64bf2a0bebea8633a62894d12
@@ -3441,7 +3451,7 @@ entries:
     version: 0.20.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.356274159Z"
+    created: "2026-03-15T17:55:29.080548147Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: b0d6ec0029b677a7843d72f546252dcf7ab165dacf61ebb755f73f5f451a521e
@@ -3455,7 +3465,7 @@ entries:
     version: 0.20.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.35514181Z"
+    created: "2026-03-15T17:55:29.079479295Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: e942c3eab33d47ae991b7b8109bc88e00a5dda17848f8d29731bd70ceba8d05d
@@ -3469,7 +3479,7 @@ entries:
     version: 0.20.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.353961677Z"
+    created: "2026-03-15T17:55:29.077897813Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: e0f909c499d9adf6dd05b5cd27ac48cbaf13535413857741f90bf5bc8abaa234
@@ -3483,7 +3493,7 @@ entries:
     version: 0.20.0-rc.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.352864331Z"
+    created: "2026-03-15T17:55:29.076289415Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 5d652cf369969a0fe6cf9b6b97d6c56c96a0334f4d24a0342771db08caab6df2
@@ -3497,7 +3507,7 @@ entries:
     version: 0.19.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.35171151Z"
+    created: "2026-03-15T17:55:29.075214522Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: aaa9ee990c67169b5e1910e32f3c493b3517fcae8e4ff8859b7f2e55252b1488
@@ -3511,7 +3521,7 @@ entries:
     version: 0.19.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.349917536Z"
+    created: "2026-03-15T17:55:29.074165346Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 7785e45b49db021e357f060bf6b5d927825a33b1755593b4f3ae5e12c2a9f85e
@@ -3525,7 +3535,7 @@ entries:
     version: 0.19.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.348282109Z"
+    created: "2026-03-15T17:55:29.073094731Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: ff494db5d4ec90c182532fbe24ccfc0678baebc6beb24a1b9bf10d96c445fdcb
@@ -3539,7 +3549,7 @@ entries:
     version: 0.18.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.347138394Z"
+    created: "2026-03-15T17:55:29.07204237Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: c005b64011454608199a21f9ac6abd369019b0bd1d5d0f84c0fdb375ec61e570
@@ -3553,7 +3563,7 @@ entries:
     version: 0.18.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.345997835Z"
+    created: "2026-03-15T17:55:29.070979178Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: a3352f568313d45bced439ceddf0b070425fd9acbfc3ad23bfeaa9d71b184159
@@ -3567,7 +3577,7 @@ entries:
     version: 0.17.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.344849143Z"
+    created: "2026-03-15T17:55:29.069857217Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: c25278564464ae527ec06d2e8997e1b07555311f45b9d878c32a9328f99821dd
@@ -3581,7 +3591,7 @@ entries:
     version: 0.17.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.343736101Z"
+    created: "2026-03-15T17:55:29.067830059Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: eb5ec32e79b00a69669028b9332e8dcfc373af88bab9400e63e96f3551f5a66a
@@ -3595,7 +3605,7 @@ entries:
     version: 0.17.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.342639772Z"
+    created: "2026-03-15T17:55:29.066760706Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 5222193da33d996471c7eed76f9b617a08c43e4f347251caf10d02229cdbfbfb
@@ -3609,7 +3619,7 @@ entries:
     version: 0.16.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.341477763Z"
+    created: "2026-03-15T17:55:29.065682497Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 84db2db8376e96a06ea13c12c3ba37d20be129e938acbc8fcc1981d3eed6c60b
@@ -3623,7 +3633,7 @@ entries:
     version: 0.15.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.339645975Z"
+    created: "2026-03-15T17:55:29.064604718Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 40370a88353915d0b35c4cf59f332410faa3dffadb26bd7a4c7050783a9a4e05
@@ -3637,7 +3647,7 @@ entries:
     version: 0.14.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.338330651Z"
+    created: "2026-03-15T17:55:29.063693971Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: f4b4220dac7ae42e0a32c3341902efbb604930fed0d1cc4e34f6b4e04bd53a0e
@@ -3651,7 +3661,7 @@ entries:
     version: 0.14.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.337408103Z"
+    created: "2026-03-15T17:55:29.062714415Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: d595eeaa8631e02ee60767c5a6c00aa4380fd06026cd72f39ae0f6e8cfccde5a
@@ -3665,7 +3675,7 @@ entries:
     version: 0.13.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2026-03-15T17:39:27.336433396Z"
+    created: "2026-03-15T17:55:29.061816251Z"
     description: Apache Superset is a modern, enterprise-ready business intelligence
       web application
     digest: 41ddde66ee42c85cf1dca6bfb15682ae657202606b15e1a1836516cabf6256f3
@@ -3677,4 +3687,4 @@ entries:
     urls:
     - https://blotoutio.github.io/charts/superset-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-15T17:39:26.43752627Z"
+generated: "2026-03-15T17:55:28.214077742Z"
