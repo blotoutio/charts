@@ -1,117 +1,66 @@
----
-{{ if .Values.webapp.ingress.enabled -}}
-{{- $fullName := include "airbyte.fullname" . -}}
-{{- $svcPort := .Values.webapp.service.port -}}
-{{- if and .Values.webapp.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-  {{- if not (hasKey .Values.webapp.ingress.annotations "kubernetes.io/ingress.class") }}
-  {{- $_ := set .Values.webapp.ingress.annotations "kubernetes.io/ingress.class" .Values.webapp.ingress.className}}
-  {{- end }}
-{{- end }}
-{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
+{{- if .Values.webapp.ingress.enabled }}
+
 apiVersion: networking.k8s.io/v1
-{{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
-apiVersion: networking.k8s.io/v1beta1
-{{- else -}}
-apiVersion: extensions/v1beta1
-{{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ include "airbyte.fullname" . }}
   labels:
     {{- include "airbyte.labels" . | nindent 4 }}
   {{- with .Values.webapp.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
+
 spec:
-  {{- if and .Values.webapp.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
+  {{- if .Values.webapp.ingress.className }}
   ingressClassName: {{ .Values.webapp.ingress.className }}
   {{- end }}
+
   {{- if .Values.webapp.ingress.tls }}
   tls:
-    {{- range .Values.webapp.ingress.tls }}
+  {{- range .Values.webapp.ingress.tls }}
     - hosts:
-        {{- range .hosts }}
+      {{- range .hosts }}
         - {{ . | quote }}
-        {{- end }}
+      {{- end }}
       secretName: {{ .secretName }}
-    {{- end }}
+  {{- end }}
   {{- end }}
   rules:
-    {{- $serverPort := int (.Values.server.service.port | default 8001) -}}
-    {{- $connectorBuilderPath := trimSuffix "/" ((index .Values.webapp "connectorBuilderServer" | default dict).url | default "") -}}
-    {{- $connectorBuilderPort := int (.Values.connectorBuilderServer.service.port | default 80) -}}
-    {{- range .Values.webapp.ingress.hosts }}
+  {{- range .Values.webapp.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
-          # 1. /api -> workload-api-server
-          - path: /api
-            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
-            pathType: Prefix
-            {{- end }}
-            backend:
-              {{- $workloadApiPort := int ($.Values.workloadApiServer.service.port | default 8001) }}
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-              service:
-                name: {{ $.Release.Name }}-workload-api-server-svc
-                port:
-                  number: {{ $workloadApiPort }}
-              {{- else }}
-              serviceName: {{ $.Release.Name }}-workload-api-server-svc
-              servicePort: {{ $workloadApiPort }}
-              {{- end }}
-          {{- if $connectorBuilderPath }}
-          # 2. /connector-builder-api -> connector-builder-server
-          - path: {{ $connectorBuilderPath }}
-            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
-            pathType: Prefix
-            {{- end }}
-            backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-              service:
-                name: {{ $.Release.Name }}-airbyte-connector-builder-server-svc
-                port:
-                  number: {{ $connectorBuilderPort }}
-              {{- else }}
-              serviceName: {{ $.Release.Name }}-airbyte-connector-builder-server-svc
-              servicePort: {{ $connectorBuilderPort }}
-              {{- end }}
-          {{- end }}
-          # 3. / -> webapp (catch-all for UI)
-          - path: /
-            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
-            pathType: Prefix
-            {{- end }}
-            backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-              service:
-                name: {{ $.Release.Name }}-airbyte-webapp-svc
-                port:
-                  number: {{ $svcPort }}
-              {{- else }}
-              serviceName: {{ $fullName }}-svc
-              servicePort: {{ $svcPort }}
-              {{- end }}
-          {{- /* Extra paths from values (skip /api and / to avoid duplicates) */}}
-          {{- range .paths }}
-          {{- $normPath := trim (trimSuffix "/" (toString .path)) }}
-          {{- if and $normPath (ne $normPath "/api") (ne $normPath "/") }}
-          - path: {{ .path }}
-            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
-            pathType: {{ .pathType | default "ImplementationSpecific" }}
-            {{- end }}
-            backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-              service:
-                name: {{ $.Release.Name }}-airbyte-webapp-svc
-                port:
-                  number: {{ $svcPort }}
-              {{- else }}
-              serviceName: {{ $fullName }}-svc
-              servicePort: {{ $svcPort }}
-              {{- end }}
-          {{- end }}
-          {{- end }}
-    {{- end }}
+
+        - path: /api
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ $.Release.Name }}-workload-api-server-svc
+              port:
+                number: {{ $.Values.workloadApiServer.service.port | default 8001 }}
+        - path: /auth
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ $.Release.Name }}-workload-api-server-svc
+              port:
+                number: {{ $.Values.workloadApiServer.service.port | default 8001 }}
+        - path: /connector-builder-api
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ $.Release.Name }}-airbyte-connector-builder-server-svc
+              port:
+                number: {{ $.Values.connectorBuilderServer.service.port | default 80 }}
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ $.Release.Name }}-airbyte-webapp-svc
+              port:
+                number: {{ $.Values.webapp.service.port }}
+
+  {{- end }}
+
 {{- end }}
