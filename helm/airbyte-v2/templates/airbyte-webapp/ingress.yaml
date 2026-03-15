@@ -45,7 +45,7 @@ spec:
     - host: {{ .host | quote }}
       http:
         paths:
-          # Route /api to the workload-api-server (do not add a duplicate /api path under .paths)
+          # 1. /api -> workload-api-server
           - path: /api
             {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
             pathType: Prefix
@@ -62,7 +62,7 @@ spec:
               servicePort: {{ $workloadApiPort }}
               {{- end }}
           {{- if $connectorBuilderPath }}
-          # Route connector-builder path to connector-builder-server when webapp.connectorBuilderServer.url is set
+          # 2. /connector-builder-api -> connector-builder-server
           - path: {{ $connectorBuilderPath }}
             {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
             pathType: Prefix
@@ -78,13 +78,27 @@ spec:
               servicePort: {{ $connectorBuilderPort }}
               {{- end }}
           {{- end }}
+          # 3. / -> webapp (catch-all for UI)
+          - path: /
+            {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
+            pathType: Prefix
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $.Release.Name }}-airbyte-webapp-svc
+                port:
+                  number: {{ $svcPort }}
+              {{- else }}
+              serviceName: {{ $fullName }}-svc
+              servicePort: {{ $svcPort }}
+              {{- end }}
+          {{- /* Extra paths from values (skip /api and / to avoid duplicates) */}}
           {{- range .paths }}
           {{- $normPath := trim (trimSuffix "/" (toString .path)) }}
-          {{- /* Skip /api so it is not duplicated; /api is routed to workload-api-server above */}}
-          {{- if and $normPath (ne $normPath "/api") }}
+          {{- if and $normPath (ne $normPath "/api") (ne $normPath "/") }}
           - path: {{ .path }}
             {{- if semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion }}
-            {{- /* Default ImplementationSpecific to  */}}
             pathType: {{ .pathType | default "ImplementationSpecific" }}
             {{- end }}
             backend:
