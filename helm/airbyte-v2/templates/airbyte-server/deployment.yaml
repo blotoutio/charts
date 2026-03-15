@@ -94,7 +94,7 @@ spec:
         {{- include "airbyte.workloadLauncher.dataPlane.clientSecretSecretName.env" . | nindent 8 }}
         {{- include "airbyte.workloadLauncher.dataPlane.clientSecretSecretKey.env" . | nindent 8 }}
         - name: AIRBYTE_API_AUTH_HEADER_VALUE
-          value: "Internal server"
+          value: {{ include "airbyte.common.api.internalAuthHeaderValue" . | quote }}
         {{- end}}
 
         {{- include "airbyte.auth.jwt.envs" . | nindent 8 }}

@@ -69,7 +69,7 @@ spec:
         {{- /* Match server's AIRBYTE_API_AUTH_HEADER_VALUE so control-plane token endpoint accepts launcher (avoids 500) */}}
         {{- if (or (eq .Values.global.edition "community") (eq .Values.global.edition "enterprise")) }}
         - name: AIRBYTE_API_AUTH_HEADER_VALUE
-          value: "Internal server"
+          value: {{ include "airbyte.common.api.internalAuthHeaderValue" . | quote }}
         {{- end }}
 
         {{- /* v1-style: DATA_PLANE_ID=local for same-cluster/hybrid launcher */}}

@@ -138,6 +138,14 @@ Renders the global.api.authHeaderName value
 {{- end }}
 
 {{/*
+Renders the internal API auth header value (AIRBYTE_API_AUTH_HEADER_VALUE).
+Server and workload-launcher must use the same value so the token endpoint accepts launcher requests.
+*/}}
+{{- define "airbyte.common.api.internalAuthHeaderValue" }}
+    {{- .Values.global.api.internalAuthHeaderValue | default "Internal server" }}
+{{- end }}
+
+{{/*
 Renders the common.api.authHeaderName environment variable
 */}}
 {{- define "airbyte.common.api.authHeaderName.env" }}
