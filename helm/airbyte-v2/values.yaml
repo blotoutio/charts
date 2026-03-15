@@ -1768,6 +1768,8 @@ temporal:
     password: ""
     passwordSecretKey: ""
 
+  # -- Override Temporal server address (host:port). When set, all components use this instead of in-cluster Release.Name-temporal.
+  # Use for a separate Temporal cluster for v2: set to your v2 Temporal address (e.g. "temporal-v2.other-ns.svc.cluster.local:7233"), and set temporal.enabled: false so this chart does not deploy Temporal.
   host: ""
 
   sdk:

@@ -28,10 +28,17 @@ Renders the temporal.autoSetup environment variable
 {{- end }}
 
 {{/*
-Renders the temporal.host value
+Renders the temporal.host value.
+When temporal.host is set, use it (external or separate cluster). Else Temporal Cloud host or in-cluster Release.Name-temporal:port.
 */}}
 {{- define "airbyte.temporal.host" }}
-    {{- ternary (include "airbyte.temporal.cloud.host" .) (printf "%s-temporal:%d" .Release.Name (int .Values.temporal.service.port)) (eq (include "airbyte.temporal.cloud.enabled" .) "true") }}
+    {{- if .Values.temporal.host }}
+    {{- .Values.temporal.host }}
+    {{- else if eq (include "airbyte.temporal.cloud.enabled" .) "true" }}
+    {{- include "airbyte.temporal.cloud.host" . }}
+    {{- else }}
+    {{- printf "%s-temporal:%d" .Release.Name (int .Values.temporal.service.port) }}
+    {{- end }}
 {{- end }}
 
 {{/*
