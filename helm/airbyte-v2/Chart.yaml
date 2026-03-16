@@ -3,4 +3,4 @@ appVersion: 2.0.0-RC-a3743e9cb62
 description: Helm chart to deploy airbyte
 name: airbyte-v2
 type: application
-version: "v2.0.61"
+version: "v2.0.62"

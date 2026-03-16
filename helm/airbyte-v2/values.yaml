@@ -653,11 +653,11 @@ webapp:
     enabled: true
     # -- Specifies ingressClassName for clusters >= 1.18+
     className: "nginx"
-    # -- Ingress annotations. Use higher proxy timeouts to avoid 504 when creating sources (discovery can be slow; intermittent 504 = timeout too low). Example (10 min):
-    #   nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-    #   nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
-    #   nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
-    annotations: {}
+    # -- Ingress annotations. Defaults include higher proxy timeouts to avoid 504 when creating sources/destinations (discovery and check can be slow). Override with webapp.ingress.annotations to replace.
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-connect-timeout: "300"
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     # -- The list of hostnames to be covered with this ingress record.
