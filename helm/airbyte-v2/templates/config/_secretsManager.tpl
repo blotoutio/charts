@@ -19,10 +19,10 @@ Renders the secretsManager secret name
 {{/*
 Renders the global.secretsManager.type value.
 Must be a value the Airbyte server accepts: testing_config_db_table, no_op, aws_secret_manager, google_secret_manager, vault, azure_key_vault (not "kubernetes").
-Default "testing_config_db_table" = connector secrets stored in config DB table; set in values for no_op or AWS/Azure/GCP/Vault.
+Default "no_op" so job pod init container works without needing datasources.local-secrets (workload launcher may not inject DATASOURCES_LOCALSECRETS_*). Set explicitly to "testing_config_db_table" for connector secrets in config DB.
 */}}
 {{- define "airbyte.secretsManager.type" }}
-    {{- .Values.global.secretsManager.type | default "testing_config_db_table" }}
+    {{- .Values.global.secretsManager.type | default "no_op" }}
 {{- end }}
 
 {{/*

@@ -218,7 +218,8 @@ global:
 
   secretsManager:
     enabled: false
-    # type: testing_config_db_table (default, secrets in config DB), no_op, aws_secret_manager, google_secret_manager, vault, azure_key_vault. Not "kubernetes".
+    # type: no_op (default), testing_config_db_table, aws_secret_manager, google_secret_manager, vault, azure_key_vault. Not "kubernetes".
+    # Default no_op avoids job pod init "datasources.local-secrets" failure. Set to "testing_config_db_table" for connector secrets in config DB (requires launcher to pass DATASOURCES_LOCALSECRETS_* to job pods).
     type: ""
     #secretName: "airbyte-config-secrets"
 
