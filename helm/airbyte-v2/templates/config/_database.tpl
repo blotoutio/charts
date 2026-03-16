@@ -173,6 +173,14 @@ DATABASE_PASSWORD: {{ include "airbyte.database.password" . | quote }}
 {{- end }}
 
 {{/*
+Renders secret vars for Micronaut datasource "local-secrets" (workload-init-container when SECRET_PERSISTENCE=testing_config_db_table). Same credentials as main DB.
+*/}}
+{{- define "airbyte.database.localSecretsDatasource.secrets" }}
+DATASOURCES_LOCALSECRETS_USERNAME: {{ include "airbyte.database.user" . | quote }}
+DATASOURCES_LOCALSECRETS_PASSWORD: {{ include "airbyte.database.password" . | quote }}
+{{- end }}
+
+{{/*
 Renders the global.migrations.runAtStartup value
 */}}
 {{- define "airbyte.database.migrations.runAtStartup" }}

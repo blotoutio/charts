@@ -510,7 +510,8 @@ SECRET_STORE_GCP_SECRET_KEY: {{ (include "airbyte.secretsManager.googleSecretMan
 SECRET_STORE_GCP_SECRET_NAME: {{ (include "airbyte.secretsManager.secretName" .) | quote }}
 {{- end }}
 
-{{- if eq $opt "TESTING_CONFIG_DB_TABLE" }}
+{{- if or (eq $opt "TESTING_CONFIG_DB_TABLE") (eq $opt "testing_config_db_table") }}
+DATASOURCES_LOCALSECRETS_URL: {{ include "airbyte.database.url" . | quote }}
 {{- end }}
 
 {{- if eq $opt "VAULT" }}
@@ -540,7 +541,7 @@ AB_AZURE_KEY_VAULT_CLIENT_SECRET: {{ include "airbyte.secretsManager.azureKeyVau
 SECRET_STORE_GCP_CREDENTIALS: {{ include "airbyte.secretsManager.googleSecretManager.credentials" . | quote }}
 {{- end }}
 
-{{- if eq $opt "TESTING_CONFIG_DB_TABLE" }}
+{{- if or (eq $opt "TESTING_CONFIG_DB_TABLE") (eq $opt "testing_config_db_table") }}
 {{- end }}
 
 {{- if eq $opt "VAULT" }}
