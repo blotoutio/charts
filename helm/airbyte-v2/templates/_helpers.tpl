@@ -126,21 +126,28 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Create the name of the service account to use. When create is true, uses serviceAccount.name or fullname so the created SA matches what deployments and job pods use.
+Default chart-wide service account name (release-namespaced). Use so worker and job pods use the same SA that has RBAC; override with global.serviceAccountName or component .serviceAccountName.
+*/}}
+{{- define "airbyte.effectiveServiceAccountName" -}}
+{{- default .Values.global.serviceAccountName (printf "%s-worker-sa" .Release.Name) }}
+{{- end }}
+
+{{/*
+Create the name of the service account to use. When create is true, uses serviceAccount.name or effectiveServiceAccountName so the created SA matches what deployments and job pods use (e.g. airbyte-v2-worker-sa).
 */}}
 {{- define "airbyte.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "airbyte.fullname" .) .Values.serviceAccount.name }}
+{{- default .Values.serviceAccount.name (include "airbyte.effectiveServiceAccountName" .) }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
 
 {{/*
-Service account name used for job pods (JOB_KUBE_SERVICEACCOUNT). Must have RBAC to create/manage pods. Set global.serviceAccountName or workloadLauncher.serviceAccountName so this matches the created ServiceAccount when serviceAccount.create is true.
+Service account name used for job pods (JOB_KUBE_SERVICEACCOUNT). Must match the created SA and have the pod-launcher Role. Defaults to effectiveServiceAccountName (e.g. airbyte-v2-worker-sa).
 */}}
 {{- define "airbyte.jobPodServiceAccountName" -}}
-{{- default .Values.global.serviceAccountName .Values.workloadLauncher.serviceAccountName | default "airbyte-admin" }}
+{{- default .Values.workloadLauncher.serviceAccountName (include "airbyte.effectiveServiceAccountName" .) }}
 {{- end }}
 
 {{/*

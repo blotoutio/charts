@@ -23,7 +23,7 @@ spec:
   completions: 1
   template:
     spec:
-      serviceAccountName: {{ default .Values.global.serviceAccountName .Values.keycloakSetup.serviceAccountName }}
+      serviceAccountName: {{ default .Values.keycloakSetup.serviceAccountName (include "airbyte.effectiveServiceAccountName" .) }}
       {{- if .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- range .Values.global.imagePullSecrets }}

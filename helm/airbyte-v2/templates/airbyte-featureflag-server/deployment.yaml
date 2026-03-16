@@ -36,7 +36,7 @@ spec:
         {{- include "airbyte.tplvalues.render" (dict "value" .Values.featureflagServer.podAnnotations "context" $) | nindent 8 }}
       {{- end }}
     spec:
-      serviceAccountName: {{ default .Values.global.serviceAccountName .Values.featureflagServer.serviceAccountName }}
+      serviceAccountName: {{ default .Values.featureflagServer.serviceAccountName (include "airbyte.effectiveServiceAccountName" .) }}
       {{- if .Values.global.imagePullSecrets }}
       imagePullSecrets:
         {{- range .Values.global.imagePullSecrets }}

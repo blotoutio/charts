@@ -35,7 +35,7 @@ spec:
         {{- include "airbyte.tplvalues.render" (dict "value" .Values.workloadLauncher.podAnnotations "context" $) | nindent 8 }}
       {{- end }}
     spec:
-      serviceAccountName: {{ default .Values.global.serviceAccountName .Values.workloadLauncher.serviceAccountName }}
+      serviceAccountName: {{ default .Values.workloadLauncher.serviceAccountName (include "airbyte.effectiveServiceAccountName" .) }}
       automountServiceAccountToken: true
       {{- if .Values.global.imagePullSecrets }}
       imagePullSecrets:
@@ -115,7 +115,7 @@ spec:
 
         {{- /* v1-style: JOB_KUBE_SERVICEACCOUNT and WORKSPACE_DOCKER_MOUNT (v1: airbyte-admin, workspace) */}}
         - name: JOB_KUBE_SERVICEACCOUNT
-          value: {{ default .Values.global.serviceAccountName .Values.workloadLauncher.serviceAccountName | default "airbyte-admin" | quote }}
+          value: {{ include "airbyte.jobPodServiceAccountName" . | quote }}
         - name: WORKSPACE_DOCKER_MOUNT
           value: {{ .Values.workloadLauncher.workspaceDockerMount | default "workspace" | quote }}
 

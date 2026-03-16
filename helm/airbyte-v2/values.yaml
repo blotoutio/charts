@@ -1,6 +1,6 @@
 global:
-  # -- Service Account name override
-  serviceAccountName: &service-account-name airbyte-admin
+  # -- Service account name override. Leave empty to use release-namespaced SA (e.g. airbyte-v2-worker-sa) so worker and job pods share one SA with RBAC.
+  serviceAccountName: ""
   # -- Edition; "community" or "enterprise"
   edition: community
 
@@ -529,8 +529,8 @@ serviceAccount:
   create: true
   # -- Annotations for service account. Evaluated as a template. Only used if `create` is `true`.
   annotations: {}
-  # -- Name of the service account to use. If not set and create is true, a name is generated using the fullname template.
-  name: *service-account-name
+  # -- Name of the service account to use. If not set and create is true, uses RELEASE_NAME-worker-sa (e.g. airbyte-v2-worker-sa).
+  name: ""
 
 # -- Sets the AIRBYTE_VERSION environment variable. Defaults to Chart.AppVersion.
 ## If changing the image tags below, you should probably also update this.

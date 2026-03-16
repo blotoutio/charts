@@ -6,10 +6,10 @@
 */}}
 
 {{/*
-Renders the global.jobs.kube.serviceAccount value
+Renders the service account used for job pods (JOB_KUBE_SERVICEACCOUNT). Uses effectiveServiceAccountName (e.g. RELEASE_NAME-worker-sa) when global.serviceAccountName is not set.
 */}}
 {{- define "airbyte.jobs.kube.serviceAccount" }}
-    {{- .Values.global.serviceAccountName }}
+    {{- include "airbyte.effectiveServiceAccountName" . }}
 {{- end }}
 
 {{/*

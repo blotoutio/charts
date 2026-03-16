@@ -19,7 +19,7 @@ metadata:
       {{- include "airbyte.tplvalues.render" (dict "value" .Values.airbyteBootloader.podAnnotations "context" $) | nindent 4 }}
     {{- end }}
 spec:
-  serviceAccountName: {{ default .Values.global.serviceAccountName .Values.airbyteBootloader.serviceAccountName }}
+  serviceAccountName: {{ default .Values.airbyteBootloader.serviceAccountName (include "airbyte.effectiveServiceAccountName" .) }}
   {{- if .Values.global.imagePullSecrets }}
   imagePullSecrets:
     {{- range .Values.global.imagePullSecrets }}
