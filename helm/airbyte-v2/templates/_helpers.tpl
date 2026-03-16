@@ -126,7 +126,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Create the name of the service account to use
+Create the name of the service account to use. When create is true, uses serviceAccount.name or fullname so the created SA matches what deployments and job pods use.
 */}}
 {{- define "airbyte.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
@@ -134,6 +134,13 @@ Create the name of the service account to use
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
+{{- end }}
+
+{{/*
+Service account name used for job pods (JOB_KUBE_SERVICEACCOUNT). Must have RBAC to create/manage pods. Set global.serviceAccountName or workloadLauncher.serviceAccountName so this matches the created ServiceAccount when serviceAccount.create is true.
+*/}}
+{{- define "airbyte.jobPodServiceAccountName" -}}
+{{- default .Values.global.serviceAccountName .Values.workloadLauncher.serviceAccountName | default "airbyte-admin" }}
 {{- end }}
 
 {{/*
