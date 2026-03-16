@@ -58,7 +58,7 @@ spec:
       - name: airbyte-temporal
         image: {{ include "imageUrl" (list .Values.temporal.image $) }}
         imagePullPolicy: {{ .Values.temporal.image.pullPolicy }}
-        {{- if .Values.temporal.command }}
+        {{- if and .Values.temporal.command (gt (len .Values.temporal.command) 0) }}
         command: {{ toYaml .Values.temporal.command | nindent 8 }}
         {{- end }}
         {{- if .Values.temporal.args }}
