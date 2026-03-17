@@ -340,7 +340,10 @@ webapp:
     # -- Specifies ingressClassName for clusters >= 1.18+
     className: "nginx"
     # -- Ingress annotations done as key:value pairs
-    annotations: {}
+    annotations: 
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-connect-timeout: "360"
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     # -- The list of hostnames to be covered with this ingress record.
