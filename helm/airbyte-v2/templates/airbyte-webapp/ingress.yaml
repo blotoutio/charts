@@ -57,9 +57,9 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: {{ $.Release.Name }}-airbyte-webapp-svc
+              name: {{ $.Release.Name }}-airbyte-server-svc
               port:
-                number: {{ $.Values.webapp.service.port }}
+                number: {{ $serverPort }}
 
   {{- end }}
 

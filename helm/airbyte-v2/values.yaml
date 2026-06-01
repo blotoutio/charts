@@ -7,11 +7,11 @@ global:
   # --AWS keys
   aws_access_key: ""
   aws_secret_key: ""
-  # -- Resource limits and requests for workloads
-  resource_cpu_limit: "4"
-  resource_cpu_request: "0.5"
-  resource_memory_limit: "4Gi"
-  resource_memory_request: "1Gi"
+  # -- Resource limits and requests for workloads (global defaults for pods without explicit resource blocks)
+  resource_cpu_limit: "2"
+  resource_cpu_request: "250m"
+  resource_memory_limit: "2Gi"
+  resource_memory_request: "512Mi"
 
   # -- Secret name for auth/bootstrap and other components that read from a single secret.
   # Set to your existing secret (e.g. airbyte-v2-airbyte-secrets) so pods look up instance-admin-password etc. there.
@@ -294,11 +294,11 @@ global:
 
       mainContainer:
         cpu:
-          request: "0.5"
+          request: "1"
           limit: "6"
         memory:
-          request: "1Gi"
-          limit: "9Gi"
+          request: "5Gi"
+          limit: "10Gi"
       check:
         cpu: {}
         memory: {}
@@ -315,7 +315,7 @@ global:
       fileTransfer:
         storage:
           request: 5G
-          limit: 5G
+          limit: 10G
 
   featureFlags:  
     secretName: ""
@@ -540,7 +540,7 @@ version: ""
 ## @section Webapp Parameters
 
 webapp:
-  enabled: true
+  enabled: false
   # -- Number of webapp replicas
   replicaCount: 1
 
@@ -679,7 +679,7 @@ webapp:
 
   api:
     # -- The webapp API url. Airbyte v2 unified server uses /api/public/v1/ (default). Do not use /api/v1/ or the UI may get wrong responses and throw e.g. "Cannot read properties of undefined (reading 'sort')".
-    url: /api/public/v1/
+    url: /api/v1/
 
   # -- Connector Builder Server URL path (same as v1). When set (e.g. /connector-builder-api), webapp uses this path on the same origin and ingress routes it to connector-builder-server. Default matches airbyte-v1.
   connectorBuilderServer:
@@ -787,7 +787,7 @@ webapp:
 
 server:
   enabled: true
-  # -- Number of server replicas
+  # -- Number of server replicas (2 for 10-pipeline workload)
   replicaCount: 1
 
   serviceAccountName:
@@ -876,17 +876,13 @@ server:
     ## limits:
     ##    cpu: 200m
     ##    memory: 1Gi
-    # -- The resources limits for the server container
+    # -- The resources limits for the server container (observed: 3m CPU, 951Mi mem)
     limits:
       cpu: 2
-      memory: 6Gi
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
+      memory: 4Gi
     # -- The requested resources for the server container
     requests:
-      cpu: 400m
+      cpu: 250m
       memory: 1Gi
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
@@ -992,7 +988,7 @@ server:
 
 worker:
   enabled: true
-  # -- Number of worker replicas
+  # -- Number of worker replicas (3 for 10-pipeline workload)
   replicaCount: 1
 
   serviceAccountName:
@@ -1068,18 +1064,14 @@ worker:
     ## limits:
     ##    cpu: 200m
     ##    memory: 1Gi
-    #! -- The resources limits for the worker container
+    # -- The resources limits for the worker container (observed: 3m CPU, 520Mi mem)
     limits:
       cpu: 2
-      memory: 6Gi
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
+      memory: 4Gi
     # -- The requested resources for the worker container
     requests:
-      cpu: 400m
-      memory: 1Gi
+      cpu: 250m
+      memory: 768Mi
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -1246,18 +1238,14 @@ workloadLauncher:
     ## limits:
     ##    cpu: 200m
     ##    memory: 1Gi
-    # -- The resources limits for the workload launcher container
+    # -- The resources limits for the workload launcher container (observed: 3m CPU, 440Mi mem)
     limits:
       cpu: 2
-      memory: 6Gi
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
+      memory: 4Gi
     # -- The requested resources for the workload launcher container
     requests:
-      cpu: 400m
-      memory: 1Gi
+      cpu: 250m
+      memory: 512Mi
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -1893,14 +1881,14 @@ temporal:
     ## requests:
     ##    memory: 256Mi
     ##    cpu: 250m
-    # -- The requested resources for temporal pods
-    requests: {}
-    ## Example:
-    ## limits:
-    ##    cpu: 200m
-    ##    memory: 1Gi
+    # -- The requested resources for temporal pods (observed: 30m CPU, 146Mi mem)
+    requests:
+      cpu: 100m
+      memory: 256Mi
     # -- The resources limits for temporal pods
-    limits: {}
+    limits:
+      cpu: 500m
+      memory: 512Mi
 
   extraContainers: []
 
@@ -2109,7 +2097,7 @@ minio:
   rootPassword: ""
 
   storage:
-    volumeClaimValue: 500Mi
+    volumeClaimValue: 5Gi
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   ##
@@ -2124,12 +2112,13 @@ minio:
   affinity: {}
 
   resources:
-     requests:
-       memory: 1Gi
-       cpu: 250m
-     limits:
-       cpu: 300m
-       memory: 2Gi
+    # observed: 1m CPU, 224Mi mem
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
 ## @section cron parameters
 cron:
   enabled: true
@@ -2218,14 +2207,14 @@ cron:
     ## limits:
     ##    cpu: 200m
     ##    memory: 1Gi
-    # -- The resources limits for the cron container
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
+    # -- The resources limits for the cron container (observed: 2m CPU, 583Mi mem)
+    limits:
+      cpu: 700m
+      memory: 1Gi
     # -- The requested resources for the cron container
-    requests: {}
+    requests:
+      cpu: 100m
+      memory: 512Mi
 
   # -- Node labels for pod assignment, see https://kubernetes.io/docs/user-guide/node-selection/
   nodeSelector: {}
@@ -2397,14 +2386,14 @@ connectorBuilderServer:
     ## limits:
     ##    cpu: 200m
     ##    memory: 1Gi
-    # -- The resources limits for the connector-builder-server container
-    limits: {}
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
+    # -- The resources limits for the connector-builder-server container (observed: 2m CPU, 439Mi mem)
+    limits:
+      cpu: 500m
+      memory: 1Gi
     # -- The requested resources for the connector-builder-server container
-    requests: {}
+    requests:
+      cpu: 100m
+      memory: 512Mi
 
   log:
     # -- The log level to log at.
@@ -2706,18 +2695,14 @@ workloadApiServer:
     ## limits:
     ##    cpu: 200m
     ##    memory: 1Gi
-    # -- The resources limits for the airbyte-workload-api-server container
+    # -- The resources limits for the airbyte-workload-api-server container (observed: 9m CPU, 436Mi mem)
     limits:
       cpu: 2
-      memory: 6Gi
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
+      memory: 4Gi
     # -- The requested resources for the airbyte-workload-api-server container
     requests:
-      cpu: 400m
-      memory: 1Gi
+      cpu: 250m
+      memory: 512Mi
 
   log:
     # -- The log level at which to log
@@ -2844,18 +2829,14 @@ featureflagServer:
     ## limits:
     ##    cpu: 200m
     ##    memory: 1Gi
-    # -- The resources limits for the airbyte-workload-api-server container
+    # -- The resources limits for the featureflag-server container
     limits:
-      cpu: 2
-      memory: 6Gi
-    ## Examples:
-    ## requests:
-    ##    memory: 256Mi
-    ##    cpu: 250m
-    # -- The requested resources for the airbyte-workload-api-server container
-    requests:
-      cpu: 400m
+      cpu: 500m
       memory: 1Gi
+    # -- The requested resources for the featureflag-server container
+    requests:
+      cpu: 100m
+      memory: 256Mi
 
   log:
     # -- The log level at which to log
