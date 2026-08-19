@@ -66,5 +66,6 @@ spec:
                 echo "waiting for postgres..."
                 sleep 3
               done
-              psql -v ON_ERROR_STOP=1 -v email="$AB_ADMIN_EMAIL" -c "UPDATE organization SET email = :'email' WHERE id = '00000000-0000-0000-0000-000000000000'; UPDATE \"user\" SET email = :'email' WHERE id = '00000000-0000-0000-0000-000000000000';"
+              psql -v ON_ERROR_STOP=1 -c "UPDATE organization SET email = '${AB_ADMIN_EMAIL}' WHERE id = '00000000-0000-0000-0000-000000000000'"
+              psql -v ON_ERROR_STOP=1 -c "UPDATE \"user\" SET email = '${AB_ADMIN_EMAIL}' WHERE id = '00000000-0000-0000-0000-000000000000'"
 {{- end }}
