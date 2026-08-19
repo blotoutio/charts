@@ -24,10 +24,36 @@ Renders the auth.instanceAdmin.password environment variable
 {{- end }}
 
 {{/*
+Renders the global.auth.instanceAdmin.email value (community login username)
+*/}}
+{{- define "airbyte.auth.instanceAdmin.email" }}
+    {{- .Values.global.auth.instanceAdmin.email | default "airbyte@example.com" }}
+{{- end }}
+
+{{/*
+Renders the auth.instanceAdmin.email secret key
+*/}}
+{{- define "airbyte.auth.instanceAdmin.email.secretKey" }}
+	{{- .Values.global.auth.instanceAdmin.emailSecretKey | default "instance-admin-email" }}
+{{- end }}
+
+{{/*
+Renders the auth.instanceAdmin.username environment variable
+*/}}
+{{- define "airbyte.auth.instanceAdmin.username.env" }}
+- name: AB_INSTANCE_ADMIN_USERNAME
+  valueFrom:
+    secretKeyRef:
+      name: {{ include "airbyte.auth.bootstrap.managedSecretName" . }}
+      key: {{ include "airbyte.auth.instanceAdmin.email.secretKey" . }}
+{{- end }}
+
+{{/*
 Renders the set of all auth environment variables
 */}}
 {{- define "airbyte.auth.envs" }}
 {{- include "airbyte.auth.instanceAdmin.password.env" . }}
+{{- include "airbyte.auth.instanceAdmin.username.env" . }}
 {{- end }}
 
 {{/*
@@ -405,6 +431,8 @@ Renders the set of all auth.bootstrap secret variables
 {{- define "airbyte.auth.bootstrap.secrets" }}
 AB_INSTANCE_ADMIN_PASSWORD: {{ include "airbyte.auth.bootstrap.instanceAdmin.password" . | quote }}
 {{ include "airbyte.auth.instanceAdmin.password.secretKey" . }}: {{ include "airbyte.auth.bootstrap.instanceAdmin.password" . | quote }}
+AB_INSTANCE_ADMIN_USERNAME: {{ include "airbyte.auth.instanceAdmin.email" . | quote }}
+{{ include "airbyte.auth.instanceAdmin.email.secretKey" . }}: {{ include "airbyte.auth.instanceAdmin.email" . | quote }}
 AB_INSTANCE_ADMIN_CLIENT_ID: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientId" . | quote }}
 {{ include "airbyte.auth.bootstrap.instanceAdmin.clientIdSecretKey" . }}: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientId" . | quote }}
 AB_INSTANCE_ADMIN_CLIENT_SECRET: {{ include "airbyte.auth.bootstrap.instanceAdmin.clientSecret" . | quote }}
@@ -885,9 +913,21 @@ Renders the auth.instanceAdmin.enterprise.password environment variable
 {{/*
 Renders the set of all auth.instanceAdmin.enterprise environment variables
 */}}
+{{- define "airbyte.auth.instanceAdmin.enterprise.email.env" }}
+- name: INITIAL_USER_EMAIL
+  valueFrom:
+    secretKeyRef:
+      name: {{ include "airbyte.auth.instanceAdmin.enterprise.secretName" . }}
+      key: {{ include "airbyte.auth.instanceAdmin.email.secretKey" . }}
+{{- end }}
+
+{{/*
+Renders the set of all auth.instanceAdmin.enterprise environment variables
+*/}}
 {{- define "airbyte.auth.instanceAdmin.enterprise.envs" }}
 {{- include "airbyte.auth.instanceAdmin.enterprise.firstName.env" . }}
 {{- include "airbyte.auth.instanceAdmin.enterprise.lastName.env" . }}
+{{- include "airbyte.auth.instanceAdmin.enterprise.email.env" . }}
 {{- include "airbyte.auth.instanceAdmin.enterprise.password.env" . }}
 {{- end }}
 
@@ -904,6 +944,8 @@ Renders the set of all auth.instanceAdmin.enterprise secret variables
 */}}
 {{- define "airbyte.auth.instanceAdmin.enterprise.secrets" }}
 INITIAL_USER_PASSWORD: {{ include "airbyte.auth.instanceAdmin.enterprise.password" . | quote }}
+INITIAL_USER_EMAIL: {{ include "airbyte.auth.instanceAdmin.email" . | quote }}
+{{ include "airbyte.auth.instanceAdmin.email.secretKey" . }}: {{ include "airbyte.auth.instanceAdmin.email" . | quote }}
 {{- end }}
 
 {{/*

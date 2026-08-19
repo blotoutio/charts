@@ -73,9 +73,11 @@ global:
       # -- Secret name where the instanceAdmin configuration is stored
       secretName: "airbyte-v2-airbyte-secrets"
       # -- The first name of the initial user
-      firstName: ""
+      firstName: "Airbyte"
       # -- The last name of the initial user
-      lastName:  ""
+      lastName:  "Admin"
+      # -- Login email / username for community auth (must match organization.email after setup, or AB_INSTANCE_ADMIN_USERNAME)
+      email: "devops@blotout.io"
       # -- The key within `emailSecretName` where the initial user's email is stored
       emailSecretKey: "instance-admin-email"
       # -- The key within `passwordSecretName` where the initial user's password is stored

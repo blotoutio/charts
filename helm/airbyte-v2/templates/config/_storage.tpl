@@ -408,8 +408,10 @@ Renders the set of all storage environment variables
 {{- if eq $opt "s3" }}
 {{- include "airbyte.storage.s3.region.env" . }}
 {{- include "airbyte.storage.s3.authenticationType.env" . }}
+{{- if ne (trim (default "credentials" .Values.global.storage.s3.authenticationType)) "instanceProfile" }}
 {{- include "airbyte.storage.s3.accessKeyId.env" . }}
 {{- include "airbyte.storage.s3.secretAccessKey.env" . }}
+{{- end }}
 {{- end }}
 
 {{- /* S3_PATH_STYLE_ACCESS always in configmap; include env ref so all components get it (avoids "Unsetting empty") */}}
@@ -476,7 +478,7 @@ AWS_ACCESS_KEY_ID: {{ include "airbyte.storage.minio.accessKeyId" . | quote }}
 AWS_SECRET_ACCESS_KEY: {{ include "airbyte.storage.minio.secretAccessKey" . | quote }}
 {{- end }}
 
-{{- if eq $opt "s3" }}
+{{- if and (eq $opt "s3") (ne (trim (default "credentials" .Values.global.storage.s3.authenticationType)) "instanceProfile") }}
 AWS_ACCESS_KEY_ID: {{ include "airbyte.storage.s3.accessKeyId" . | quote }}
 AWS_SECRET_ACCESS_KEY: {{ include "airbyte.storage.s3.secretAccessKey" . | quote }}
 {{- end }}
