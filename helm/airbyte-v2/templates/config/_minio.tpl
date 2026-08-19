@@ -9,7 +9,7 @@
 Renders the minio.rootUser secret key
 */}}
 {{- define "airbyte.minio.rootUser.secretKey" }}
-	{{- .Values.minio.rootUserSecretKey | default "AWS_ACCESS_KEY_ID" }}
+	{{- .Values.minio.rootUserSecretKey | default "MINIO_ROOT_USER" }}
 {{- end }}
 
 {{/*
@@ -27,7 +27,7 @@ Renders the minio.rootUser environment variable
 Renders the minio.rootPassword secret key
 */}}
 {{- define "airbyte.minio.rootPassword.secretKey" }}
-	{{- .Values.minio.rootPasswordSecretKey | default "AWS_SECRET_ACCESS_KEY" }}
+	{{- .Values.minio.rootPasswordSecretKey | default "MINIO_ROOT_PASSWORD" }}
 {{- end }}
 
 {{/*

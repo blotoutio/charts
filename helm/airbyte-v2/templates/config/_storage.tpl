@@ -483,4 +483,10 @@ AWS_ACCESS_KEY_ID: {{ include "airbyte.storage.s3.accessKeyId" . | quote }}
 AWS_SECRET_ACCESS_KEY: {{ include "airbyte.storage.s3.secretAccessKey" . | quote }}
 {{- end }}
 
+{{- /* Dedicated MinIO keys so instanceProfile S3 does not need AWS_ACCESS_KEY_ID in this secret. */}}
+{{- if .Values.minio.enabled }}
+MINIO_ROOT_USER: {{ include "airbyte.storage.minio.accessKeyId" . | quote }}
+MINIO_ROOT_PASSWORD: {{ include "airbyte.storage.minio.secretAccessKey" . | quote }}
+{{- end }}
+
 {{- end }}

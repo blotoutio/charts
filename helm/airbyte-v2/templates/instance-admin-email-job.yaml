@@ -1,0 +1,70 @@
+{{- if and .Values.global.auth.enabled (include "airbyte.auth.instanceAdmin.email" .) }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Release.Name }}-set-instance-admin-email
+  labels:
+    {{- include "airbyte.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "10"
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+spec:
+  backoffLimit: 6
+  ttlSecondsAfterFinished: 300
+  template:
+    metadata:
+      labels:
+        {{- include "airbyte.selectorLabels" . | nindent 8 }}
+    spec:
+      restartPolicy: OnFailure
+      serviceAccountName: {{ include "airbyte.effectiveServiceAccountName" . }}
+      {{- if .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- range .Values.global.imagePullSecrets }}
+        - name: {{ .name }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: psql
+          image: postgres:15-alpine
+          env:
+            - name: AB_ADMIN_EMAIL
+              value: {{ include "airbyte.auth.instanceAdmin.email" . | quote }}
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-airbyte-env
+                  key: DATABASE_HOST
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-airbyte-env
+                  key: DATABASE_PORT
+            - name: PGDATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-airbyte-env
+                  key: DATABASE_DB
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "airbyte.database.secretName" . }}
+                  key: {{ include "airbyte.database.user.secretKey" . }}
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "airbyte.database.secretName" . }}
+                  key: {{ include "airbyte.database.password.secretKey" . }}
+          command:
+            - sh
+            - -c
+            - |
+              set -eu
+              until psql -c 'SELECT 1' >/dev/null 2>&1; do
+                echo "waiting for postgres..."
+                sleep 3
+              done
+              psql -v ON_ERROR_STOP=1 -v email="$AB_ADMIN_EMAIL" -c "UPDATE organization SET email = :'email' WHERE id = '00000000-0000-0000-0000-000000000000'; UPDATE \"user\" SET email = :'email' WHERE id = '00000000-0000-0000-0000-000000000000';"
+{{- end }}
