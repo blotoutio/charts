@@ -296,10 +296,10 @@ global:
 
       mainContainer:
         cpu:
-          request: "1"
-          limit: "6"
+          request: "250m"
+          limit: "8"
         memory:
-          request: "5Gi"
+          request: "341Mi"
           limit: "10Gi"
       check:
         cpu: {}
@@ -308,8 +308,12 @@ global:
         cpu: {}
         memory: {}
       replication:
-        cpu: {}
-        memory: {}
+        cpu:
+          request: "250m"
+          limit: "8"
+        memory:
+          request: "341Mi"
+          limit: "10Gi"
       sidecar:
         cpu: {}
         memory: {}
