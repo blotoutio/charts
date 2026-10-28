@@ -1,0 +1,12 @@
+apiVersion: v2
+appVersion: 1.3.0
+dependencies:
+- name: common
+  repository: https://charts.bitnami.com/bitnami
+  tags:
+  - bitnami-common
+  version: 1.x.x
+description: Helm chart to deploy airbyte-temporal-ui
+name: temporal-ui
+type: application
+version: 1.3.0
