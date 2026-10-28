@@ -1893,8 +1893,8 @@ temporal:
       memory: 256Mi
     # -- The resources limits for temporal pods
     limits:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 2
+      memory: 2Gi
 
   extraContainers: []
 
