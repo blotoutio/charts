@@ -41,6 +41,10 @@ spec:
           envFrom:
           - configMapRef:
               name: mcp-configmap
+          {{- range .Values.envFromSecrets }}
+          - secretRef:
+              name: {{ . | quote }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

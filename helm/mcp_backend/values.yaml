@@ -16,6 +16,9 @@ fullnameOverride: ""
 
 env: {}
 
+# Names of Secrets in the release namespace loaded with envFrom after mcp-configmap.
+envFromSecrets: []
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
