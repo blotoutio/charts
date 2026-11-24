@@ -1,0 +1,5 @@
+gateway:
+  name: blotout
+  namespace: envoy-gateway-system
+namespace: lineage
+host: ""

@@ -1,0 +1,10 @@
+apiVersion: v2
+name: lineage-route
+description: Data lineage HTTPRoute on the shared Envoy Gateway
+type: application
+version: v0.1.0
+appVersion: "1.0.0"
+keywords:
+  - lineage
+  - envoy
+  - blotout
