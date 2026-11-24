@@ -14,11 +14,18 @@ spec:
   hostnames:
     - {{ .Values.uiHost | quote }}
   rules:
+    # NLB terminates TLS, so Envoy sees HTTP and would tell Airflow the scheme is http.
+    # Airflow enable_proxy_fix then builds http URLs and the UI shows an unknown error.
     - matches:
         - path:
             type: PathPrefix
             value: /airflow/api/v2
       filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
         - type: URLRewrite
           urlRewrite:
             path:
@@ -32,11 +39,11 @@ spec:
             type: PathPrefix
             value: /airflow
       filters:
-        - type: URLRewrite
-          urlRewrite:
-            path:
-              type: ReplacePrefixMatch
-              replacePrefixMatch: /airflow
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
       backendRefs:
         - name: airflow-api-server
           port: 8080
@@ -44,6 +51,12 @@ spec:
         - path:
             type: PathPrefix
             value: /api/v2
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
       backendRefs:
         - name: airflow-api-server
           port: 8080
@@ -51,6 +64,12 @@ spec:
         - path:
             type: PathPrefix
             value: /ui
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
       backendRefs:
         - name: airflow-api-server
           port: 8080
