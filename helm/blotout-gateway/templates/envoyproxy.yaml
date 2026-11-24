@@ -1,0 +1,21 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: blotout-proxy
+  namespace: {{ .Values.gateway.namespace }}
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyService:
+        type: LoadBalancer
+        externalTrafficPolicy: {{ .Values.envoyService.externalTrafficPolicy }}
+        name: {{ .Values.gateway.serviceName }}
+        loadBalancerSourceRanges:
+{{- range .Values.envoyService.loadBalancerSourceRanges }}
+          - {{ . | quote }}
+{{- end }}
+        annotations:
+{{- range $k, $v := .Values.envoyService.annotations }}
+          {{ $k }}: {{ $v | quote }}
+{{- end }}

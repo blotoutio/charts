@@ -1,0 +1,26 @@
+gateway:
+  namespace: envoy-gateway-system
+  name: blotout
+  className: blotout
+  serviceName: envoy-blotout
+
+envoyService:
+  annotations: {}
+  loadBalancerSourceRanges:
+    - 0.0.0.0/0
+  externalTrafficPolicy: Local
+
+uiHost: ""
+airbyteHost: ""
+enableAirbyte: false
+enableMcp: false
+mcpNamespace: mcp
+etlNamespace: etl
+airbyteNamespace: airbyte-v2
+
+airflowAllowedCidrs: []
+
+timeouts:
+  backend: "900s"
+  airflow: "60s"
+  mcp: "3600s"

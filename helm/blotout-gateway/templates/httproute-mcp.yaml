@@ -1,0 +1,40 @@
+{{- if .Values.enableMcp }}
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: mcp
+  namespace: {{ .Values.mcpNamespace }}
+spec:
+  parentRefs:
+    - name: {{ .Values.gateway.name }}
+      namespace: {{ .Values.gateway.namespace }}
+      sectionName: https
+    - name: {{ .Values.gateway.name }}
+      namespace: {{ .Values.gateway.namespace }}
+      sectionName: http
+  hostnames:
+    - {{ .Values.uiHost | quote }}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /stream
+      backendRefs:
+        - name: mcp
+          port: 8082
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: mcp-stream-timeouts
+  namespace: {{ .Values.mcpNamespace }}
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: mcp
+  timeout:
+    http:
+      requestTimeout: {{ .Values.timeouts.mcp | quote }}
+      connectionIdleTimeout: {{ .Values.timeouts.mcp | quote }}
+{{- end }}
