@@ -11,3 +11,7 @@ spec:
   clientIPDetection:
     customHeader:
       name: CF-Connecting-IP
+  # Close idle client connections before the NLB drops them at 350s.
+  timeout:
+    http:
+      idleTimeout: 300s
