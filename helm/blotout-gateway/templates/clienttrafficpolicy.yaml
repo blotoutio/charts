@@ -12,6 +12,14 @@ spec:
     customHeader:
       name: CF-Connecting-IP
   # Close idle client connections before the NLB drops them at 350s.
+  # streamIdleTimeout is a silent in-flight request. Envoy's default is 5m,
+  # which cuts the backend (900s) and MCP (3600s) while they are still working.
   timeout:
     http:
       idleTimeout: 75s
+      streamIdleTimeout: 3600s
+  # Probes start before the NLB's 350s drop, so a long silent stream stays up.
+  tcpKeepalive:
+    idleTime: 60s
+    interval: 30s
+    probes: 3
