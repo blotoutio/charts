@@ -20,15 +20,15 @@ spec:
             type: PathPrefix
             value: /connector-builder-api
       backendRefs:
-        - name: airbyte-v2-airbyte-connector-builder-server-svc
-          port: 80
+        - name: {{ .Values.airbyteConnectorBuilderService }}
+          port: {{ .Values.airbyteConnectorBuilderPort }}
     - matches:
         - path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: airbyte-v2-airbyte-server-svc
-          port: 8001
+        - name: {{ .Values.airbyteServerService }}
+          port: {{ .Values.airbyteServerPort }}
 ---
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: BackendTrafficPolicy

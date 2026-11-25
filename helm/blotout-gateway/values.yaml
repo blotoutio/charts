@@ -19,6 +19,10 @@ enableMcp: false
 mcpNamespace: mcp
 etlNamespace: etl
 airbyteNamespace: airbyte-v2
+airbyteServerService: airbyte-v2-airbyte-server-svc
+airbyteServerPort: 8001
+airbyteConnectorBuilderService: airbyte-v2-airbyte-connector-builder-server-svc
+airbyteConnectorBuilderPort: 80
 
 airflowAllowedCidrs: []
 
