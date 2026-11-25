@@ -26,3 +26,5 @@ timeouts:
   backend: "900s"
   airflow: "60s"
   mcp: "3600s"
+  # Longer than the UI's 180s source check, so the UI timeout wins.
+  airbyte: "300s"
