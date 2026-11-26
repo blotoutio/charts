@@ -32,3 +32,10 @@ timeouts:
   mcp: "3600s"
   # Longer than the UI's 180s source check, so the UI timeout wins.
   airbyte: "300s"
+
+# Envoy proxy pods. Empty resources keeps Envoy Gateway's defaults.
+envoy:
+  resources: {}
+  # e.g. blotout-critical (cluster-scoped PriorityClass, created outside this chart)
+  priorityClassName: ""
+  spreadAcrossNodes: true

@@ -122,3 +122,10 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# PriorityClass for SDK pods (cluster-scoped, created outside this chart).
+# Under node pressure the kubelet evicts lower-priority pods (ETL) first.
+priorityClassName: ""
+
+# Spread replicas across nodes (soft: ScheduleAnyway).
+spreadAcrossNodes: true
