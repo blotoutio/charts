@@ -27,6 +27,26 @@ serviceAccount:
 
 podAnnotations: {}
 
+# Start a new pod and wait for it to be Ready before stopping an old one,
+# so a rollout never leaves the SDK with fewer ready pods.
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+
+# On shutdown, keep serving while Envoy / the load balancer stop routing to the
+# pod, then let in-flight requests finish. Must stay below the grace period.
+preStopSleepSeconds: 15
+terminationGracePeriodSeconds: 45
+
+# Keep at least one SDK pod during node drains and autoscaler scale-down.
+# Run at least 2 replicas (autoscaling.minReplicas: 2) when this is enabled,
+# otherwise a single pod can never be evicted and node drains hang.
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
 podSecurityContext: {}
   # fsGroup: 2000
 
@@ -102,3 +122,10 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# PriorityClass for SDK pods (cluster-scoped, created outside this chart).
+# Under node pressure the kubelet evicts lower-priority pods (ETL) first.
+priorityClassName: ""
+
+# Spread replicas across nodes (soft: ScheduleAnyway).
+spreadAcrossNodes: true

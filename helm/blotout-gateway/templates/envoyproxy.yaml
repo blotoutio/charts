@@ -1,0 +1,52 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: blotout-proxy
+  namespace: {{ .Values.gateway.namespace }}
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyDeployment:
+        replicas: 2
+        {{- with .Values.envoy.resources }}
+        container:
+          resources:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        {{- if .Values.envoy.spreadAcrossNodes }}
+        pod:
+          # Keep the Envoy replicas on different nodes.
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: ScheduleAnyway
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: envoy
+                  gateway.envoyproxy.io/owning-gateway-name: {{ .Values.gateway.name }}
+        {{- end }}
+        {{- with .Values.envoy.priorityClassName }}
+        # EnvoyProxy has no priorityClassName field; set it with a pod patch.
+        patch:
+          type: StrategicMerge
+          value:
+            spec:
+              template:
+                spec:
+                  priorityClassName: {{ . }}
+        {{- end }}
+      envoyPDB:
+        minAvailable: 1
+      envoyService:
+        type: LoadBalancer
+        externalTrafficPolicy: {{ .Values.envoyService.externalTrafficPolicy }}
+        name: {{ .Values.gateway.serviceName }}
+        loadBalancerSourceRanges:
+{{- range .Values.envoyService.loadBalancerSourceRanges }}
+          - {{ . | quote }}
+{{- end }}
+        annotations:
+{{- range $k, $v := .Values.envoyService.annotations }}
+          {{ $k }}: {{ $v | quote }}
+{{- end }}

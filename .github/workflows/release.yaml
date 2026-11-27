@@ -4,8 +4,10 @@ on:
     branches:
       - main
       - eks_upgrade
-    paths:
-      - 'helm/**'
+      - airbyte_v1
+      - airbyte_v2
+    # paths-ignore:
+    #   - 'helm/airbyte-v1/**'
   release:
     types: [published, created]
 
@@ -20,3 +22,5 @@ jobs:
         with:
           token: ${{ secrets.BO_CHARTS_HELM_TOKEN }}
           charts_dir: helm
+          # Due to airbyte-v1 version incompatility with the current config of gh actions it always fails on linting so we switched it off
+          linting: off

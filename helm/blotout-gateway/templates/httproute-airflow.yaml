@@ -1,0 +1,112 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: airflow
+  namespace: {{ .Values.etlNamespace }}
+spec:
+  parentRefs:
+    - name: {{ .Values.gateway.name }}
+      namespace: {{ .Values.gateway.namespace }}
+      sectionName: https
+    - name: {{ .Values.gateway.name }}
+      namespace: {{ .Values.gateway.namespace }}
+      sectionName: http
+  hostnames:
+    - {{ .Values.uiHost | quote }}
+  rules:
+    # NLB terminates TLS, so Envoy sees HTTP and would tell Airflow the scheme is http.
+    # Airflow enable_proxy_fix then builds http URLs and the UI shows an unknown error.
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /airflow/api/v2
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /api/v2
+      backendRefs:
+        - name: airflow-api-server
+          port: 8080
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /airflow
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
+      backendRefs:
+        - name: airflow-api-server
+          port: 8080
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api/v2
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
+      backendRefs:
+        - name: airflow-api-server
+          port: 8080
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /ui
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: X-Forwarded-Proto
+                value: https
+      backendRefs:
+        - name: airflow-api-server
+          port: 8080
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: airflow-api-timeouts
+  namespace: {{ .Values.etlNamespace }}
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: airflow
+  timeout:
+    http:
+      requestTimeout: {{ .Values.timeouts.airflow | quote }}
+      connectionIdleTimeout: {{ .Values.timeouts.airflow | quote }}
+{{- if .Values.airflowAllowedCidrs }}
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: airflow-ip-allow
+  namespace: {{ .Values.etlNamespace }}
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: airflow
+  authorization:
+    defaultAction: Deny
+    rules:
+      - action: Allow
+        principal:
+          clientCIDRs:
+{{- range .Values.airflowAllowedCidrs }}
+            - {{ . | quote }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,41 @@
+gateway:
+  namespace: envoy-gateway-system
+  name: blotout
+  className: blotout
+  serviceName: envoy-blotout
+
+envoyService:
+  annotations: {}
+  loadBalancerSourceRanges:
+    - 0.0.0.0/0
+  externalTrafficPolicy: Local
+
+sdkHosts: []
+
+uiHost: ""
+airbyteHost: ""
+enableAirbyte: false
+enableMcp: false
+mcpNamespace: mcp
+etlNamespace: etl
+airbyteNamespace: airbyte-v2
+airbyteServerService: airbyte-v2-airbyte-server-svc
+airbyteServerPort: 8001
+airbyteConnectorBuilderService: airbyte-v2-airbyte-connector-builder-server-svc
+airbyteConnectorBuilderPort: 80
+
+airflowAllowedCidrs: []
+
+timeouts:
+  backend: "900s"
+  airflow: "60s"
+  mcp: "3600s"
+  # Longer than the UI's 180s source check, so the UI timeout wins.
+  airbyte: "300s"
+
+# Envoy proxy pods. Empty resources keeps Envoy Gateway's defaults.
+envoy:
+  resources: {}
+  # e.g. blotout-critical (cluster-scoped PriorityClass, created outside this chart)
+  priorityClassName: ""
+  spreadAcrossNodes: true

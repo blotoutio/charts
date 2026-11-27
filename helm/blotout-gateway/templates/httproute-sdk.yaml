@@ -1,0 +1,33 @@
+{{- range .Values.sdkHosts }}
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: sdk-{{ . | replace "." "-" }}
+  namespace: default
+spec:
+  parentRefs:
+    - name: {{ $.Values.gateway.name }}
+      namespace: {{ $.Values.gateway.namespace }}
+      sectionName: https
+    - name: {{ $.Values.gateway.name }}
+      namespace: {{ $.Values.gateway.namespace }}
+      sectionName: http
+  hostnames:
+    - {{ . | quote }}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /sdk
+      backendRefs:
+        - name: blotoutsdk
+          port: 8080
+    - matches:
+        - path:
+            type: Exact
+            value: /robots.txt
+      backendRefs:
+        - name: blotoutsdk
+          port: 8080
+{{- end }}
