@@ -299,8 +299,8 @@ global:
           request: "250m"
           limit: "8"
         memory:
-          request: "341Mi"
-          limit: "10Gi"
+          request: "1Gi"
+          limit: "5Gi"
       check:
         cpu: {}
         memory: {}
@@ -312,8 +312,8 @@ global:
           request: "250m"
           limit: "8"
         memory:
-          request: "341Mi"
-          limit: "10Gi"
+          request: "1Gi"
+          limit: "3Gi"
       sidecar:
         cpu: {}
         memory: {}
